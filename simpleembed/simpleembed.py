@@ -60,5 +60,5 @@ class SimpleEmbed(commands.Cog):
 		embed.add_field(name="\u200B", value="\u200B", inline =False)
 		embed.add_field(name="!!buy 7 - Buy Nitro Classic [leggy req]", value="10M Chiefs Coins", inline=False)
 		embed.add_field(name="\u200B", value="\u200B", inline =False)
-		embed.set_footer(text="\t \t Bot by Gladiator#0004", url="https://images-ext-1.discordapp.net/external/kYJx8YK6XrdnbhUQEHHbFtsmN4X2ga4LbzgVMFllKi8/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/698376874186768384/a_d545d6bab43dd8e041268f1d51fa4199.gif?width=473&height=473")
+		embed.set_footer(text="Bot by Gladiator#0004", icon_url="https://images-ext-1.discordapp.net/external/kYJx8YK6XrdnbhUQEHHbFtsmN4X2ga4LbzgVMFllKi8/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/698376874186768384/a_d545d6bab43dd8e041268f1d51fa4199.gif?width=473&height=473")
 		await ctx.send(embed = embed)
