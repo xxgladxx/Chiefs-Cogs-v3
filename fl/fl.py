@@ -11,8 +11,8 @@ class FL(commands.Cog):
 
         user=message.author
         if "https://link.clashroyale.com/invite/friend" in message.content:
-            embed = discord.Embed(color=user.colour, description="Chiefs Bot!")
-            embed.set_author(name=user.name, icon_url=user.avatar_url)
+            embed = discord.Embed(color=user.colour, description=user.mention)
+            embed.set_author(name="Chiefs United!", icon_url=user.avatar_url)
             embed.set_thumbnail(url="https://media.tenor.co/videos/89c5ae3cdef45e20658074f4d3e386e0/mp4")
             embed.add_field(name="Click the link below to add "+str(user.name)+" in Clash Royale!", value="\u200B")
             embed.add_field(name="Link", value="(Link)[message.content]", inline=True)
