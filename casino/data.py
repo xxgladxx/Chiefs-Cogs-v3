@@ -52,7 +52,7 @@ guild_defaults = {
     "Memberships": {},
     "Settings": {
         "Global": False,
-        "Casino_Name": "Redjumpman's",
+        "Casino_Name": "Chiefs",
         "Casino_Open": True,
         "Payout_Switch": False,
         "Payout_Limit": 10000,
@@ -219,11 +219,9 @@ class Database:
 
     async def get_data(self, ctx, player=None):
         """
-
         :param ctx: Context object
         :param player: Member or user object
         :return: Database that corresponds to the given data.
-
         Returns the appropriate config category based on the given
         data, and wheater or not the casino is global.
         """
@@ -240,11 +238,9 @@ class Database:
 
     async def get_all(self, ctx, player):
         """
-
         :param ctx: Context Object
         :param player: Member or user object
         :return: Tuple with two dictionaries
-
         Returns a dictionary representation of casino's settings data
         and the player data.
         """
@@ -255,10 +251,8 @@ class Database:
     async def _wipe_casino(self, ctx):
         """
         Wipes all the casino data available
-
         :param ctx: context object
         :return: None
-
         This wipes everything, including member/user data.
         """
         await self.config.clear_all()
@@ -306,9 +300,7 @@ class Database:
         :param ctx: Context object
         :param player: user or member object
         :return: None
-
         Resets a player's win / played stats.
-
         """
         data = await self.get_data(ctx, player=player)
         await data.Played.clear()
@@ -319,11 +311,9 @@ class Database:
 
     async def _reset_player_all(self, ctx, player):
         """
-
         :param ctx: context object
         :param player: user or member object
         :return: None
-
         Resets all data belonging to the user, including stats and memberships.
         """
         data = await self.get_data(ctx, player=player)
@@ -334,11 +324,9 @@ class Database:
 
     async def _reset_player_cooldowns(self, ctx, player):
         """
-
         :param ctx: context object
         :param player: user or member object
         :return: None
-
         Resets all game cooldowns for a player.
         """
         data = await self.get_data(ctx, player=player)
@@ -366,10 +354,8 @@ class Database:
 
     async def change_mode(self, mode):
         """
-
         :param mode: String, must be local or global.
         :return: None
-
         Toggles how data is stored for casino between local and global.
         When switching modes, all perviously stored data will be deleted.
         """
@@ -388,11 +374,9 @@ class Database:
 
     async def _get_player_membership(self, ctx, player):
         """
-
         :param ctx: context object
         :param player: user or member object
         :return: Membership name and a dictionary with the perks
-
         Performs a lookup on the user and the created memberhips for casino.
         If the user has a memberhip that was deleted, it will return the
         default basic membership. It will also set their new membership to the
