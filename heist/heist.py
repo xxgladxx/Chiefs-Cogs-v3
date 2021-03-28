@@ -476,9 +476,9 @@ class Heist(commands.Cog):
             config["Planned"] = True
             await self.thief.config.guild(guild).Config.set(config)
             crew = await self.thief.add_crew_member(author)
-            await ctx.send("\n A {4} is being planned by {0} \n The {4}"
+            await ctx.send("\n <@&824570460237987870> A {4} is being planned by {0} \n The {4}"
                                "will begin in {1} seconds. Type {2}heist play to join their" 
-                               "{3}.".format(author.name, wait_time, ctx.prefix, t_crew, t_heist))
+                               "{3}.".format(author.name, wait_time, ctx.prefix, t_crew, t_heist) allowed_mentions=discord.AllowedMentions(roles=True))
             await asyncio.sleep(wait_time)
             
             crew = await self.thief.config.guild(guild).Crew()
