@@ -476,7 +476,7 @@ class Heist(commands.Cog):
             config["Planned"] = True
             await self.thief.config.guild(guild).Config.set(config)
             crew = await self.thief.add_crew_member(author)
-            await ctx.send("@here \n A {4} is being planned by {0}\nThe {4} "
+            await ctx.send("<@&824570460237987870> \n A {4} is being planned by {0}\nThe {4} "
                                "will begin in {1} seconds. Type {2}heist play to join their "
                                "{3}.".format(author.name, wait_time, ctx.prefix, t_crew, t_heist))
             await asyncio.sleep(wait_time)
