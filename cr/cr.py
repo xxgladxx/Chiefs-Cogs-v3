@@ -16,7 +16,8 @@ class ClashRoyaleCog(commands.Cog):
         self.config.register_guild(**default_guild)
         
     async def initialize(self):
-        apikey = await self.bot.db.api_tokens.get_raw("crapi", default={"api_key": None})
+        keys = await self.bot.get_shared_api_tokens("crapi")
+        apikey = keys.get("api_key")
         if apikey["api_key"] is None:
             raise ValueError("The Clash Royale API key has not been set. Use [p]set api crapi api_key,YOURAPIKEY")
         self.crapi = clashroyale.OfficialAPI(apikey["api_key"], is_async=True)
