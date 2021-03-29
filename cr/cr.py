@@ -18,7 +18,7 @@ class ClashRoyaleCog(commands.Cog):
     async def initialize(self):
         keys = await self.bot.get_shared_api_tokens("crapi")
         apikey = keys.get("api_key")
-        if apikey["api_key"] is None:
+        if apikey is None:
             raise ValueError("The Clash Royale API key has not been set. Use [p]set api crapi api_key,YOURAPIKEY")
         self.crapi = clashroyale.OfficialAPI(apikey["api_key"], is_async=True)
 
