@@ -380,35 +380,3 @@ class ClashRoyaleCog(commands.Cog):
             await ctx.send(embed = self.goodEmbed("Clan info successfully edited!"))
         except KeyError:
             await ctx.send(embed = self.badEmbed(f"{key.title()} isn't saved clan in this server!"))
-
-    
-    @commands.command()
-    async def listaccounts(self, ctx, user: discord.Member = None):
-        """List your account and the account number that they are associated with"""
-
-        if user is None:
-            user = ctx.author
-
-        tags = self.tags.getAllTags(user.id)
-
-        embed = discord.Embed(title=f"{user.display_name} Clash Royale Accounts: ", color=discord.Color.green())
-
-        accounts = ''
-        number = 1
-
-        try:
-            for tag in tags:
-                name = await self.cr.get_player(tag)
-                accounts += f'{number}: {name.name} (#{tag})\n'
-                number += 1
-            if number == 1:
-                accounts = 'No CR Accounts saved :( \n\n Use !save <TAG> to save a tag'
-        except clashroyale.RequestError:
-            return await ctx.send("Sorry the CR API is down.")
-
-        embed.add_field(name="Accounts", value=accounts)
-        # todo maybe embed limits for people with 9000 accounts like Labda
-
-        embed.set_footer(text="Bot by: Gladiator | ChiefsOP!")
-        await ctx.send(embed=embed)
-
