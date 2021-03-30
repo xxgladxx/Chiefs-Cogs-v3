@@ -13,10 +13,9 @@ class friendlink(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.CRregex = re.compile(r"<?(https?:\/\/)?(www\.)?(link\.clashroyale\.com\/invite\/friend)\b([-a-zA-Z0-9/]*)>?")
-        self.BSregex = re.compile(r"<?(https?:\/\/)?(www\.)?(link\.brawlstars\.com\/invite\/friend)\b([-a-zA-Z0-9/]*)>?")
-        self.auth = self.bot.get_cog('crtools').auth
-        self.tags = self.bot.get_cog('crtools').tags
-        self.constants = self.bot.get_cog('crtools').constants
+        self.auth = self.bot.get_cog('cr').auth
+        self.tags = self.bot.get_cog('cr').tags
+        self.constants = self.bot.get_cog('cr').constants
         self.clash = clashroyale.OfficialAPI(self.auth.getOfficialToken(), is_async=True)
 
     def emoji(self, name):
