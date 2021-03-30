@@ -2,7 +2,6 @@ import discord
 import re
 import urllib.parse as urlparse
 import clashroyale
-import brawlstats
 
 creditIcon = "https://i.imgur.com/TP8GXZb.png"
 credits = "Bot by GR8 | Titan"
@@ -78,37 +77,6 @@ class friendlink(commands.Cog):
         except Exception as e:
             return
 
-    async def friend_link_bs(self, message):
-
-        url = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', message.content)
-
-        try:
-
-            parsed = urlparse.urlparse(url[0])
-            profiletag = urlparse.parse_qs(parsed.query)['tag'][0]
-
-            try:
-                profiledata = self.brawl.get_player(profiletag)
-            except brawlstats.RequestError:
-                return
-
-            embed = discord.Embed(title='Click this link to add as friend in Brawl Stars!', url=url[0], color=0x0080ff)
-            embed.set_author(name=await self.tags.formatName(profiledata.name) + " (#" + profiledata.tag + ")", icon_url=profiledata.club.badge_url)
-            embed.set_thumbnail(url="https://i.imgur.com/ThtCInQ.jpg")
-            embed.add_field(name="User", value=message.author.mention, inline=True)
-            embed.add_field(name="Trophies", value="{} {:,}".format(self.getLeagueEmoji(profiledata.trophies), profiledata.trophies), inline=True)
-            embed.add_field(name="Level", value="{} {:,}".format(self.emoji("xp"), profiledata.exp_level), inline=True)
-            if profiledata.club is not None:
-                embed.add_field(name="Club {}".format(profiledata.club.role),
-                                value=profiledata.club.name, inline=True)
-            embed.set_footer(text=credits, icon_url=creditIcon)
-
-            await self.bot.send_message(message.channel, embed=embed)
-            await self.bot.delete_message(message)
-
-        except Exception as e:
-            return
-
     async def on_message(self, message):
 
         author = message.author
@@ -118,8 +86,3 @@ class friendlink(commands.Cog):
 
         if self.CRregex.search(message.content) is not None:
             return await self.friend_link_cr(message)
-
-        if self.BSregex.search(message.content) is not None:
-            return await self.friend_link_bs(message)
-
-
