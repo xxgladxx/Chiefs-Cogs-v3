@@ -8,7 +8,7 @@ creditIcon = "https://i.imgur.com/TP8GXZb.png"
 credits = "Bot by GR8 | Titan"
 
 
-class friendlink:
+class friendlink(commands.Cog):
     """Automatically convert Clash Royale and Brawl Stars friend links to beautiful embeds"""
 
     def __init__(self, bot):
@@ -19,7 +19,6 @@ class friendlink:
         self.tags = self.bot.get_cog('crtools').tags
         self.constants = self.bot.get_cog('crtools').constants
         self.clash = clashroyale.OfficialAPI(self.auth.getOfficialToken(), is_async=True)
-        self.brawl = brawlstats.Client(self.auth.getBSToken(), is_async=False)
 
     def emoji(self, name):
         """Emoji by name."""
@@ -44,6 +43,7 @@ class friendlink:
             if mapLeagues[league][0] <= trophies <= mapLeagues[league][1]:
                 return self.emoji(league)
 
+    @commands.Cog.listener()
     async def friend_link_cr(self, message):
 
         url = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', message.content)
