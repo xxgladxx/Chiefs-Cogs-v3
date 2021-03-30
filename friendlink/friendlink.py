@@ -2,6 +2,7 @@ import discord
 import re
 import urllib.parse as urlparse
 import clashroyale
+from redbot.core import commands
 
 creditIcon = "https://i.imgur.com/TP8GXZb.png"
 credits = "Bot by GR8 | Titan"
