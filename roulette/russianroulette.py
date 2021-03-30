@@ -29,7 +29,7 @@ class RussianRoulette(commands.Cog):
         "Chamber_Size": 6,
         "Wait_Time": 300,
         "useable_cost": None,
-        "roulette_role": 737857454095990825, 
+        "roulette_role": 823532994266529862, 
         "Session": {"Pot": 0, "Players": [], "Active": False},
     }
 
@@ -165,7 +165,7 @@ class RussianRoulette(commands.Cog):
                 "{0} {1.author.mention} is gathering players for a game of russian "
                 "roulette!\nType `{1.prefix}russian` to enter. "
                 "The round will start in {2} seconds. "
-                "The bet is set to **{3}** credits.".format(role.mention, ctx, wait, cost),allowed_mentions=discord.AllowedMentions(roles=True)
+                "The bet is set to **{3}** credits.".format(role.mention, ctx, wait, cost), allowed_mentions=discord.AllowedMentions(roles=True)
             )
             await asyncio.sleep(wait)
             await self.start_game(ctx)
