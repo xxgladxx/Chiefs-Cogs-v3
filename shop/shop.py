@@ -22,7 +22,7 @@ class Shop(commands.Cog):
             'emoji_cost': 50000,
             'cc_cost': 50000,
             'rarecost': 60000,
-            'epiccost': 750000,
+            'epiccost': 75000,
             'legendarycost': 1000000,
             'passroyale_cost': 10000000,
             'nitroclassic_cost': 100000000,
