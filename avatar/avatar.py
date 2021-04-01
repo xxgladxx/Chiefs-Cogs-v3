@@ -30,4 +30,4 @@ class Avatar(BaseCog):
         if not user.is_avatar_animated():
             url = user.avatar_url_as(static_format="png")
 
-        await ctx.send(url))
+        await ctx.send(url)
