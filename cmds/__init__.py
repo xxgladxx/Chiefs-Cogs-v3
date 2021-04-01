@@ -1,4 +1,4 @@
-from .pda import PDA
+from .cmds import PDA
 
 
 def setup(bot):
