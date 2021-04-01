@@ -81,7 +81,7 @@ class PDA(BaseCog):
         
 import random
 
-@commands.command()
+    @commands.command()
     async def hug(self, ctx, member: discord.Member):
         """Hug your senpai/waifu!"""
         author = ctx.author.mention
