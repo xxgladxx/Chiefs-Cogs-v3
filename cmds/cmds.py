@@ -79,7 +79,9 @@ class PDA(BaseCog):
         ver = self.version
         await ctx.send("You are using PDA version {}".format(ver))
         
-    @commands.command()
+import random
+
+@commands.command()
     async def hug(self, ctx, member: discord.Member):
         """Hug your senpai/waifu!"""
         author = ctx.author.mention
