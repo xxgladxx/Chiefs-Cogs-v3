@@ -1,5 +1,6 @@
 # Discord
 import discord
+import random
 
 # Red
 from redbot.core import commands
@@ -79,8 +80,6 @@ class PDA(BaseCog):
         ver = self.version
         await ctx.send("You are using PDA version {}".format(ver))
         
-import random
-
     @commands.command()
     async def hug(self, ctx, member: discord.Member):
         """Hug your senpai/waifu!"""
