@@ -85,7 +85,7 @@ class ClashRoyaleCog(commands.Cog):
     @commands.command(aliases=['p'])
     async def profile(self, ctx, member=None):
         
-        await ctx.send("{}, the command is under development. Contact <@698376874186768384> regarding the updates. Notification will be sent in <#822770263371546635> once it's available.")
+        await ctx.send("{ctx.author.mention}, the command is under development. Contact <@698376874186768384> regarding the updates. Notification will be sent in <#822770263371546635> once it's available.")
    #     """Clash Royale profile"""
    #     await ctx.trigger_typing()
    #     prefix = "/"
