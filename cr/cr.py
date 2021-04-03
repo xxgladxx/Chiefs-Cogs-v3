@@ -71,29 +71,16 @@ class ClashRoyaleCog(commands.Cog):
         nick = f"{player.name}" if player.clan is not None else f"{player.name}" 
         try:
             await member.edit(nick=nick[:31])
-            
-            if player.clan.name == 'Chiefs United!':
-                 await discord.Member.add_roles(member, discord.utils.get(member.guild.roles, name="Chiefs"))
-                 await discord.Member.remove_roles(member, discord.utils.get(member.guild.roles, name="unverified"))
-                                            
+               
+            role = discord.utils.get(member.guild.roles, name="Chiefs") if player.clan.name is 'Chiefs United' else discord.utils.get(member.guild.roles, name="Guest")
+            await discord.Member.add_roles(member, role)
+                 
+            await discord.Member.remove_roles(member, discord.utils.get(member.guild.roles, name="unverified"))                                
             await ctx.send(f"Done! New nickname: `{nick[:31]}`. Required roles added.")
         except discord.Forbidden:
             await ctx.send(f"I dont have permission to change nickname of this user!")
         except Exception as e:
             await ctx.send(f"Something went wrong: {str(e)}")
-            
-            if player.clan.name != 'Chiefs United!':
-                 guest = ctx.author
-                 await discord.Member.add_roles(guest, discord.utils.get(guest.guild.roles, name="Guest"))
-                 await discord.Member.remove_roles(guest, discord.utils.get(guest.guild.roles, name="unverified"))
-                                            
-            await ctx.send(f"Done! New nickname: `{nick[:31]}`. Required roles for Guests added.")
-        except discord.Forbidden:
-            await ctx.send(f"I dont have permission to change nickname of this user!")
-        except Exception as e:
-            await ctx.send(f"Something went wrong: {str(e)}")                
-                
-           
             
     @commands.command(aliases=['p'])
     async def profile(self, ctx, member=None):
