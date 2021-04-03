@@ -76,7 +76,7 @@ class ClashRoyaleCog(commands.Cog):
                     role = discord.utils.get(member.guild.roles, name="Chiefs")
             return await discord.Member.add_roles(member, role)
                                             
-             await ctx.send(f"Done! New nickname: `{nick[:31]}`. Required roles added.")
+            await ctx.send(f"Done! New nickname: `{nick[:31]}`. Required roles added.")
         except discord.Forbidden:
             await ctx.send(f"I dont have permission to change nickname of this user!")
         except Exception as e:
