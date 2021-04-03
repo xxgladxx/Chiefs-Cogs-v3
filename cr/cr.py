@@ -74,9 +74,10 @@ class ClashRoyaleCog(commands.Cog):
             
             if player.clan.name == "Chiefs United!":
                 member.add_role(discord.utils.get(ctx.guild.roles, name = "Chiefs")
+                return
             if player.clan.name != "Chiefs United!":
                 member.add_role(discord.utils.get(ctx.guild.roles, name = "Guest")
-
+                
              await ctx.send(f"Done! New nickname: `{nick[:31]}`. Required roles added.")
         except discord.Forbidden:
             await ctx.send(f"I dont have permission to change nickname of this user!")
