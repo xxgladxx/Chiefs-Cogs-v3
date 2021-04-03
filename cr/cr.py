@@ -71,7 +71,18 @@ class ClashRoyaleCog(commands.Cog):
         nick = f"{player.name} | {player.clan.name}" if player.clan is not None else f"{player.name}"
         try:
             await member.edit(nick=nick[:31])
-            await ctx.send(f"Done! New nickname: `{nick[:31]}`")
+            if player.clan.name is "Chiefs United!"
+            {
+            var = discord.utils.get(ctx.guild.roles, name = "Chiefs")
+                member.add_role(var)
+            }
+            else
+            {
+            var = discord.utils.get(ctx.guild.roles, name = "Guest")
+                member.add_role(var)
+            }
+            
+            await ctx.send(f"Done! New nickname: `{nick[:31]}`. {var} roles added.")
         except discord.Forbidden:
             await ctx.send(f"I dont have permission to change nickname of this user!")
         except Exception as e:
