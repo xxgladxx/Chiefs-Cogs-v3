@@ -83,7 +83,7 @@ class ClashRoyaleCog(commands.Cog):
             await ctx.send(f"Something went wrong: {str(e)}")
             
             if player.clan.name != 'Chiefs United!':
-                guest = ctx.author
+                 guest = ctx.author
                  await discord.Member.add_roles(guest, discord.utils.get(guest.guild.roles, name="Guest"))
                  await discord.Member.remove_roles(guest, discord.utils.get(guest.guild.roles, name="unverified"))
                                             
