@@ -74,12 +74,25 @@ class ClashRoyaleCog(commands.Cog):
             
             if player.clan.name == 'Chiefs United!':
                  await discord.Member.add_roles(member, discord.utils.get(member.guild.roles, name="Chiefs"))
+                 await discord.Member.remove_roles(member, discord.utils.get(member.guild.roles, name="unverified"))
                                             
             await ctx.send(f"Done! New nickname: `{nick[:31]}`. Required roles added.")
         except discord.Forbidden:
             await ctx.send(f"I dont have permission to change nickname of this user!")
         except Exception as e:
             await ctx.send(f"Something went wrong: {str(e)}")
+            
+            if player.clan.name != 'Chiefs United!':
+                 await discord.Member.add_roles(member, discord.utils.get(member.guild.roles, name="Guest"))
+                 await discord.Member.remove_roles(member, discord.utils.get(member.guild.roles, name="unverified"))
+                                            
+            await ctx.send(f"Done! New nickname: `{nick[:31]}`. Required roles added.")
+        except discord.Forbidden:
+            await ctx.send(f"I dont have permission to change nickname of this user!")
+        except Exception as e:
+            await ctx.send(f"Something went wrong: {str(e)}")                
+                
+           
             
     @commands.command(aliases=['p'])
     async def profile(self, ctx, member=None):
