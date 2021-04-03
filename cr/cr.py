@@ -72,7 +72,7 @@ class ClashRoyaleCog(commands.Cog):
         try:
             await member.edit(nick=nick[:31])
             
-            if player.clan.name == "Chiefs United!"
+            if player.clan.name == "Chiefs United!":
             {
             var = discord.utils.get(ctx.guild.roles, name = "Chiefs")
                 member.add_role(var)
