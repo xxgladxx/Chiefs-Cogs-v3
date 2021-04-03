@@ -83,9 +83,9 @@ class ClashRoyaleCog(commands.Cog):
             await ctx.send(f"Something went wrong: {str(e)}")
             
             if player.clan.name != 'Chiefs United!':
-                try:
-                 await discord.Member.add_roles(member, discord.utils.get(member.guild.roles, name="Guest"))
-                 await discord.Member.remove_roles(member, discord.utils.get(member.guild.roles, name="unverified"))
+                guest = ctx.author
+                 await discord.Member.add_roles(guest, discord.utils.get(guest.guild.roles, name="Guest"))
+                 await discord.Member.remove_roles(guest, discord.utils.get(guest.guild.roles, name="unverified"))
                                             
             await ctx.send(f"Done! New nickname: `{nick[:31]}`. Required roles for Guests added.")
         except discord.Forbidden:
