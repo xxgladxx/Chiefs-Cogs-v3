@@ -68,14 +68,14 @@ class ClashRoyaleCog(commands.Cog):
             return await ctx.send(embed = self.badEmbed(f"This user has no tag saved! Use {prefix}save <tag>"))
         
         player = await self.crapi.get_player(tag)
-        nick = f"{player.name} | {player.clan.name}" if player.clan is not None else f"{player.name}"
+        nick = f"{player.name}" if player.clan is not None else f"{player.name}" 
         try:
             await member.edit(nick=nick[:31])
             
-            if player.clan.name == "Chiefs United!":
+            if player.clan.name is "Chiefs United!":
                 member.add_role(discord.utils.get(ctx.guild.roles, name = "Chiefs")
-                return
-            if player.clan.name != "Chiefs United!":
+                                
+            else:
                 member.add_role(discord.utils.get(ctx.guild.roles, name = "Guest")
                 
              await ctx.send(f"Done! New nickname: `{nick[:31]}`. Required roles added.")
