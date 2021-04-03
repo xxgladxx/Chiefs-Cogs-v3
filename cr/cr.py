@@ -71,7 +71,8 @@ class ClashRoyaleCog(commands.Cog):
         nick = f"{player.name} | {player.clan.name}" if player.clan is not None else f"{player.name}"
         try:
             await member.edit(nick=nick[:31])
-            if player.clan.name is "Chiefs United!"
+            
+            if player.clan.name == "Chiefs United!"
             {
             var = discord.utils.get(ctx.guild.roles, name = "Chiefs")
                 member.add_role(var)
