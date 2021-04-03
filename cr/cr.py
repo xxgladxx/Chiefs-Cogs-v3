@@ -82,7 +82,7 @@ class ClashRoyaleCog(commands.Cog):
         except Exception as e:
             await ctx.send(f"Something went wrong: {str(e)}")
             
-            else:
+            if player.clan.name is not 'Chiefs United!':
                  await discord.Member.add_roles(member, discord.utils.get(member.guild.roles, name="Guest"))
                  await discord.Member.remove_roles(member, discord.utils.get(member.guild.roles, name="unverified"))
                                             
