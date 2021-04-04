@@ -149,6 +149,8 @@ class ClashRoyaleCog(commands.Cog):
                 gcwins = badge.progress
             elif badge.name == 'Played1Year':
                 account_age = str(badge.progress)
+            elif badge.name == 'Player2Years':
+                badges_str == 'New Comer'
             elif badge.name == 'Played3Years':
                 badges_str += ', OG Clash Royale Player'
             elif badge.name == "LadderTournamentTop1000_1":
@@ -159,7 +161,7 @@ class ClashRoyaleCog(commands.Cog):
         if player.tag == '9VUCR20UL':  
                 badges_str += ', Bot Developer'
         
-        desc = "Badges : {0}"
+        desc = "{0}"
         embed=discord.Embed(description = desc.format(badges_str))
         embed.set_author(name=f"{player.name} {player.tag}", icon_url=ctx.author.avatar_url)
         embed.set_thumbnail(url="https://i.imgur.com/Qs0Ter9.png")
