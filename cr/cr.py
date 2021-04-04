@@ -193,14 +193,10 @@ class ClashRoyaleCog(commands.Cog):
            # i+=1
         #embed.add_field(name="Upcoming Chests", value=chests_msg.split("X")[0], inline=False)
         #embed.add_field(name="Rare Chests", value=chests_msg.split("X")[1], inline=False)
-        
+        embed.set_footer(text="Bot by Gladiator#6969", icon_url="https://images-ext-1.discordapp.net/external/kYJx8YK6XrdnbhUQEHHbFtsmN4X2ga4LbzgVMFllKi8/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/698376874186768384/a_d545d6bab43dd8e041268f1d51fa4199.gif?width=473&height=473")
         await ctx.send(embed=randomize_colour(embed))
         
-        embedA=discord.Embed()
-        embedA.set_author(name="\u200B")
-        embedA.add_field(name="Current Deck", value=f"<:deck:827893484823248896>{player.current_deck}")
-        embed.set_footer(text="Bot by Gladiator#6969", icon_url="https://images-ext-1.discordapp.net/external/kYJx8YK6XrdnbhUQEHHbFtsmN4X2ga4LbzgVMFllKi8/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/698376874186768384/a_d545d6bab43dd8e041268f1d51fa4199.gif?width=473&height=473")
-        await ctx.send(embed=randomize_colour(embedA))
+        await ctx.send(f"Deck : {player.current_deck}")
         
         
         
