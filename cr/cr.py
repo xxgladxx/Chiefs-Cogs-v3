@@ -149,7 +149,7 @@ class ClashRoyaleCog(commands.Cog):
                 gcwins = badge.progress
             if badge.name == 'Played1Year':
                 account_age = str(badge.progress)
-            if badge.progress >= 365
+            if badge.progress >= 365:
                 badges_str += 'New Comer'
             if badge.name == 'Played3Years':
                 badges_str += ', OG Clash Royale Player'
@@ -197,6 +197,7 @@ class ClashRoyaleCog(commands.Cog):
            # i+=1
         #embed.add_field(name="Upcoming Chests", value=chests_msg.split("X")[0], inline=False)
         #embed.add_field(name="Rare Chests", value=chests_msg.split("X")[1], inline=False)
+        embed.set_footer(text="Bot by Gladiator#6969", icon_url="https://images-ext-1.discordapp.net/external/kYJx8YK6XrdnbhUQEHHbFtsmN4X2ga4LbzgVMFllKi8/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/698376874186768384/a_d545d6bab43dd8e041268f1d51fa4199.gif?width=473&height=473")
         await ctx.send(embed=randomize_colour(embed))
         
         
