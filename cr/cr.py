@@ -165,7 +165,7 @@ class ClashRoyaleCog(commands.Cog):
         embed.add_field(name="Highest Trophies", value=f"<:ltrophy:827893696157843467>{player.bestTrophies}")
         embed.add_field(name="Level", value=f"<:lvl:827893695047139348>{player.expLevel}")
         embed.add_field(name="Star Points", value=f"<:lvl:827893695047139348>{player.star_points}")
-        embed.add_field(name="Playing Since", value=f":alarm_clock:{player.account_age}")
+        embed.add_field(name="Playing Since", value=f":alarm_clock:{account_age}")
         embed.add_field(name="Arena", value=f"<:arena:827893484144820224>{player.arena.name}")
         if player.clan is not None:
             clanbadge = discord.utils.get(self.bot.emojis, name = str(player.clan.badgeId))
