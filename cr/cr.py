@@ -87,80 +87,82 @@ class ClashRoyaleCog(commands.Cog):
         
         msg = "{0.mention}, the command is under development. Contact <@698376874186768384> regarding the updates. Notification will be sent in <#822770263371546635> once it's available."
         await ctx.send(msg.format(ctx.author))
-   #     """Clash Royale profile"""
-   #     await ctx.trigger_typing()
-   #     prefix = "/"
-   #     tag = ""
+        """Clash Royale profile"""
+        await ctx.trigger_typing()
+        prefix = "/"
+        tag = ""
 
-   #     member = ctx.author if member is None else member
+        member = ctx.author if member is None else member
 
-#        if isinstance(member, discord.Member):
- #           tag = await self.config.user(member).tag()
-  #          if tag is None:
-   #             return await ctx.send(embed = self.badEmbed(f"This user has no tag saved! Use {prefix}save <tag>"))
-    #    elif isinstance(member, str) and member.startswith("<"):
-     #       id = member.replace("<", "").replace(">", "").replace("@", "").replace("!", "")
-      #      try:
-       #         member = discord.utils.get(ctx.guild.members, id=int(id))
-        #        if member is not None:
-         #           tag = await self.config.user(member).tag()
-          #          if tag is None:
-           #             return await ctx.send(embed = self.badEmbed(f"This user has no tag saved! Use {prefix}save <tag>"))
-            #except ValueError:
-             #   pass
-    #    elif isinstance(member, str) and member.startswith("#"):
-          #  tag = member.upper().replace('O', '0')
-#        elif isinstance(member, str):
- #           try:
-  #              member = discord.utils.get(ctx.guild.members, id=int(member))
-   #             if member is not None:
-    #                tag = await self.config.user(member).tag()
-     #               if tag is None:
-      #                  return await ctx.send(embed = self.badEmbed(f"This user has no tag saved! Use {prefix}save <tag>"))
-       #     except ValueError:
-        #        member = discord.utils.get(ctx.guild.members, name=member)
-         #       if member is not None:
-          #          tag = await self.config.user(member).tag()
-           #         if tag is None:
-            #            return await ctx.send(embed = self.badEmbed(f"This user has no tag saved! Use {prefix}save <tag>"))
+        if isinstance(member, discord.Member):
+            tag = await self.config.user(member).tag()
+           if tag is None:
+                return await ctx.send(embed = self.badEmbed(f"This user has no tag saved! Use {prefix}save <tag>"))
+        elif isinstance(member, str) and member.startswith("<"):
+            id = member.replace("<", "").replace(">", "").replace("@", "").replace("!", "")
+            try:
+                member = discord.utils.get(ctx.guild.members, id=int(id))
+                if member is not None:
+                    tag = await self.config.user(member).tag()
+                    if tag is None:
+                        return await ctx.send(embed = self.badEmbed(f"This user has no tag saved! Use {prefix}save <tag>"))
+            except ValueError:
+                pass
+        elif isinstance(member, str) and member.startswith("#"):
+            tag = member.upper().replace('O', '0')
+        elif isinstance(member, str):
+            try:
+                member = discord.utils.get(ctx.guild.members, id=int(member))
+                if member is not None:
+                    tag = await self.config.user(member).tag()
+                    if tag is None:
+                        return await ctx.send(embed = self.badEmbed(f"This user has no tag saved! Use {prefix}save <tag>"))
+            except ValueError:
+                member = discord.utils.get(ctx.guild.members, name=member)
+                if member is not None:
+                    tag = await self.config.user(member).tag()
+                    if tag is None:
+                        return await ctx.send(embed = self.badEmbed(f"This user has no tag saved! Use {prefix}save <tag>"))
 
-#        if tag is None or tag == "":
- #           desc = "/profile\n/profile @user\n/profile discord_name\n/profile discord_id\n/profile #CRTAG"
-  #          embed = discord.Embed(title="Invalid argument!", colour=discord.Colour.red(), description=desc)
-   #         return await ctx.send(embed=embed)
-    #    try:
-     #       player = await self.crapi.get_player(tag)
-      #      chests = await self.crapi.get_player_chests(tag)
+        if tag is None or tag == "":
+            desc = "/profile\n/profile @user\n/profile discord_name\n/profile discord_id\n/profile #CRTAG"
+            embed = discord.Embed(title="Invalid argument!", colour=discord.Colour.red(), description=desc)
+            return await ctx.send(embed=embed)
+        try:
+            player = await self.crapi.get_player(tag)
+            chests = await self.crapi.get_player_chests(tag)
             
-       # except clashroyale.NotFoundError:
-        #    return await ctx.send(embed = self.badEmbed("No clan with this tag found, try again!"))
+        except clashroyale.NotFoundError:
+            return await ctx.send(embed = self.badEmbed("No clan with this tag found, try again!"))
 
- #       except clashroyale.RequestError as e:
-  #          return await ctx.send(embed = self.badEmbed(f"CR API is offline, please try again later! ({str(e)})"))
+        except clashroyale.RequestError as e:
+            return await ctx.send(embed = self.badEmbed(f"CR API is offline, please try again later! ({str(e)})"))
         
-   #     except Exception as e:
-    #        return await ctx.send("**Something went wrong, please send a personal message to <@590906101554348053> or try again!**")
+        except Exception as e:
+            return await ctx.send("**Something went wrong, please send a personal message to <@590906101554348053> or try again!**")
 
 
-     #   embed=discord.Embed()
-      #  embed.set_author(name=f"{player.name} {player.tag}", icon_url="https://i.imgur.com/Qs0Ter9.png")
-       # embed.add_field(name="Trophies", value=f"<:trophycr:587316903001718789>{player.trophies}")
-        #embed.add_field(name="Highest Trophies", value=f"<:nicertrophy:587565339038973963>{player.bestTrophies}")
-        #embed.add_field(name="Level", value=f"<:level:451064038420381717>{player.expLevel}")
-        #embed.add_field(name="Arena", value=f"<:training:587566327204544512>{player.arena.name}")
-        #if player.clan is not None:
-        #    clanbadge = discord.utils.get(self.bot.emojis, name = str(player.clan.badgeId))
-         #   embed.add_field(name="Clan", value=f"{clanbadge}{player.clan.name}")
-          #  embed.add_field(name="Role", value=f"<:social:451063078096994304>{player.role.capitalize()}")
-        #embed.add_field(name="Total Games Played", value=f"<:swords:449650442033430538>{player.battleCount}")
-        #embed.add_field(name="Wins/Losses", value=f"<:starcr:587705837817036821>{player.wins}/{player.losses}")
-        #embed.add_field(name="Three Crown Wins", value=f"<:crownblue:449649785528516618>{player.threeCrownWins}")
-        #embed.add_field(name="War Day Wins", value=f"<:cw_win:449644364981993475>{player.warDayWins}")
-        #embed.add_field(name="Clan Cards Collected", value=f"<:cw_cards:449641339580317707>{player.clanCardsCollected}")
-        #embed.add_field(name="Max Challenge Wins", value=f"<:tournament:587706689357217822>{player.challengeMaxWins}")
-        #embed.add_field(name="Challenge Cards Won", value=f"<:cardcr:587702597855477770>{player.challengeCardsWon}")
-        #embed.add_field(name="Favourite Card", value=f"<:epic:587708123087634457>{player.currentFavouriteCard.name}")
-        #embed.add_field(name="Total Donations", value=f"<:deck:451062749565550602>{player.totalDonations}")
+        embed=discord.Embed()
+        embed.set_author(name=f"{player.name} {player.tag}", icon_url=ctx.author.avatar_url)
+        embed.set_thumbnail(icon_url="https://i.imgur.com/Qs0Ter9.png")
+        embed.add_field(name="Trophies", value=f"<:trophycr:827893698360377415>{player.trophies}")
+        embed.add_field(name="Highest Trophies", value=f"<:ltrophy:827893696157843467>{player.bestTrophies}")
+        embed.add_field(name="Level", value=f"<:lvl:827893695047139348>{player.expLevel}")
+        embed.add_field(name="Arena", value=f"<:arena:827893484144820224>{player.arena.name}")
+        if player.clan is not None:
+            clanbadge = discord.utils.get(self.bot.emojis, name = str(player.clan.badgeId))
+            embed.add_field(name="Clan", value=f"<:clan:827899551196512286>{player.clan.name}")
+            embed.add_field(name="Role", value=f"<:social:827893695206522881>{player.role.capitalize()}")
+        embed.add_field(name="Total Games Played", value=f"<:sword:827893697068662814>{player.battleCount}")
+        embed.add_field(name="Wins/Losses", value=f"<:up:827893694706352139><:dw:828180361695199243>{player.wins}/{player.losses}")
+        embed.add_field(name="Three Crown Wins", value=f"<:bc:827893695474696223>{player.threeCrownWins}")
+        embed.add_field(name="War Day Wins", value=f"<:cws:827893695927681034>{player.warDayWins}")
+        embed.add_field(name="Clan Cards Collected", value=f"<:cards:827893696011567145>{player.clanCardsCollected}")
+        embed.add_field(name="Max Challenge Wins", value=f"<:gt:827893482805919754>{player.challengeMaxWins}")
+        embed.add_field(name="Challenge Cards Won", value=f"<:deck:827893484823248896>{player.challengeCardsWon}")
+        embed.add_field(name="CC Wins", value=f"<:cc:827893697282048000>{player.classicChallengeWins}")
+        embed.add_field(name="Favourite Card", value=f"<:leggy:827893479064600586>{player.currentFavouriteCard.name}")
+        embed.add_field(name="Total Donations", value=f"<:trade:722539395407675553>{player.totalDonations}")       
 
         #chests_msg = ""
         #i = 0
@@ -172,7 +174,7 @@ class ClashRoyaleCog(commands.Cog):
            # i+=1
         #embed.add_field(name="Upcoming Chests", value=chests_msg.split("X")[0], inline=False)
         #embed.add_field(name="Rare Chests", value=chests_msg.split("X")[1], inline=False)
-        #await ctx.send(embed=randomize_colour(embed))
+        await ctx.send(embed=randomize_colour(embed))
         
         
     @commands.guild_only()
