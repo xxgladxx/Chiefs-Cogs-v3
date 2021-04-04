@@ -6,4 +6,3 @@ async def setup(bot):
     cog = ClashRoyale(bot=bot)
     await cog.crtoken()
     bot.add_cog(cog)
-© 2021 GitHub, Inc.
