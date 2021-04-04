@@ -168,8 +168,9 @@ class ClashRoyaleCog(commands.Cog):
             else:
                 season_best = player.league_statistics.current_season.best_trophies
                 
-        embed.add_field(name="Season Best", value='<:trophycr:827893698360377415>{} {:,}'.format((season_best), season_best))
+        
         embed.add_field(name="Trophies", value=f"<:trophycr:827893698360377415> {player.trophies}")
+        embed.add_field(name="Season Best", value='<:strophy:828219808138395648> {}'.format(season_best))
         embed.add_field(name="Highest Trophies", value=f"<:ltrophy:827893696157843467> {player.bestTrophies}")
         embed.add_field(name="Level", value=f"<:lvl:827893695047139348> {player.expLevel}")
         embed.add_field(name="Star Points", value=f"<:lvl:827893695047139348> {player.star_points}")
