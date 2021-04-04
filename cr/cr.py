@@ -149,7 +149,7 @@ class ClashRoyaleCog(commands.Cog):
                 gcwins = badge.progress
             if badge.name == 'Played1Year':
                 account_age = str(badge.progress)
-            if badge.progress >= 365:
+            if badge.progress >= 730 and badge.progress < 1095:
                 badges_str += 'New Comer'
             if badge.name == 'Played3Years':
                 badges_str += ', OG Clash Royale Player'
