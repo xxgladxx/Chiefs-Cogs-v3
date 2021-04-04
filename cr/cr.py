@@ -160,7 +160,7 @@ class ClashRoyaleCog(commands.Cog):
         embed.add_field(name="Challenge Cards Won", value=f"<:deck:827893484823248896>{player.challengeCardsWon}")
         embed.add_field(name="CC Wins", value=f"<:cc:827893697282048000>{player.classicChallengeWins}")
         embed.add_field(name="Favourite Card", value=f"<:leggy:827893479064600586>{player.currentFavouriteCard.name}")
-        embed.add_field(name="Total Donations", value=f"<:trade:722539395407675553>{player.totalDonations}")       
+        embed.add_field(name="Total Donations", value=f"<:trade:828177387287740426>{player.totalDonations}")       
 
         #chests_msg = ""
         #i = 0
