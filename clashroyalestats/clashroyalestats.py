@@ -8,7 +8,7 @@ class ClashRoyale(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-        self.tags = self.bot.get_cog('ClashRoyaleCog').tags
+        self.tags = self.bot.get_cog('ClashRoyaleCog').tag
         self.constants = self.bot.get_cog('ClashRoyaleTools').constants
 
     async def crtoken(self):
