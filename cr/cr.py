@@ -162,11 +162,12 @@ class ClashRoyaleCog(commands.Cog):
         embed=discord.Embed(description = badges_str)
         embed.set_author(name=f"{player.name} {player.tag}", icon_url=ctx.author.avatar_url)
         embed.set_thumbnail(url="https://i.imgur.com/Qs0Ter9.png")
-            if getattr(player, 'league_statistics', False):
+        if getattr(player, 'league_statistics', False):
             if not getattr(player.league_statistics.current_season, 'best_trophies', False):
                 season_best = player.league_statistics.current_season.trophies
             else:
                 season_best = player.league_statistics.current_season.best_trophies
+                
         embed.add_field(name="Season Best", value='<:trophycr:827893698360377415>{} {:,}'.format((season_best), season_best))
         embed.add_field(name="Trophies", value=f"<:trophycr:827893698360377415> {player.trophies}")
         embed.add_field(name="Highest Trophies", value=f"<:ltrophy:827893696157843467> {player.bestTrophies}")
