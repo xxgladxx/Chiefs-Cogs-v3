@@ -116,3 +116,13 @@ class PDA(BaseCog):
         embed.set_image(url="https://media.discordapp.net/attachments/823464413910532109/828225199613804584/image0-removebg-preview_1.png")
 
         await ctx.send(embed=embed)
+
+    @commands.command()
+    async def daanop(self, ctx):
+        """Hug your senpai/waifu!"""
+        
+        embed = discord.Embed(colour=discord.Colour.red(), description="Shhh:shushing_face:")
+        embed.set_author(name="Mr.077")
+        embed.set_image(url="https://media.discordapp.net/attachments/823464413910532109/828225199613804584/image0-removebg-preview_1.png")
+
+        await ctx.send(embed=embed)
