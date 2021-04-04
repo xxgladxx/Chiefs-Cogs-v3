@@ -170,7 +170,7 @@ class ClashRoyaleCog(commands.Cog):
                 
         
         embed.add_field(name="Trophies", value=f"<:trophycr:827893698360377415> {player.trophies}")
-        embed.add_field(name="Season Best", value='<:strophy:828219808138395648> {}'.format(season_best))
+        embed.add_field(name="Season Best", value=f"<:strophy:828219808138395648> {season_best}")
         embed.add_field(name="Highest Trophies", value=f"<:ltrophy:827893696157843467> {player.bestTrophies}")
         embed.add_field(name="Level", value=f"<:lvl:827893695047139348> {player.expLevel}")
         embed.add_field(name="Star Points", value=f"<:lvl:827893695047139348> {player.star_points}")
@@ -183,7 +183,7 @@ class ClashRoyaleCog(commands.Cog):
         embed.add_field(name="Total Games Played", value=f"<:sword:827893697068662814> {player.battleCount}")
         embed.add_field(name="Wins/Losses", value=f"<:up:827893694706352139><:dw:828180361695199243> {player.wins}/{player.losses}")
         embed.add_field(name="Three Crown Wins", value=f"<:bc:827893695474696223> {player.threeCrownWins}")
-        embed.add_field(name="Friendly Wins", value=f"<:fb:828221464384765964>{profiledata.achievements[9].value}))
+        embed.add_field(name="Friendly Wins", value=f"<:fb:828221464384765964>{player.achievements[9].value}))
         embed.add_field(name="War Day Wins", value=f"<:cws:827893695927681034> {player.warDayWins}")
         embed.add_field(name="Clan Cards Collected", value=f"<:cards:827893696011567145> {player.clanCardsCollected}")
         embed.add_field(name="Max Challenge Wins", value=f"<:gt:827893482805919754> {player.challengeMaxWins}")
