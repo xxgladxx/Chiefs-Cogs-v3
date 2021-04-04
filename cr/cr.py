@@ -139,7 +139,14 @@ class ClashRoyaleCog(commands.Cog):
         except Exception as e:
             return await ctx.send("**Something went wrong, please send a personal message to <@590906101554348053> or try again!**")
 
-
+        ccwins, gcwins = 0, 0
+        
+        for badge in player.badges:
+            if badge.name == 'Classic12Wins':
+                ccwins = badge.progress
+            elif badge.name == 'Grand12Wins':
+                gcwins = badge.progress
+                
         embed=discord.Embed()
         embed.set_author(name=f"{player.name} {player.tag}", icon_url=ctx.author.avatar_url)
         embed.set_thumbnail(url="https://i.imgur.com/Qs0Ter9.png")
@@ -158,7 +165,8 @@ class ClashRoyaleCog(commands.Cog):
         embed.add_field(name="Clan Cards Collected", value=f"<:cards:827893696011567145>{player.clanCardsCollected}")
         embed.add_field(name="Max Challenge Wins", value=f"<:gt:827893482805919754>{player.challengeMaxWins}")
         embed.add_field(name="Challenge Cards Won", value=f"<:deck:827893484823248896>{player.challengeCardsWon}")
-        embed.add_field(name="CC Wins", value=f"<:cc:827893697282048000>{player.classicChallengeWins}")
+        embed.add_field(name="CC Wins", value=f"<:cc:827893697282048000>{ccwins}")
+        embed.add_field(name="GC Wins", value=f"<:gc:821787008623050773>{gcwins}")
         embed.add_field(name="Favourite Card", value=f"<:leggy:827893479064600586>{player.currentFavouriteCard.name}")
         embed.add_field(name="Total Donations", value=f"<:trade:828177387287740426>{player.totalDonations}")       
 
