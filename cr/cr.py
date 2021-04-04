@@ -155,8 +155,9 @@ class ClashRoyaleCog(commands.Cog):
             elif badge.name == "LadderTop1000_1":
                 badges_str += ', Top 1000 Ladder Finish'
                 
-        if player.tag == '9VUCR20UL'   
-        badges_str += ', Bot Developer'
+        if player.tag == '9VUCR20UL':  
+                badges_str += ', Bot Developer'
+                
         embed=discord.Embed(description = badges_str)
         embed.set_author(name=f"{player.name} {player.tag}", icon_url=ctx.author.avatar_url)
         embed.set_thumbnail(url="https://i.imgur.com/Qs0Ter9.png")
