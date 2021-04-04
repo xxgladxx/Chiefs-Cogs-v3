@@ -157,8 +157,7 @@ class ClashRoyaleCog(commands.Cog):
                 badges_str += ', Top 1000 Global Tournament Finish'
             if badge.name == "LadderTop1000_1":
                 badges_str += ', Top 1000 Ladder Finish'
-                
-        if player.tag == '9VUCR20UL':  
+            if player.tag == '9VUCR20UL':  
                 badges_str += ', Bot Developer'
         
         desc = "{0}"
