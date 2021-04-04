@@ -162,6 +162,12 @@ class ClashRoyaleCog(commands.Cog):
         embed=discord.Embed(description = badges_str)
         embed.set_author(name=f"{player.name} {player.tag}", icon_url=ctx.author.avatar_url)
         embed.set_thumbnail(url="https://i.imgur.com/Qs0Ter9.png")
+            if getattr(player, 'league_statistics', False):
+            if not getattr(player.league_statistics.current_season, 'best_trophies', False):
+                season_best = player.league_statistics.current_season.trophies
+            else:
+                season_best = player.league_statistics.current_season.best_trophies
+        embed.add_field(name="Season Best", value='<:trophycr:827893698360377415>{} {:,}'.format((season_best), season_best))
         embed.add_field(name="Trophies", value=f"<:trophycr:827893698360377415> {player.trophies}")
         embed.add_field(name="Highest Trophies", value=f"<:ltrophy:827893696157843467> {player.bestTrophies}")
         embed.add_field(name="Level", value=f"<:lvl:827893695047139348> {player.expLevel}")
@@ -171,7 +177,7 @@ class ClashRoyaleCog(commands.Cog):
         if player.clan is not None:
             clanbadge = discord.utils.get(self.bot.emojis, name = str(player.clan.badgeId))
             embed.add_field(name="Clan", value=f"<:clan:827899551196512286> {player.clan.name}")
-            embed.add_field(name="Role", value=f"<:social:827893695206522881> {player.role.capitalize()}")
+            embed.add_field(name="Position", value=f"<:social:827893695206522881> {player.role.capitalize()}")
         embed.add_field(name="Total Games Played", value=f"<:sword:827893697068662814> {player.battleCount}")
         embed.add_field(name="Wins/Losses", value=f"<:up:827893694706352139><:dw:828180361695199243> {player.wins}/{player.losses}")
         embed.add_field(name="Three Crown Wins", value=f"<:bc:827893695474696223> {player.threeCrownWins}")
@@ -197,7 +203,7 @@ class ClashRoyaleCog(commands.Cog):
         embed.set_footer(text="Bot by Gladiator#6969", icon_url="https://images-ext-1.discordapp.net/external/kYJx8YK6XrdnbhUQEHHbFtsmN4X2ga4LbzgVMFllKi8/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/698376874186768384/a_d545d6bab43dd8e041268f1d51fa4199.gif?width=473&height=473")
         await ctx.send(embed=randomize_colour(embed))
         
-        await ctx.send(self.constants.decklink_url(player.current_deck))
+        #await ctx.send(self.constants.decklink_url(player.current_deck))
         
         
         
