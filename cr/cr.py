@@ -145,17 +145,17 @@ class ClashRoyaleCog(commands.Cog):
         for badge in player.badges:
             if badge.name == 'Classic12Wins':
                 ccwins = badge.progress
-            elif badge.name == 'Grand12Wins':
+            if badge.name == 'Grand12Wins':
                 gcwins = badge.progress
-            elif badge.name == 'Played1Year':
+            if badge.name == 'Played1Year':
                 account_age = str(badge.progress)
-            elif badge.name == 'Player2Years':
-                badges_str == 'New Comer'
-            elif badge.name == 'Played3Years':
+            if badge.progress >= 365
+                badges_str += 'New Comer'
+            if badge.name == 'Played3Years':
                 badges_str += ', OG Clash Royale Player'
-            elif badge.name == "LadderTournamentTop1000_1":
+            if badge.name == "LadderTournamentTop1000_1":
                 badges_str += ', Top 1000 Global Tournament Finish'
-            elif badge.name == "LadderTop1000_1":
+            if badge.name == "LadderTop1000_1":
                 badges_str += ', Top 1000 Ladder Finish'
                 
         if player.tag == '9VUCR20UL':  
@@ -165,27 +165,27 @@ class ClashRoyaleCog(commands.Cog):
         embed=discord.Embed(description = desc.format(badges_str))
         embed.set_author(name=f"{player.name} {player.tag}", icon_url=ctx.author.avatar_url)
         embed.set_thumbnail(url="https://i.imgur.com/Qs0Ter9.png")
-        embed.add_field(name="Trophies", value=f"<:trophycr:827893698360377415>{player.trophies}")
-        embed.add_field(name="Highest Trophies", value=f"<:ltrophy:827893696157843467>{player.bestTrophies}")
-        embed.add_field(name="Level", value=f"<:lvl:827893695047139348>{player.expLevel}")
-        embed.add_field(name="Star Points", value=f"<:lvl:827893695047139348>{player.star_points}")
-        embed.add_field(name="Playing Since", value=f":alarm_clock:{account_age}")
-        embed.add_field(name="Arena", value=f"<:arena:827893484144820224>{player.arena.name}")
+        embed.add_field(name="Trophies", value=f"<:trophycr:827893698360377415> {player.trophies}")
+        embed.add_field(name="Highest Trophies", value=f"<:ltrophy:827893696157843467> {player.bestTrophies}")
+        embed.add_field(name="Level", value=f"<:lvl:827893695047139348> {player.expLevel}")
+        embed.add_field(name="Star Points", value=f"<:lvl:827893695047139348> {player.star_points}")
+        embed.add_field(name="Playing Since", value=f":alarm_clock: {account_age} days")
+        embed.add_field(name="Arena", value=f"<:arena:827893484144820224> {player.arena.name}")
         if player.clan is not None:
             clanbadge = discord.utils.get(self.bot.emojis, name = str(player.clan.badgeId))
-            embed.add_field(name="Clan", value=f"<:clan:827899551196512286>{player.clan.name}")
-            embed.add_field(name="Role", value=f"<:social:827893695206522881>{player.role.capitalize()}")
-        embed.add_field(name="Total Games Played", value=f"<:sword:827893697068662814>{player.battleCount}")
-        embed.add_field(name="Wins/Losses", value=f"<:up:827893694706352139><:dw:828180361695199243>{player.wins}/{player.losses}")
-        embed.add_field(name="Three Crown Wins", value=f"<:bc:827893695474696223>{player.threeCrownWins}")
-        embed.add_field(name="War Day Wins", value=f"<:cws:827893695927681034>{player.warDayWins}")
-        embed.add_field(name="Clan Cards Collected", value=f"<:cards:827893696011567145>{player.clanCardsCollected}")
-        embed.add_field(name="Max Challenge Wins", value=f"<:gt:827893482805919754>{player.challengeMaxWins}")
-        embed.add_field(name="Challenge Cards Won", value=f"<:deck:827893484823248896>{player.challengeCardsWon}")
-        embed.add_field(name="CC Wins", value=f"<:cc:827893697282048000>{ccwins}")
-        embed.add_field(name="GC Wins", value=f"<:gc:821787008623050773>{gcwins}")
-        embed.add_field(name="Favourite Card", value=f"<:leggy:827893479064600586>{player.currentFavouriteCard.name}")
-        embed.add_field(name="Total Donations", value=f"<:trade:828177387287740426>{player.totalDonations}")       
+            embed.add_field(name="Clan", value=f"<:clan:827899551196512286> {player.clan.name}")
+            embed.add_field(name="Role", value=f"<:social:827893695206522881> {player.role.capitalize()}")
+        embed.add_field(name="Total Games Played", value=f"<:sword:827893697068662814> {player.battleCount}")
+        embed.add_field(name="Wins/Losses", value=f"<:up:827893694706352139><:dw:828180361695199243> {player.wins}/{player.losses}")
+        embed.add_field(name="Three Crown Wins", value=f"<:bc:827893695474696223> {player.threeCrownWins}")
+        embed.add_field(name="War Day Wins", value=f"<:cws:827893695927681034> {player.warDayWins}")
+        embed.add_field(name="Clan Cards Collected", value=f"<:cards:827893696011567145> {player.clanCardsCollected}")
+        embed.add_field(name="Max Challenge Wins", value=f"<:gt:827893482805919754> {player.challengeMaxWins}")
+        embed.add_field(name="Challenge Cards Won", value=f"<:deck:827893484823248896> {player.challengeCardsWon}")
+        embed.add_field(name="CC Wins", value=f"<:cc:827893697282048000> {ccwins}")
+        embed.add_field(name="GC Wins", value=f"<:gc:821787008623050773> {gcwins}")
+        embed.add_field(name="Favourite Card", value=f"<:leggy:827893479064600586> {player.currentFavouriteCard.name}")
+        embed.add_field(name="Total Donations", value=f"<:trade:828177387287740426> {player.totalDonations}")       
 
         #chests_msg = ""
         #i = 0
