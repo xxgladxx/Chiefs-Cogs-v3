@@ -85,8 +85,6 @@ class ClashRoyaleCog(commands.Cog):
     @commands.command(aliases=['p'])
     async def profile(self, ctx, member=None):
         
-        msg = "{0.mention}, the command is under development. Contact <@698376874186768384> regarding the updates. Notification will be sent in <#822770263371546635> once it's available."
-        await ctx.send(msg.format(ctx.author))
         """Clash Royale profile"""
         await ctx.trigger_typing()
         prefix = "/"
@@ -144,7 +142,7 @@ class ClashRoyaleCog(commands.Cog):
 
         embed=discord.Embed()
         embed.set_author(name=f"{player.name} {player.tag}", icon_url=ctx.author.avatar_url)
-        embed.set_thumbnail(icon_url="https://i.imgur.com/Qs0Ter9.png")
+        embed.set_thumbnail(url="https://i.imgur.com/Qs0Ter9.png")
         embed.add_field(name="Trophies", value=f"<:trophycr:827893698360377415>{player.trophies}")
         embed.add_field(name="Highest Trophies", value=f"<:ltrophy:827893696157843467>{player.bestTrophies}")
         embed.add_field(name="Level", value=f"<:lvl:827893695047139348>{player.expLevel}")
