@@ -96,7 +96,7 @@ class ClashRoyaleCog(commands.Cog):
 
         if isinstance(member, discord.Member):
             tag = await self.config.user(member).tag()
-           if tag is None:
+        if tag is None:
                 return await ctx.send(embed = self.badEmbed(f"This user has no tag saved! Use {prefix}save <tag>"))
         elif isinstance(member, str) and member.startswith("<"):
             id = member.replace("<", "").replace(">", "").replace("@", "").replace("!", "")
