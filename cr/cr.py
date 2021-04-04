@@ -145,17 +145,17 @@ class ClashRoyaleCog(commands.Cog):
         for badge in player.badges:
             if badge.name == 'Classic12Wins':
                 ccwins = badge.progress
-            if badge.name == 'Grand12Wins':
+            elif badge.name == 'Grand12Wins':
                 gcwins = badge.progress
-            if badge.name == 'Played1Year':
+            elif badge.name == 'Played1Year':
                 account_age = str(badge.progress)
-            if badge.name == 'Played3Years':
+            elif badge.name == 'Played3Years':
                 badges_str += ', OG Clash Royale Player'
-            if badge.name == "LadderTournamentTop1000_1":
+            elif badge.name == "LadderTournamentTop1000_1":
                 badges_str += ', Top 1000 Global Tournament Finish'
-            if badge.name == "LadderTop1000_1":
+            elif badge.name == "LadderTop1000_1":
                 badges_str += ', Top 1000 Ladder Finish'
-            if player.tag == '#9VUCR20UL':  
+            elif player.tag == '#9VUCR20UL':  
                 badges_str += ', Bot Developer'
         
         desc = "{0}"
