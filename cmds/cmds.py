@@ -98,7 +98,7 @@ class PDA(BaseCog):
         await ctx.send(embed=embed)
 
     @commands.command()
-    async def mongoop(self, ctx, member: discord.Member):
+    async def mongoop(self, ctx):
         """Hug your senpai/waifu!"""
         
         embed = discord.Embed(colour=discord.Colour.blue(), description="No doubt!")
@@ -108,7 +108,7 @@ class PDA(BaseCog):
         await ctx.send(embed=embed)
                         
     @commands.command()
-    async def yerzop(self, ctx, member: discord.Member):
+    async def yerzop(self, ctx):
         """Hug your senpai/waifu!"""
         
         embed = discord.Embed(colour=discord.Colour.red(), description="No doubt!")
