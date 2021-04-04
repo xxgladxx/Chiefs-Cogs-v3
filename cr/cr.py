@@ -140,6 +140,7 @@ class ClashRoyaleCog(commands.Cog):
             return await ctx.send("**Something went wrong, please send a personal message to <@590906101554348053> or try again!**")
 
         ccwins, gcwins = 0, 0
+        badges_str = '**Badges:** 2020 Player'
         
         for badge in player.badges:
             if badge.name == 'Classic12Wins':
@@ -158,7 +159,7 @@ class ClashRoyaleCog(commands.Cog):
         if player.tag == '9VUCR20UL':  
                 badges_str += ', Bot Developer'
                 
-        embed=discord.Embed(description = badges_str)
+        embed=discord.Embed(description = f"Badges + {}".format(badges_str))
         embed.set_author(name=f"{player.name} {player.tag}", icon_url=ctx.author.avatar_url)
         embed.set_thumbnail(url="https://i.imgur.com/Qs0Ter9.png")
         embed.add_field(name="Trophies", value=f"<:trophycr:827893698360377415>{player.trophies}")
