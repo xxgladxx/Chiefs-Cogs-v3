@@ -14,6 +14,7 @@ class ClashRoyaleCog(commands.Cog):
         self.config.register_user(**default_user)
         default_guild = {"clans" : {}}
         self.config.register_guild(**default_guild)
+        self.constants = self.bot.get_cog('ClashRoyaleTools').constants
         
     async def initialize(self):
         keys = await self.bot.get_shared_api_tokens("crapi")
@@ -196,7 +197,7 @@ class ClashRoyaleCog(commands.Cog):
         embed.set_footer(text="Bot by Gladiator#6969", icon_url="https://images-ext-1.discordapp.net/external/kYJx8YK6XrdnbhUQEHHbFtsmN4X2ga4LbzgVMFllKi8/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/698376874186768384/a_d545d6bab43dd8e041268f1d51fa4199.gif?width=473&height=473")
         await ctx.send(embed=randomize_colour(embed))
         
-        await ctx.send(f"Deck : {player.current_deck}")
+        await ctx.send(self.constants.decklink_url(player.current_deck))
         
         
         
