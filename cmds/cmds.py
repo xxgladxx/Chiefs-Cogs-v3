@@ -103,8 +103,7 @@ class PDA(BaseCog):
         
         embed = discord.Embed(colour=discord.Colour.blue(), description="No doubt!")
         embed.set_author(name="Yeeet!")
-        embed.set_image(url="https://cdn.discordapp.com/attachments/823464413910532109/828225135575302154/image0-removebg-preview.png"
-        embed.set_footer(text="Confirmed by God Himself!")
+        embed.set_image(url="https://cdn.discordapp.com/attachments/823464413910532109/828225135575302154/image0-removebg-preview.png")
 
         await ctx.send(embed=embed)
                         
@@ -114,7 +113,6 @@ class PDA(BaseCog):
         
         embed = discord.Embed(colour=discord.Colour.red(), description="No doubt!")
         embed.set_author(name="Wuhuuuu!")
-        embed.set_image(url="https://media.discordapp.net/attachments/823464413910532109/828225199613804584/image0-removebg-preview_1.png"
-        embed.set_footer(text="Confirmed by God Himself!")
+        embed.set_image(url="https://media.discordapp.net/attachments/823464413910532109/828225199613804584/image0-removebg-preview_1.png")
 
         await ctx.send(embed=embed)
