@@ -140,7 +140,7 @@ class ClashRoyaleCog(commands.Cog):
             return await ctx.send("**Something went wrong, please send a personal message to <@590906101554348053> or try again!**")
 
         ccwins, gcwins = 0, 0
-        badges_str = '**Badges:** 2020 Player'
+        badges_str = '**Badges:** 2021 Player'
         
         for badge in player.badges:
             if badge.name == 'Classic12Wins':
@@ -155,11 +155,10 @@ class ClashRoyaleCog(commands.Cog):
                 badges_str += ', Top 1000 Global Tournament Finish'
             elif badge.name == "LadderTop1000_1":
                 badges_str += ', Top 1000 Ladder Finish'
-            elif player.tag == '#9VUCR20UL':  
+                
+        if player.tag == '#9VUCR20UL':  
                 badges_str += ', Bot Developer'
-        
-        desc = "{0}"
-        embed=discord.Embed(description = desc.format(badges_str))
+        embed=discord.Embed(description = badges_str)
         embed.set_author(name=f"{player.name} {player.tag}", icon_url=ctx.author.avatar_url)
         embed.set_thumbnail(url="https://i.imgur.com/Qs0Ter9.png")
         embed.add_field(name="Trophies", value=f"<:trophycr:827893698360377415> {player.trophies}")
