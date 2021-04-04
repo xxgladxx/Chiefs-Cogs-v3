@@ -122,7 +122,7 @@ class PDA(BaseCog):
         """Hug your senpai/waifu!"""
         
         embed = discord.Embed(colour=discord.Colour.red(), description="Shhh:shushing_face:")
-        embed.set_author(name="Mr.077")
-        embed.set_image(url="https://media.discordapp.net/attachments/823464413910532109/828225199613804584/image0-removebg-preview_1.png")
+        embed.set_author(name="Mr.077!")
+        embed.set_image(url="https://media.discordapp.net/attachments/823464413910532109/828230236122120192/821639162611630111.png")
 
         await ctx.send(embed=embed)
