@@ -120,11 +120,10 @@ class Shop(commands.Cog):
 
     @commands.command()
     async def buy(self, ctx, choice_no: int = 0):
-        if choice_no is None
-        await ctx.send("{0.mention}, please type `!!shop` for getting the list of items available.".format(ctx.author))
+        
         # Shows options if they don't have an option
         if choice_no == 0 or choice_no > 7:
-            await self.shop(ctx)
+            await ctx.send("{0.mention}, please type `!!shop` for getting the list of items available.".format(ctx.author))
             return
 
         guild_data = self.config.guild(ctx.guild)
