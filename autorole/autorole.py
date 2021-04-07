@@ -10,5 +10,5 @@ class AutoRole(commands.Cog):
     async def on_member_join(self, member : discord.Member):
         """ADD AUTOROLE"""
         # Your code will go here
-        role = discord.utils.get(member.server.roles, id="821778143937167372")
+        role = member.guild.get_role(821778143937167372)
         await self.bot.add_roles(member, role)
