@@ -11,4 +11,4 @@ class AutoRole(commands.Cog):
         """ADD AUTOROLE"""
         # Your code will go here
         role = discord.utils.get(member.server.roles, id="821778143937167372")
-        await bot.add_roles(member, role)
+        await self.bot.add_roles(member, role)
