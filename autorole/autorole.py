@@ -11,4 +11,4 @@ class AutoRole(commands.Cog):
         """ADD AUTOROLE"""
         # Your code will go here
         role = member.guild.get_role(821778143937167372)
-        await self.bot.add_roles(member, role)
+        await member.add_roles(role)
