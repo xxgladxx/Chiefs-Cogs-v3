@@ -25,6 +25,8 @@ class WLCM(commands.Cog):
     @commands.command()
     @checks.admin_or_permissions(manage_guild=True)
     async def approve(self, ctx, member : discord.Member = None):
+        if member is None:
+            member = ctx.author
         embed = discord.Embed(color=discord.Colour.blue(), description=f"Hey there again {member.mention}!")
         embed.set_author(name="Chiefs United v1!", icon_url="https://media.discordapp.net/attachments/754780357349605467/760477780978434058/image0.gif?width=473&height=473")
         embed.set_thumbnail(url="https://cdn.discordapp.com/emojis/598503254351020032.png?v=1")
