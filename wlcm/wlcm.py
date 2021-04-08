@@ -30,7 +30,7 @@ class WLCM(commands.Cog):
         embed = discord.Embed(color=discord.Colour.blue(), description=f"Hey there {member.mention}!")
         embed.set_author(name="Chiefs United!", icon_url="https://media.discordapp.net/attachments/754780357349605467/760477780978434058/image0.gif?width=473&height=473")
         embed.set_thumbnail(url="https://cdn.discordapp.com/emojis/598503254351020032.png?v=1")
-        embed.add_field(name=f"We're more than happy to have you approved as a Chief! \n Please click the link below to join our clan.", value=f"<:star:827893695047139348> [\u2022\u2022\u2022](https://link.clashroyale.com/en?clanInfo?id=YGGQR0CV%27) <:star:827893695047139348>")
+        embed.add_field(name=f"We're more than happy to have you approved as a Chief! \nPlease click the link below to join our clan.", value=f"<:star:827893695047139348> [\u2022\u2022\u2022\u2022\u2022](https://link.clashroyale.com/en?clanInfo?id=YGGQR0CV%27) <:star:827893695047139348>")
         embed.set_image(url="https://images-ext-1.discordapp.net/external/wtqLXQjEmYQLdwmAUUo0gMMutN6MApAxnfHSqsMds7c/%3Fwidth%3D473%26height%3D473/https/media.discordapp.net/attachments/827982101507866726/829589928807497768/legend_logo-trans.png")
         embed.set_footer(text="Bot by Gladiator#6969", icon_url="https://images-ext-1.discordapp.net/external/kYJx8YK6XrdnbhUQEHHbFtsmN4X2ga4LbzgVMFllKi8/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/698376874186768384/a_d545d6bab43dd8e041268f1d51fa4199.gif?width=473&height=473")
         await member.send(embed=embed, allowed_mentions=discord.AllowedMentions(roles=True, users=True))
