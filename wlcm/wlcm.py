@@ -11,5 +11,5 @@ class WLCM(commands.Cog):
         # send a message to welcome channel when a user joins server
     @commands.command()
     async def wlcm(self, ctx):
-        channel = ctx.get_channel(827982101507866726)
+        channel = ctx.guild.get_channel(827982101507866726)
         await channel.send('Hey')
