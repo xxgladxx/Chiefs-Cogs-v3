@@ -17,5 +17,5 @@ class WLCM(commands.Cog):
         embed.set_thumbnail(url="https://images-ext-1.discordapp.net/external/wtqLXQjEmYQLdwmAUUo0gMMutN6MApAxnfHSqsMds7c/%3Fwidth%3D473%26height%3D473/https/media.discordapp.net/attachments/827982101507866726/829589928807497768/legend_logo-trans.png")
         embed.set_image(url="https://cdn.discordapp.com/emojis/576516555714592796.gif?v=1")
         embed.set_footer(text="Bot by Gladiator#6969", icon_url="https://images-ext-1.discordapp.net/external/kYJx8YK6XrdnbhUQEHHbFtsmN4X2ga4LbzgVMFllKi8/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/698376874186768384/a_d545d6bab43dd8e041268f1d51fa4199.gif?width=473&height=473")
-        await channel.send(embed=embed,allowed_mentions=discord.AllowedMentions(roles=True))
+        await channel.send(embed=embed, allowed_mentions=discord.AllowedMentions(roles=True))
         await member.send('https://link.clashroyale.com/en?clanInfo?id=YGGQR0CV')
