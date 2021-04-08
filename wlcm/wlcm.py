@@ -10,6 +10,6 @@ class WLCM(commands.Cog):
    # async def on_member_join(self, member : discord.Member) -> None:
         # send a message to welcome channel when a user joins server
     @commands.command()
-    async def on_member_join(self, ctx):
+    async def wlcm(self, ctx):
         channel = ctx.get_channel(827982101507866726)
         await channel.send('Hey')
