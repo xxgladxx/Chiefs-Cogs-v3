@@ -1,7 +1,6 @@
 from redbot.core import commands
 from redbot.core import checks
 import discord
-import emoji
 
 class WLCM(commands.Cog):
     """My custom cog"""
@@ -23,7 +22,7 @@ class WLCM(commands.Cog):
         await channel.send(embed=embed, allowed_mentions=discord.AllowedMentions(roles=True, users=True))
         await member.send('Join us here : \n <https://link.clashroyale.com/en?clanInfo?id=YGGQR0CV>x')
 
-    @commands.Cog()
+    @commands.command()
     @checks.admin_or_permissions(manage_guild=True)
     async def approve(self, ctx, member : discord.Member = None):
         embed = discord.Embed(color=discord.Colour.blue(), description=f"Hey there again {member.mention}!")
