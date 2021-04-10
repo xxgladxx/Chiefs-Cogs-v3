@@ -1,6 +1,7 @@
 import discord
 from redbot.core import commands
 import asyncio
+import clashroyale
 
 class FL(commands.Cog):
     def __init__(self, bot):
