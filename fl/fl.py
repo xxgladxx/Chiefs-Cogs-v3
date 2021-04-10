@@ -35,8 +35,8 @@ class FL(commands.Cog):
         fand = message.content.index('&') 
         profiletag = '#' + message.content[ftag:fand] 
         url = re.findall('https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', message.content)
-        url = url.strip([')
-        url = url.strip('])                
+        url = url.strip("['")
+        url = url.strip("']")                
                        
 
       try:            
