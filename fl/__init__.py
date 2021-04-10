@@ -1,4 +1,7 @@
 from .fl import FL
 
-def setup(bot):
-    bot.add_cog(FL(bot))
+async def setup(bot):
+    cog = FL(bot=bot)
+    await cog.crtoken()
+    bot.add_cog(cog)
+
