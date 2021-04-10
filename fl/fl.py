@@ -5,17 +5,51 @@ import asyncio
 class FL(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.tags = self.bot.get_cog('ClashRoyaleTools').tags
+        self.constants = self.bot.get_cog('ClashRoyaleTools').constants
+
+    async def crtoken(self):
+        # Clash Royale API config
+        token = await self.bot.get_shared_api_tokens("clashroyale")
+        if token['token'] is None:
+            print("CR Token is not SET. Make sure to have royaleapi ip added (128.128.128.128) Use !set api "
+                  "clashroyale token,YOUR_TOKEN to set it")
+        self.clash = clashroyale.official_api.Client(token=token['token'], is_async=True,
+                                                     url="https://proxy.royaleapi.dev/v1")
+    def cog_unload(self):
+        if self.clash:
+            self.bot.loop.create_task(self.clash.close())
+   
+        
 
     @commands.Cog.listener()
     async def on_message_without_command(self, message):
+        
+     try:
+        if "https://link.clashroyale.com/invite/friend/" in message.content:
+         ftag = message.content.index('=') + 5
+         fand = message.content.index('&')
+         profiletag = '#' + message.content[ftag:fand]
+         if not self.tags.verifyTag(profiletag):
+          return await ctx.send("Invalid Tag. Please try again.")
 
-        user=message.author
-        if "https://link.clashroyale.com/invite/friend" in message.content:
-            embed = discord.Embed(color=user.colour, description=user.mention)
-            embed.set_author(name="Chiefs United!", icon_url=user.avatar_url)
-            embed.set_thumbnail(url="https://media.tenor.co/videos/89c5ae3cdef45e20658074f4d3e386e0/mp4")
-            embed.add_field(name="Click the link below to add "+str(user.name)+" in Clash Royale!", value="\u200B", inline="False")
-            embed.add_field(name="Link", value=f"[click]({message.content})", inline="False")
-            embed.set_footer(text="Bot by Gladiator#0004", icon_url="https://images-ext-1.discordapp.net/external/kYJx8YK6XrdnbhUQEHHbFtsmN4X2ga4LbzgVMFllKi8/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/698376874186768384/a_d545d6bab43dd8e041268f1d51fa4199.gif?width=473&height=473")
-            await message.channel.send(embed=embed)
-            await message.delete()
+         try:
+          profiledata = await self.clash.get_player(profiletag)
+         except clashroyale.RequestError:
+          return await ctx.send('Unable to reach CR servers')
+
+        embed = discord.Embed(title='Click this link to add as friend in Clash Royale!', color=0x0080ff)
+        embed.set_author(name=profiledata.name + " (" + profiledata.tag + ")", icon_url=await self.constants.get_clan_image(profiledata))
+        embed.set_thumbnail(url="https://imgur.com/C9rLoeh.jpg")
+        embed.add_field(name="User", value=message.author.mention, inline=True)
+        embed.add_field(name="Trophies", value="{} {:,}".format(self.emoji(arenaFormat), profiledata.trophies), inline=True)
+        embed.add_field(name="Level", value=self.emoji("level{}".format(profiledata.expLevel)), inline=True)
+        if profiledata.clan is not None:
+        embed.add_field(name="Clan {}".format(profiledata.role.capitalize()), value="{} {}".format(self.emoji("clan"), profiledata.clan.name), inline=True)
+        embed.set_footer(text=credits, icon_url=creditIcon)
+        await self.bot.delete_message(message)
+        await self.bot.send_message(message.channel, embed=embed)
+     except Exception as e:
+        print('e')
+        return
+
