@@ -30,7 +30,7 @@ class FL(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message_without_command(self, message):
-      profiletag = ""  
+ 
       if "https://link.clashroyale.com/invite/friend" in message.content:
 
         ftag = message.content.index('=') +1
