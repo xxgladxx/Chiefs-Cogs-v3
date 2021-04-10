@@ -46,13 +46,13 @@ class FL(commands.Cog):
       embed = discord.Embed(title='Click this link to add as friend in Clash Royale!', color=discord.Colour.green())
       embed.set_author(name=profiledata.name + " (" + profiledata.tag + ")", icon_url=await self.constants.get_clan_image(profiledata))
       embed.set_thumbnail(url="https://imgur.com/C9rLoeh.jpg")
-      embed.add_field(name="User", value=message.author.mention, inline=True)
+      embed.add_field(name="{}User".format(self.emoji("blueking"), value=message.author.mention, inline=True)
       embed.add_field(name="Trophies", value="{} {}".format(self.emoji("ltrophy"), profiledata.trophies), inline=True)
       embed.add_field(name="Level", value="{}{}".format(self.emoji("exp"), profiledata.expLevel), inline=True)      
       if profiledata.clan is not None:
-        embed.add_field(name="Clan {}".format(profiledata.role.capitalize()), value="Clan{}: {} ".format(self.emoji("cws"), profiledata.clan.name), inline=True)
+        embed.add_field(name="Clan {}".format(profiledata.role.capitalize()), value="{}{} ".format(self.emoji("cws"), profiledata.clan.name), inline=True)
       
-      embed.set_image(url="https://media.discordapp.net/attachments/760484066381398026/830034046813601823/legend_logo-trans.png?width=473&height=473")
+      embed.set_image(url="https://media.discordapp.net/attachments/760484066381398026/830034046813601823/legend_logo-trans.png?width=200&height=200")
       embed.set_footer(text="Bot by Gladiator#6969", icon_url="https://images-ext-1.discordapp.net/external/kYJx8YK6XrdnbhUQEHHbFtsmN4X2ga4LbzgVMFllKi8/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/698376874186768384/a_d545d6bab43dd8e041268f1d51fa4199.gif?width=473&height=473")
     
       await message.delete()
