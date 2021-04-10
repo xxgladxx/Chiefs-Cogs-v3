@@ -46,7 +46,7 @@ class FL(commands.Cog):
       embed = discord.Embed(title='Click this link to add as friend in Clash Royale!', color=discord.Colour.green())
       embed.set_author(name=profiledata.name + " (" + profiledata.tag + ")", icon_url=await self.constants.get_clan_image(profiledata))
       embed.set_thumbnail(url="https://imgur.com/C9rLoeh.jpg")
-      embed.add_field(name="{}User".format(self.emoji("blueking"), value=message.author.mention, inline=True)
+      embed.add_field(name="{}User".format(self.emoji("blueking")), value=message.author.mention, inline=True)
       embed.add_field(name="Trophies", value="{} {}".format(self.emoji("ltrophy"), profiledata.trophies), inline=True)
       embed.add_field(name="Level", value="{}{}".format(self.emoji("exp"), profiledata.expLevel), inline=True)      
       if profiledata.clan is not None:
