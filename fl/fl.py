@@ -27,13 +27,13 @@ class FL(commands.Cog):
         
      try:
         if "https://link.clashroyale.com/invite/friend/" in message.content:
-         ftag = message.content.index('=') + 5
+         ftag = message.content.index('=') + 1
          fand = message.content.index('&')
          profiletag = '#' + message.content[ftag:fand]
-         if not self.tags.verifyTag(profiletag):
-          return await ctx.send("Invalid Tag. Please try again.")
+         except clashroyale.NotFoundError:
+            return await ctx.send("Invalid Tag. Please try again.")
 
-         try:
+        try:
           profiledata = await self.clash.get_player(profiletag)
          except clashroyale.RequestError:
           return await ctx.send('Unable to reach CR servers')
