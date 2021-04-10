@@ -27,7 +27,7 @@ class FL(commands.Cog):
         fand = message.content.index('&') 
         profiletag = '#' + message.content[ftag:fand]   
       try:            
-        profiletag = profiletag
+        profiletag = str(profiletag)
       except clashroyale.NotFoundError:
         return await ctx.send("Invalid Tag. Please try again.")
 
@@ -45,7 +45,7 @@ class FL(commands.Cog):
       if profiledata.clan is not None:
         embed.add_field(name="Clan {}".format(profiledata.role.capitalize()), value="Clan: {}".format(profiledata.clan.name), inline=True)
       embed.set_footer(text="Bot by Gladiator#6969", icon_url="https://images-ext-1.discordapp.net/external/kYJx8YK6XrdnbhUQEHHbFtsmN4X2ga4LbzgVMFllKi8/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/698376874186768384/a_d545d6bab43dd8e041268f1d51fa4199.gif?width=473&height=473")
-      await message.delete(message)
+      await message.delete()
       await message.channel.send(embed=embed)
 
 
