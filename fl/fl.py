@@ -30,16 +30,17 @@ class FL(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message_without_command(self, message):
-        
+      profiletag = ""  
       if "https://link.clashroyale.com/invite/friend" in message.content:
-        profiletag = ""
+
         ftag = message.content.index('=') +1
         fand = message.content.index('&') 
         profiletag = '#' + message.content[ftag:fand] 
         url1 = re.findall('https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', message.content)
-        url = urllib.unquote(url1).decode('utf8')
-        url = url.strip("']")
+        url = str(url1)
         url = url.strip("['")
+        url = url.strip("']")
+
                        
 
       try:            
