@@ -52,6 +52,6 @@ class FL(commands.Cog):
         await self.bot.delete_message(message)
         await self.bot.send_message(message.channel, embed=embed)
      except Exception as e:
-        print('e')
+        print(e)
         return
 
