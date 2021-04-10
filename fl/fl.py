@@ -58,7 +58,7 @@ class FL(commands.Cog):
       embed.set_thumbnail(url="https://imgur.com/C9rLoeh.jpg")
       embed.add_field(name="{0}**[<<>>]({1})**{0}".format('<:frnd:830119277935067146>', url), value="[⚪⚪⚪⚪⚪⚪⚪]({})".format(url))
       embed.add_field(name="{}User".format(self.emoji("blueking")), value=message.author.mention, inline=True)
-      embed.add_field(name="Trophies", value="{} {}".format(self.emoji("ltrophy"), profiledata.trophies), inline=True)
+      embed.add_field(name="Trophies", value="{} {}".format(self.emoji("ltrophy"), profiledata.trophies), inline=False)
       embed.add_field(name="Level", value="{}{}".format(self.emoji("exp"), profiledata.expLevel), inline=True)      
       if profiledata.clan is not None:
         embed.add_field(name="Clan {}".format(profiledata.role.capitalize()), value="{}{} ".format(self.emoji("cws"), profiledata.clan.name), inline=True)
