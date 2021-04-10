@@ -17,18 +17,14 @@ class FL(commands.Cog):
                   "clashroyale token,YOUR_TOKEN to set it")
         self.clash = clashroyale.official_api.Client(token=token['token'], is_async=True,
                                                      url="https://proxy.royaleapi.dev/v1")
-    def cog_unload(self):
-        if self.clash:
-            self.bot.loop.create_task(self.clash.close())
-   
-        
+     
 
     @commands.Cog.listener()
     async def on_message_without_command(self, message):
         
       if "https://link.clashroyale.com/invite/friend/" in message.content:
-        ftag = message.content.index('=')
-        fand = message.content.index('&')
+        ftag = message.content.index('=') +1
+        fand = message.content.index('&') -1
         profiletag = '#' + message.content[ftag:fand]   
       try:            
         profiletag = profiletag
@@ -45,7 +41,7 @@ class FL(commands.Cog):
       embed.set_thumbnail(url="https://imgur.com/C9rLoeh.jpg")
       embed.add_field(name="User", value=message.author.mention, inline=True)
       embed.add_field(name="Trophies", value="{} {}".format('Trophies: ', profiledata.trophies), inline=True)
-      embed.add_field(name="Level", value=self.emoji("level{}".format(profiledata.expLevel)), inline=True)
+      embed.add_field(name="Level", value="level{}".format(profiledata.expLevel), inline=True)
       if profiledata.clan is not None:
         embed.add_field(name="Clan {}".format(profiledata.role.capitalize()), value="Clan: {}".format(profiledata.clan.name), inline=True)
       embed.set_footer(text=credits, icon_url=creditIcon)
