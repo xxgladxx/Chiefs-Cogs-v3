@@ -24,7 +24,7 @@ class FL(commands.Cog):
         
       if "https://link.clashroyale.com/invite/friend/" in message.content:
         ftag = message.content.index('=') +1
-        fand = message.content.index('&') -1
+        fand = message.content.index('&') 
         profiletag = '#' + message.content[ftag:fand]   
       try:            
         profiletag = profiletag
