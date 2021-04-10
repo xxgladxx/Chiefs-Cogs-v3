@@ -34,7 +34,7 @@ class FL(commands.Cog):
       try:
         profiledata = await self.clash.get_player(profiletag)
       except clashroyale.RequestError:
-        return await ctx.send('Unable to reach CR servers')
+        return await message.channel.send('Unable to reach CR servers')
 
       embed = discord.Embed(title='Click this link to add as friend in Clash Royale!', color=0x0080ff)
       embed.set_author(name=profiledata.name + " (" + profiledata.tag + ")", icon_url=await self.constants.get_clan_image(profiledata))
