@@ -2,6 +2,7 @@ import discord
 from redbot.core import commands
 import asyncio
 import clashroyale
+import re
 
 class FL(commands.Cog):
     def __init__(self, bot):
@@ -29,10 +30,12 @@ class FL(commands.Cog):
     @commands.Cog.listener()
     async def on_message_without_command(self, message):
         
-      if "https://link.clashroyale.com/invite/friend/" in message.content:
+      if "https://link.clashroyale.com/invite/friend" in message.content:
         ftag = message.content.index('=') +1
         fand = message.content.index('&') 
-        profiletag = '#' + message.content[ftag:fand]   
+        profiletag = '#' + message.content[ftag:fand] 
+        url = re.findall('https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', message.content)
+
       try:            
         profiletag = str(profiletag)
       except clashroyale.NotFoundError:
@@ -43,7 +46,7 @@ class FL(commands.Cog):
       except clashroyale.RequestError:
         return await message.channel.send('Unable to reach CR servers')
 
-      embed = discord.Embed(title='Click this link to add as friend in Clash Royale!', color=discord.Colour.green())
+      embed = discord.Embed(title='[Click this link to add as friend in Clash Royale!]({})'.format(url), color=discord.Colour.green())
       embed.set_author(name=profiledata.name + " (" + profiledata.tag + ")", icon_url=await self.constants.get_clan_image(profiledata))
       embed.set_thumbnail(url="https://imgur.com/C9rLoeh.jpg")
       embed.add_field(name="{}User".format(self.emoji("blueking")), value=message.author.mention, inline=True)
