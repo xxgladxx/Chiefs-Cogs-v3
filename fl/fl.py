@@ -10,6 +10,7 @@ class FL(commands.Cog):
         self.bot = bot
         self.tags = self.bot.get_cog('ClashRoyaleTools').tags
         self.constants = self.bot.get_cog('ClashRoyaleTools').constants
+        self.CRregex = re.compile(r"<?(https?:\/\/)?(www\.)?(link\.clashroyale\.com\/invite\/friend)\b([-a-zA-Z0-9/]*)>?")
 
     async def crtoken(self):
         # Clash Royale API config
