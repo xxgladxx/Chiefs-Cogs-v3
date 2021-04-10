@@ -3,6 +3,7 @@ from redbot.core import commands
 import asyncio
 import clashroyale
 import re
+import urllib.request
 
 class FL(commands.Cog):
     def __init__(self, bot):
@@ -31,11 +32,12 @@ class FL(commands.Cog):
     async def on_message_without_command(self, message):
         
       if "https://link.clashroyale.com/invite/friend" in message.content:
+        profiletag = ""
         ftag = message.content.index('=') +1
         fand = message.content.index('&') 
         profiletag = '#' + message.content[ftag:fand] 
-        url = re.findall('https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', message.content)
-        url = str(url.strip("['"))
+        url1 = re.findall('https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', message.content)
+        url = str(url1.strip("['"))
         url = url.strip("']")                
                        
 
