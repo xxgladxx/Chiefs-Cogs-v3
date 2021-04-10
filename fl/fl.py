@@ -25,33 +25,31 @@ class FL(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message_without_command(self, message):
-     profiletag = ""        
-     try:
-        if "https://link.clashroyale.com/invite/friend/" in message.content:
-         ftag = message.content.index('=')
-         fand = message.content.index('&')
-         try:            
-          profiletag = '#' + message.content[ftag:fand]
-         except clashroyale.NotFoundError:
-          return await ctx.send("Invalid Tag. Please try again.")
+        
+      if "https://link.clashroyale.com/invite/friend/" in message.content:
+        ftag = message.content.index('=')
+        fand = message.content.index('&')
+        profiletag = '#' + message.content[ftag:fand]   
+      try:            
+        profiletag = profiletag
+      except clashroyale.NotFoundError:
+        return await ctx.send("Invalid Tag. Please try again.")
 
-        try:
-          profiledata = await self.clash.get_player(profiletag)
-        except clashroyale.RequestError:
-          return await ctx.send('Unable to reach CR servers')
+      try:
+        profiledata = await self.clash.get_player(profiletag)
+      except clashroyale.RequestError:
+        return await ctx.send('Unable to reach CR servers')
 
-        embed = discord.Embed(title='Click this link to add as friend in Clash Royale!', color=0x0080ff)
-        embed.set_author(name=profiledata.name + " (" + profiledata.tag + ")", icon_url=await self.constants.get_clan_image(profiledata))
-        embed.set_thumbnail(url="https://imgur.com/C9rLoeh.jpg")
-        embed.add_field(name="User", value=message.author.mention, inline=True)
-        embed.add_field(name="Trophies", value="{} {}".format('Trophies: ', profiledata.trophies), inline=True)
-        embed.add_field(name="Level", value=self.emoji("level{}".format(profiledata.expLevel)), inline=True)
-        if profiledata.clan is not None:
-          embed.add_field(name="Clan {}".format(profiledata.role.capitalize()), value="Clan: {}".format(profiledata.clan.name), inline=True)
-        embed.set_footer(text=credits, icon_url=creditIcon)
-        await self.bot.delete_message(message)
-        await self.bot.send_message(message.channel, embed=embed)
-     except Exception as e:
-        print(e)
-        return
+      embed = discord.Embed(title='Click this link to add as friend in Clash Royale!', color=0x0080ff)
+      embed.set_author(name=profiledata.name + " (" + profiledata.tag + ")", icon_url=await self.constants.get_clan_image(profiledata))
+      embed.set_thumbnail(url="https://imgur.com/C9rLoeh.jpg")
+      embed.add_field(name="User", value=message.author.mention, inline=True)
+      embed.add_field(name="Trophies", value="{} {}".format('Trophies: ', profiledata.trophies), inline=True)
+      embed.add_field(name="Level", value=self.emoji("level{}".format(profiledata.expLevel)), inline=True)
+      if profiledata.clan is not None:
+        embed.add_field(name="Clan {}".format(profiledata.role.capitalize()), value="Clan: {}".format(profiledata.clan.name), inline=True)
+      embed.set_footer(text=credits, icon_url=creditIcon)
+      await self.bot.delete_message(message)
+      await self.bot.send_message(message.channel, embed=embed)
+
 
