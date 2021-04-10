@@ -46,7 +46,7 @@ class FL(commands.Cog):
         embed.add_field(name="Trophies", value="{} {:,}".format(self.emoji(arenaFormat), profiledata.trophies), inline=True)
         embed.add_field(name="Level", value=self.emoji("level{}".format(profiledata.expLevel)), inline=True)
         if profiledata.clan is not None:
-         embed.add_field(name="Clan {}".format(profiledata.role.capitalize()), value="{} {}".format(self.emoji("clan"), profiledata.clan.name), inline=True)
+          embed.add_field(name="Clan {}".format(profiledata.role.capitalize()), value="{} {}".format(self.emoji("clan"), profiledata.clan.name), inline=True)
         embed.set_footer(text=credits, icon_url=creditIcon)
         await self.bot.delete_message(message)
         await self.bot.send_message(message.channel, embed=embed)
