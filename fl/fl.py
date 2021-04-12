@@ -49,7 +49,7 @@ class FL(commands.Cog):
       except clashroyale.NotFoundError:
         return await ctx.send("Invalid Tag. Please try again.")
 
-      try:.
+      try:
         profiledata = await self.clash.get_player(profiletag)
       except clashroyale.RequestError:
         return await message.channel.send('Unable to reach CR servers')
