@@ -54,7 +54,7 @@ class FL(commands.Cog):
       except clashroyale.RequestError:
         return await message.channel.send('Unable to reach CR servers')
 
-      embed = discord.Embed(title="[Click the link below to add as friend in Clash Royale!]({})".format(url), color=discord.Colour.green())
+      embed = discord.Embed(title="Click the link below to add as friend in Clash Royale!", color=discord.Colour.green(), description="[Link]({})".format(url))
       embed.set_author(name=profiledata.name + " (" + profiledata.tag + ")", icon_url=await self.constants.get_clan_image(profiledata))
       embed.set_thumbnail(url="https://imgur.com/C9rLoeh.jpg")
       embed.add_field(name="{}".format('<:frnd:830119277935067146>', url), value="[{}]({})".format(':white_circle:', url))
