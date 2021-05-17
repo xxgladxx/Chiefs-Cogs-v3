@@ -39,6 +39,10 @@ class SimpleEmbed(commands.Cog):
 	async def red_delete_data_for_user(self, **kwargs):
 		"""Nothing to delete."""
 		return
+        def goodEmbed(self, text):
+           gembed = discord.Embed(color=0x45cafc)
+           gembed.set_author(name=text, icon_url="https://i.imgur.com/qYmbGK6.png")
+           return gembed  
 
 	@commands.command()
 	async def shop(self, ctx):
@@ -93,3 +97,6 @@ class SimpleEmbed(commands.Cog):
 	async def registerme(self, ctx):
 		message = ctx.message
 		await message.add_reaction("<a:tick:822032492395102209>")
+                role = discord.utils.get(ctx.author.guild.roles, name="2v2_registered")
+		await discord.Member.add_roles(ctx.author, role)
+		await ctx.author.send(embed = self.goodEmbed("Thanks for registering in Chiefs Duo Combat!"))
