@@ -92,4 +92,4 @@ class SimpleEmbed(commands.Cog):
 	@commands.command()
 	async def registerme(self, ctx):
 		message = ctx.message
-		await message.add_reaction(":white_check_mark:")
+		await message.add_reaction("<a:tick:822032492395102209>")
