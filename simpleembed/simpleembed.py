@@ -90,6 +90,6 @@ class SimpleEmbed(commands.Cog):
 		await ctx.send(embed = embed)
 
 	@commands.command()
-	async def registerme(self, ctx, message = discord.Message):
-		channel = 834072063504416819
-		await message.add_reaction(channel, emoji = ":white_check_mark:")
+	async def registerme(self, ctx):
+		message = ctx.message
+		await message.add_reaction(":white_check_mark:")
