@@ -88,3 +88,8 @@ class SimpleEmbed(commands.Cog):
 		embed.add_field(name="\u200B", value="\u200B", inline =False)
 		embed.set_footer(text="Bot by Gladiator#0004", icon_url="https://images-ext-1.discordapp.net/external/kYJx8YK6XrdnbhUQEHHbFtsmN4X2ga4LbzgVMFllKi8/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/698376874186768384/a_d545d6bab43dd8e041268f1d51fa4199.gif?width=473&height=473")
 		await ctx.send(embed = embed)
+
+	@commands.command()
+	async def registerme(self, ctx, message = discord.Message):
+		emoji = ':white_check_mark: :
+		await message.add_reaction(emoji)
