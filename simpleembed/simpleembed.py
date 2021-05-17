@@ -40,9 +40,9 @@ class SimpleEmbed(commands.Cog):
 		"""Nothing to delete."""
 		return
         def goodEmbed(self, text):
-           gembed = discord.Embed(color=0x45cafc)
-           gembed.set_author(name=text, icon_url="https://i.imgur.com/qYmbGK6.png")
-           return gembed  
+		gembed = discord.Embed(color=0x45cafc)
+		gembed.set_author(name=text, icon_url="https://i.imgur.com/qYmbGK6.png")
+		return gembed  
 
 	@commands.command()
 	async def shop(self, ctx):
