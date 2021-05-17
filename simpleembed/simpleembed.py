@@ -91,4 +91,4 @@ class SimpleEmbed(commands.Cog):
 
 	@commands.command()
 	async def registerme(self, ctx, message = discord.Message):
-		await message.add_reaction(emoji = ":white_check_mark:")
+		await message.add_reaction(self, emoji = ":white_check_mark:")
