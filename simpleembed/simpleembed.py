@@ -39,7 +39,7 @@ class SimpleEmbed(commands.Cog):
 	async def red_delete_data_for_user(self, **kwargs):
 		"""Nothing to delete."""
 		return
-        def goodEmbed(self, text):
+	def goodEmbed(self, text):
 		gembed = discord.Embed(color=0x45cafc)
 		gembed.set_author(name=text, icon_url="https://i.imgur.com/qYmbGK6.png")
 		return gembed  
