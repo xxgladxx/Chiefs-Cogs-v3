@@ -78,7 +78,7 @@ class SimpleEmbed(commands.Cog):
 		#embed.add_field(name="\u200B", value="\u200B", inline =False)
 		embed.add_field(name="\u200b", value= "Get notified when someone gets CC 12 wins {}".format('<:cc:821787009110638602>'), inline=False)
 		#embed.add_field(name="\u200B", value="\u200B", inline =False)
-		embed.add_field(name="\u200b", value="Get notified when a Heist begins {}".format('<:moneyop:843720716817530920'>), inline=False)
+		embed.add_field(name="\u200b", value="Get notified when a Heist begins {}".format('<:moneyop:843720716817530920>'), inline=False)
 		#embed.add_field(name="\u200B", value="\u200B", inline =False)
 		embed.add_field(name=":video_game:", value="Get notified when a Roulette match begins", inline=False)
 		#embed.add_field(name="\u200B", value="\u200B", inline =False)
