@@ -97,6 +97,6 @@ class SimpleEmbed(commands.Cog):
 	async def registerme(self, ctx):
 		message = ctx.message
 		await message.add_reaction("<a:tick:822032492395102209>")
-                role = discord.utils.get(ctx.author.guild.roles, name="2v2_registered")
+		role = discord.utils.get(ctx.author.guild.roles, name="2v2_registered")
 		await discord.Member.add_roles(ctx.author, role)
 		await ctx.author.send(embed = self.goodEmbed("Thanks for registering in Chiefs Duo Combat!"))
