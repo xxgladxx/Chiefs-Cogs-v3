@@ -71,7 +71,7 @@ class SimpleEmbed(commands.Cog):
 		embed.set_thumbnail(url="https://media.discordapp.net/attachments/754780357349605467/760462448846831646/image1.png?width=473&height=473")
 		embed.add_field(name="\u200B", value="\u200B", inline =False)
 		embed.add_field(name="{}".format(':bluecrown:'), value="Clash Royale Official news", inline=False)
-		embed.add_field(name="\u200B", value="\u200B",` inline =False)
+		embed.add_field(name="\u200B", value="\u200B", inline =False)
 		embed.add_field(name="{}".format(':api:'), value="RoyaleAPI Official updates", inline =False)
 		embed.add_field(name="\u200B", value="\u200B", inline =False)
 		embed.add_field(name="{}".format(':gc:'), value="Get notified when someone gets GC 12 wins", inline=False)
