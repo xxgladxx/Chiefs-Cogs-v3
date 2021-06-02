@@ -53,4 +53,4 @@ class ClashRoyaleCog(commands.Cog):
 
 
     await ctx.send_interactive(clan, box_lang=None, timeout=15)
-    await.tick()
+
