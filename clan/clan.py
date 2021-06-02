@@ -25,6 +25,6 @@ class ClashRoyaleCog(commands.Cog):
   
     @checks.is_owner()
     @commands.Command()
-    async def chiefstry(self ctx):
+    async def chiefstry(self, ctx):
       clan = await self.crapi.get_clan('#YGGQR0CV')
       await ctx.send(clan)
