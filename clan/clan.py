@@ -4,7 +4,28 @@ from redbot.core.utils.embed import randomize_colour
 from redbot.core.utils.menus import menu, DEFAULT_CONTROLS
 from random import choice
 import clashroyale
+from redbot.core.utils.chat_formatting import pagify
+import datetime
+import datetime as dt
+import io
+import json
+import logging
+import os
+import random
+import re
+import string
+from concurrent.futures import ThreadPoolExecutor
+from typing import Dict, List, Optional
 
+import aiohttp
+import discord
+import yaml
+from PIL import Image, ImageDraw, ImageFont
+from redbot.core import Config, checks, commands
+from redbot.core.data_manager import bundled_data_path, cog_data_path
+from redbot.core.utils.chat_formatting import pagify
+from redbot.core.utils.menus import DEFAULT_CONTROLS, menu
+from redbot.core.utils.predicates import MessagePredicate
 class ClashRoyaleCog(commands.Cog):
     
     def __init__(self, bot):
@@ -27,4 +48,17 @@ class ClashRoyaleCog(commands.Cog):
     @commands.command()
     async def chiefstry(self, ctx):
       clan = await self.crapi.get_clan('#YGGQR0CV', 60)
-      await ctx.send(clan.name)
+      
+      out = []
+
+      for card in sorted(clan):
+
+            out.append(clan)
+                )
+            )
+      pages = []
+      for page in pagify("\n".join(out), shorten_by=24):
+            embed = discord.Embed(description=page, timestamp=dt.datetime.utcnow(),)
+            embed.set_footer(text="Test")
+            pages.append(embed)
+      await menu(ctx, pages, DEFAULT_CONTROLS, timeout=PAGINATION_TIMEOUT)
