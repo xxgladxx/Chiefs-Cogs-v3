@@ -26,6 +26,7 @@ from redbot.core.data_manager import bundled_data_path, cog_data_path
 from redbot.core.utils.chat_formatting import pagify
 from redbot.core.utils.menus import DEFAULT_CONTROLS, menu
 from redbot.core.utils.predicates import MessagePredicate
+PAGINATION_TIMEOUT = 120
 class ClashRoyaleCog(commands.Cog):
     
     def __init__(self, bot):
