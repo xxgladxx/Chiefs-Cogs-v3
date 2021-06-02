@@ -24,6 +24,6 @@ class ClashRoyaleCog(commands.Cog):
         self.crapi = clashroyale.OfficialAPI(apikey, is_async=True)
   
      
-    async def chiefstry(self, ctx):
+    async def chiefstry(self):
       clan = await self.crapi.get_clan('#YGGQR0CV')
       await ctx.send(clan)
