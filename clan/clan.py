@@ -54,8 +54,7 @@ class ClashRoyaleCog(commands.Cog):
       for card in sorted(clan):
 
             out.append(clan)
-                )
-            )
+
       pages = []
       for page in pagify("\n".join(out), shorten_by=24):
             embed = discord.Embed(description=page, timestamp=dt.datetime.utcnow(),)
