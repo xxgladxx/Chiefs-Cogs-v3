@@ -23,7 +23,8 @@ class ClashRoyaleCog(commands.Cog):
             raise ValueError("The Clash Royale API key has not been set. Use [p]set api crapi api_key,YOURAPIKEY")
         self.crapi = clashroyale.OfficialAPI(apikey, is_async=True)
   
-     
-    async def chiefstry(self):
+    @checks.is_owner()
+    @commands.Command()
+    async def chiefstry(self ctx):
       clan = await self.crapi.get_clan('#YGGQR0CV')
       await ctx.send(clan)
