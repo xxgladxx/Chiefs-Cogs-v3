@@ -52,9 +52,5 @@ class ClashRoyaleCog(commands.Cog):
       
 
 
-      pages = []
-      for page in pagify("\n".join(clan), shorten_by=24):
-            embed = discord.Embed(description=page, timestamp=dt.datetime.utcnow(),)
-            embed.set_footer(text="Test")
-            pages.append(embed)
-      await menu(ctx, pages, DEFAULT_CONTROLS, timeout=PAGINATION_TIMEOUT)
+    await ctx.send_interactive(clan, box_lang=None, timeout=15)
+    await.tick()
