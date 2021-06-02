@@ -22,18 +22,8 @@ class ClashRoyaleCog(commands.Cog):
         if apikey is None:
             raise ValueError("The Clash Royale API key has not been set. Use [p]set api crapi api_key,YOURAPIKEY")
         self.crapi = clashroyale.OfficialAPI(apikey, is_async=True)
-
-    def badEmbed(self, text):
-        bembed = discord.Embed(color=0xff0000)
-        bembed.set_author(name=text, icon_url="https://i.imgur.com/FcFoynt.png")
-        return bembed
-        
-    def goodEmbed(self, text):
-        gembed = discord.Embed(color=0x45cafc)
-        gembed.set_author(name=text, icon_url="https://i.imgur.com/qYmbGK6.png")
-        return gembed        
+  
      
-    @checks.is_owner()
-    async def chiefs(self, ctx):
+    async def chiefstry(self, ctx):
       clan = await self.crapi.get_clan('#YGGQR0CV')
       await ctx.send(clan)
