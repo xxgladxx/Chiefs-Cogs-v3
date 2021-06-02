@@ -51,9 +51,9 @@ class ClashRoyaleCog(commands.Cog):
       
       out = []
 
-      for card in sorted(clan):
+      for card in sorted(str(clan)):
 
-            out.append(clan)
+            out.append(str(clan))
 
       pages = []
       for page in pagify("\n".join(out), shorten_by=24):
