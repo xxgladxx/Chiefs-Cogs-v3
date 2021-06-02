@@ -49,14 +49,10 @@ class ClashRoyaleCog(commands.Cog):
     async def chiefstry(self, ctx):
       clan = await self.crapi.get_clan('#YGGQR0CV', 60)
       
-      out = []
 
-      for card in sorted(str(clan)):
-
-            out.append(str(clan))
 
       pages = []
-      for page in pagify("\n".join(out), shorten_by=24):
+      for page in pagify("\n".join(clan), shorten_by=24):
             embed = discord.Embed(description=page, timestamp=dt.datetime.utcnow(),)
             embed.set_footer(text="Test")
             pages.append(embed)
