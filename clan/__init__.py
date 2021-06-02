@@ -1,6 +1,6 @@
 from .clan import ClashRoyaleCog
 
-async def setup(self, bot):
+async def setup(bot):
   cog = ClashRoyaleCog(bot)
   await cog.initialize()
   bot.add_cog(cog)
