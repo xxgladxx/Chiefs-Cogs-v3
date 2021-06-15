@@ -37,5 +37,5 @@ class ClashLastSeen(commands.Cog):
         if member is None:
             member = ctx.author
         
-        data = await self.clash.get_popular_decks()
+        data = await self.clash.get_popular_players()
         await ctx.send(data)
