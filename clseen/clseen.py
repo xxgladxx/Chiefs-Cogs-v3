@@ -44,9 +44,11 @@ class ClashLastSeen(commands.Cog):
          
         user_tag = '#' + str(self.tags.getTag(member.id, account))
         player_data = await self.clash.get_player(user_tag)
-        clan_data = await self.clash.get_clan_members(player_data.clan.tag)
-        if clan_data is None:
+        if player_data.clan is None:
             return await ctx.send(f"Sorry, {player_data.name} is not in a clan.\nHence, I could not track their last seen.") 
+        else:
+            clan_data = await self.clash.get_clan_members(player_data.clan.tag)
+
         
         async for data in clan_data:
 
