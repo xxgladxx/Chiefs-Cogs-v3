@@ -47,6 +47,7 @@ class ClashLastSeen(commands.Cog):
         
         async for data in clan_data:
             if str(data.tag) == str(user_tag):
+                await ctx.send(data.tag)
                 await ctx.send(data.lastSeen)
         
         #await ctx.send_interactive(pagify(data))
