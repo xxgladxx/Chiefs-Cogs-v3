@@ -37,5 +37,5 @@ class ClashLastSeen(commands.Cog):
         if member is None:
             member = ctx.author
         
-        data = self.clash.get_clan_war_log("#YGGQR0CV")
+        data = await self.clash.get_clan_war_log("#YGGQR0CV")
         await ctx.send(data)
