@@ -45,4 +45,4 @@ class ClashLastSeen(commands.Cog):
         difference = str(datetime.now() - datetime.strptime(ls, '%Y%m%dT%H%M%S.%fZ'))
         index = difference.rindex(':')
         difference = difference[:index].replace(':','h ') + 'm'
-        await ctx.send(f"The user was last seen at\n{difference} from now"
+        await ctx.send(f"The user was last seen at\n{difference} from now")
