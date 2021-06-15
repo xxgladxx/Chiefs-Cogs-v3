@@ -45,7 +45,7 @@ class ClashLastSeen(commands.Cog):
         #clan_data = await self.clash.get_clan_members("#YGGQR0CV")
         user_tag = '#' + str(self.tags.getTag(member.id, account))
         player_data = await self.clash.get_player(user_tag)
-        await ctx.send(player_data)
+        await ctx.send_interactive(pagify(player_data))
 
             #if str(data.tag) == user_tag:
             #    await ctx.send(data.tag)
