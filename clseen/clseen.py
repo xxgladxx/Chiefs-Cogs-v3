@@ -58,7 +58,7 @@ class ClashLastSeen(commands.Cog):
             if str(data.tag) == user_tag:
                 ls = data.lastSeen
                 
-        lastseen = datetime.strftime(datetime.strptime(ls, '%Y%m%dT%H%M%S.%fZ'))
+        lastseen = datetime.strftime(datetime.strptime(ls, '%Y%m%dT%H%M%S.%fZ'), "%d/%m/%Y, %H:%M:%S")
         await ctx.send("Last seen:\n{}".format(lastseen))
     
     
