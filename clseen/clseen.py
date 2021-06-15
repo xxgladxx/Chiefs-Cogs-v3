@@ -41,14 +41,14 @@ class ClashLastSeen(commands.Cog):
         """Check last seen in Clash Royale"""
         if member is None:
             member = ctx.author
-        
-        #clan_data = await self.clash.get_clan_members("#YGGQR0CV")
+         
         user_tag = '#' + str(self.tags.getTag(member.id, account))
         player_data = await self.clash.get_player(user_tag)
-        await ctx.send_interactive(pagify(str(player_data)))
+        clan_data = await self.clash.get_clan_members(player_data.clan.tag)
+        
+        async for data in clan_data:
 
-            #if str(data.tag) == user_tag:
-            #    await ctx.send(data.tag)
-            #    await ctx.send(data.lastSeen)
+            if str(data.tag) == user_tag:
+                await ctx.send(data.lastSeen)
         
         #await ctx.send_interactive(pagify(data))
