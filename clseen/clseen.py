@@ -26,6 +26,7 @@ class ClashLastSeen(commands.Cog):
         self.clash = clashroyale.royaleapi.Client(token=token['token'], is_async=True, url="https://proxy.royaleapi.dev/v1")
     
 
+    
 
     @commands.command()
     async def cls(self, ctx, member = discord.Member):
@@ -33,6 +34,6 @@ class ClashLastSeen(commands.Cog):
         if member is None:
             member = ctx.author
         
-        return self.clash.get_popular_decks()
+        return await ctx.send(self.clash.get_popular_decks())
 
 
