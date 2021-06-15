@@ -32,16 +32,18 @@ class ClashLastSeen(commands.Cog):
         self.clash = clashroyale.official_api.Client(token=token['token'], is_async=True, url="https://proxy.royaleapi.dev/v1")
     
 
-    
+    def cog_unload(self):
+       if self.clash:
+           self.bot.loop.create_task(self.clash.close())
 
     @commands.command()
-    async def cls(self, ctx, member = discord.Member, account: int = 1):
+    async def cls(self, ctx, member: discord.Member = None, account: int = 1):
         """Check last seen in Clash Royale"""
         if member is None:
             member = ctx.author
         
         clan_data = str(await self.clash.get_clan_members("#YGGQR0CV"))
-        user_tag = str(self.tags.getTag(member.id, account))
+        user_tag = self.tags.getTag(member.id, account)
         
         for data in clan_data:
             if data.tag == user_tag:
