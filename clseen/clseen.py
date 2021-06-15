@@ -45,7 +45,7 @@ class ClashLastSeen(commands.Cog):
         clan_data = await self.clash.get_clan_members("#YGGQR0CV")
         user_tag = self.tags.getTag(member.id, account)
         
-        for data in clan_data:
+        async for data in clan_data:
             if data.tag == user_tag:
                 await ctx.send(data.lastSeen)
         
