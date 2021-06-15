@@ -13,6 +13,9 @@ import asyncio
 #pagify
 from redbot.core.utils.chat_formatting import pagify
 
+#datetime
+from datetime import datetime
+
 
 
 class ClashLastSeen(commands.Cog):
@@ -53,6 +56,14 @@ class ClashLastSeen(commands.Cog):
         async for data in clan_data:
 
             if str(data.tag) == user_tag:
-                await ctx.send(data.lastSeen)
+                ls = data.lastSeen
+                
+       lastseen = datetime.strftime(datetime.strptime(ls, '%Y%m%dT%H%M%S.%fZ'))
+       await ctx.send("Last seen:\n{}".format(lastseen))
+    
+    
+    
+    
+    
         
         #await ctx.send_interactive(pagify(data))
