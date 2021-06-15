@@ -42,7 +42,7 @@ class ClashLastSeen(commands.Cog):
         if member is None:
             member = ctx.author
         
-        clan_data = str(await self.clash.get_clan_members("#YGGQR0CV"))
+        clan_data = await self.clash.get_clan_members("#YGGQR0CV")
         user_tag = self.tags.getTag(member.id, account)
         
         for data in clan_data:
