@@ -45,4 +45,7 @@ class ClashLastSeen(commands.Cog):
         difference = str(datetime.now() - datetime.strptime(ls, '%Y%m%dT%H%M%S.%fZ'))
         index = difference.rindex(':')
         difference = difference[:index].replace(':','h ') + 'm'
-        await ctx.send(f"The user was last seen at\n{difference} from now")
+        embed = discord.Embed()
+        embed.set_author(name = ctx.guild.name, icon_url = ctx.guild.icon_url)
+        embed.add_field(name = "\u200B", value = f"The user was last seen at\n{difference} from now")
+        await ctx.send(embed=embed)
