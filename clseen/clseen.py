@@ -37,4 +37,4 @@ class ClashLastSeen(commands.Cog):
         if member is None:
             member = ctx.author
         
-        ctx.send(await asyncio.run(self.clash.get_popular_decks())
+        ctx.send(await asyncio.run(self.clash.get_popular_decks()))
