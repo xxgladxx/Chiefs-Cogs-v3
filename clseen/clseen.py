@@ -10,6 +10,9 @@ import clashroyale
 #asyncio
 import asyncio
 
+#pagify
+import pagify
+
 
 
 class ClashLastSeen(commands.Cog):
@@ -38,4 +41,4 @@ class ClashLastSeen(commands.Cog):
             member = ctx.author
         
         data = await self.clash.get_clan_members("#YGGQR0CV")
-        await ctx.send(data)
+        await ctx.send(pagify(data))
