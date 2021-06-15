@@ -2,7 +2,7 @@ from .clseen import ClashLastSeen
 
 async def setup(bot):
     cog = ClashLastSeen(bot=bot)
-    await bot.crtoken
+    await cog.crtoken
     bot.add_cog(cog)
 
         
