@@ -11,7 +11,7 @@ import clashroyale
 import asyncio
 
 #pagify
-import pagify
+from redbot.core.utils.chat_formatting import pagify
 
 
 
