@@ -61,7 +61,7 @@ class ClashLastSeen(commands.Cog):
         lastseen = datetime.strftime(datetime.strptime(ls, '%Y%m%dT%H%M%S.%fZ'), format)
         difference_obj = datetime.now() - datetime.strptime(ls, '%Y%m%dT%H%M%S.%fZ')
         #difference = datetime.strftime(difference_obj, format)
-        await ctx.send("The user was last seen at:\n{} UTC, i-e,\n{} from now".format(lastseen, str(difference_obj)))
+        await ctx.send("The user was last seen at:\n{} UTC, i-e,\n{} from now".format(lastseen, str(difference_obj)[:7))
     
     
     
