@@ -33,8 +33,6 @@ class ClashLastSeen(commands.Cog):
         if member is None:
             member = ctx.author
         
-        message = self.clash.get_popular_decks()
-        await ctx.send(message)
-
+        return self.clash.get_popular_decks()
 
 
