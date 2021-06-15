@@ -26,7 +26,7 @@ class ClashLastSeen(commands.Cog):
         token = await self.bot.get_shared_api_tokens("clashroyale")
         if token['token'] is None:
             print("CR Token is not SET. Make sure to have royaleapi ip added (128.128.128.128) Use !set api clashroyale token,YOUR_TOKEN to set it")
-        self.clash = clashroyale.royaleapi.Client(token=token['token'], is_async=True, url="https://proxy.royaleapi.dev/v1")
+        self.clash = clashroyale.official_api.Client(token=token['token'], is_async=True, url="https://proxy.royaleapi.dev/v1")
     
 
     
