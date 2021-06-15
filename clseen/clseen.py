@@ -40,5 +40,5 @@ class ClashLastSeen(commands.Cog):
         if member is None:
             member = ctx.author
         
-        data = await self.clash.get_clan_members("#YGGQR0CV")
+        data = str(await self.clash.get_clan_members("#YGGQR0CV"))
         await ctx.send_interactive(pagify(data))
