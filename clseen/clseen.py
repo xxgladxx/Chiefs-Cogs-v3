@@ -7,6 +7,9 @@ from redbot.core  import commands
 #clashroyale
 import clashroyale
 
+#asyncio
+import asyncio
+
 
 
 class ClashLastSeen(commands.Cog):
@@ -34,6 +37,6 @@ class ClashLastSeen(commands.Cog):
         if member is None:
             member = ctx.author
         
-        return await ctx.send(self.clash.get_popular_decks())
+        ctx.send(await asyncio.run(self.clash.get_popular_decks())
 
 
