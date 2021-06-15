@@ -41,4 +41,4 @@ class ClashLastSeen(commands.Cog):
             member = ctx.author
         
         data = await self.clash.get_clan_members("#YGGQR0CV")
-        await ctx.send(pagify(data))
+        await ctx.send_interactive(pagify(data))
