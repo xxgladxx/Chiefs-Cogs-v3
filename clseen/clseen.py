@@ -37,9 +37,4 @@ class ClashLastSeen(commands.Cog):
         await ctx.send(message)
 
 
-async def setup(bot):
-    cog = ClashLastSeen(bot=bot)
-    await bot.crtoken
-    bot.add_cog(cog)
 
-        
