@@ -57,10 +57,10 @@ class ClashLastSeen(commands.Cog):
 
             if str(data.tag) == user_tag:
                 ls = data.lastSeen
-                
-        lastseen = datetime.strftime(datetime.strptime(ls, '%Y%m%dT%H%M%S.%fZ'), "%d/%m/%Y, %H:%M:%S")
-        difference = datetime.strftime(datetime.now() - datetime.strptime(ls, '%Y%m%dT%H%M%S.%fZ'), "%d/%m/%Y, %H:%M:%S")
-        
+        format = "%d/%m/%Y, %H:%M:%S"        
+        lastseen = datetime.strftime(datetime.strptime(ls, '%Y%m%dT%H%M%S.%fZ'), format)
+        difference_obj = datetime.utcnow() - datetime.strptime(ls, '%Y%m%dT%H%M%S.%fZ'))
+        difference = datetime.strftime(difference_obj, format)
         await ctx.send("The user was last seen at:\n{} UTC, i-e,\n{} from now".format(lastseen, difference))
     
     
