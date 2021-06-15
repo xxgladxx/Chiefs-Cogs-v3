@@ -1,0 +1,45 @@
+#discord
+import discord
+
+#commands
+from redbot.core  import commands
+
+#clashroyale
+import clashroyale
+
+
+
+class ClashLastSeen(commands.Cog):
+    """A CR related command"""
+
+    def __init__(self):
+        # Certain initializations
+        self.bot = bot
+        self.tags = self.bot.get_cog('ClashRoyaleTools').tags
+        self.constants = self.bot.get_cog('ClashRoyaleTools').constants
+
+    async def crtoken(self):
+        # Clash Royale API config
+        token = await self.bot.get_shared_api_tokens("clashroyale")
+        if token['token'] is None:
+            print("CR Token is not SET. Make sure to have royaleapi ip added (128.128.128.128) Use !set api clashroyale token,YOUR_TOKEN to set it")
+        self.clash = clashroyale.royaleapi.Client(token=token['token'], is_async=True, url="https://proxy.royaleapi.dev/v1")
+    
+
+
+    @commands.command()
+    async def cls(self, ctx, member = discord.Member):
+        """Check last seen in Clash Royale"""
+        if member is None:
+            member = ctx.author
+        
+        message = self.clash.get_popular_decks()
+        await ctx.send(message)
+
+
+async def setup(bot):
+    cog = ClashLastSeen(bot=bot)
+    await bot.crtoken
+    bot.add_cog(cog)
+
+        
