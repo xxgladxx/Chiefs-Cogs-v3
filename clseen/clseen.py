@@ -12,7 +12,7 @@ import clashroyale
 class ClashLastSeen(commands.Cog):
     """A CR related command"""
 
-    def __init__(self):
+    def __init__(self, bot):
         # Certain initializations
         self.bot = bot
         self.tags = self.bot.get_cog('ClashRoyaleTools').tags
