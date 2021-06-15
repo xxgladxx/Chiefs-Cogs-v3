@@ -38,5 +38,3 @@ class ClashLastSeen(commands.Cog):
             member = ctx.author
         
         ctx.send(await asyncio.run(self.clash.get_popular_decks())
-
-
