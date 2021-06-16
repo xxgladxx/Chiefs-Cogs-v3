@@ -52,5 +52,5 @@ class ClashRoyaleCog(commands.Cog):
       
 
 
-      await ctx.send_interactive(clan)
+      await ctx.send_interactive(str(clan))
 
