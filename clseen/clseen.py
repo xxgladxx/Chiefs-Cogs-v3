@@ -89,6 +89,6 @@ class ClashLastSeen(commands.Cog):
     @commands.command(aliases = ["chief"])
     async def chiefclan(self, ctx):
         """A command under build"""
-        clan_data = await self.clash.get_clan_war('#YGGQR0CV')
+        clan_data = await self.clash.get_clan_war_log('#YGGQR0CV')
         await ctx.send_interactive(pagify(clan_data))
 
