@@ -27,11 +27,14 @@ class ClashRoyaleCog(commands.Cog):
     @commands.command()
     async def chiefstry(self, ctx):
       clan = await self.crapi.get_clan('#YGGQR0CV')
+      stringA = ""
       for data in str(clan):
             if 'memberList' in data:
                 break
             else:
-                await ctx.send(str(clan))
+                stringA = stringA.replace(str(clan))
+                
+      await ctx.send(stringA)
 
     @commands.command(aliases=["z"])
     async def dev_z(self, ctx):
