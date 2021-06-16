@@ -19,6 +19,6 @@ class ClashRoyaleCog(commands.Cog):
 
     @commands.command()
     async def chiefstry(self, ctx):
-      clan = self.crapi.get_clan('#YGGQR0CV')
+      clan = str(await(self.crapi.get_clan('#YGGQR0CV')))
       await ctx.send_interactive(pagify((clan)))
 
