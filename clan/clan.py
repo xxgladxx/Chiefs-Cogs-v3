@@ -19,7 +19,7 @@ class ClashRoyaleCog(commands.Cog):
             raise ValueError("The Clash Royale API key has not been set. Use [p]set api crapi api_key,YOURAPIKEY")
         self.clash = clashroyale.OfficialAPI(apikey, is_async=True)
         
-    @tasks.loop(seconds = 20)
+    @tasks.loop(seconds = 5)
     async def checker(self, ctx):
         await self.nclan_data()
         time = datetime.datetime.utcnow().strftime('%B %d %Y - %H:%M:%S')
@@ -38,18 +38,16 @@ class ClashRoyaleCog(commands.Cog):
             if int(self.members, 10) > int(self.nmembers, 10): #means if someone left the clan
                 async for data in self.old_clan_members:
                     tag = data.tag
-                    if tag not in self.new_clan_members:
+                   async if tag not in self.new_clan_members:
                         await ctx.send(f"Clan member list updated\n{self.members} -> {self.nmembers}\n```py\n'{data.name} - {tag} left the clan.'```")
-                    else:
-                        continue
+
 
             elif int(self.members, 10) < int(self.nmembers, 10): #means if someone joined the clan
                 async for data in self.new_clan_members:
                     tag = data.tag
-                    if tag not in self.old_clan_members:
+                    async if tag not in self.old_clan_members:
                         await ctx.send(f"Clan member list updated\n{self.members} -> {self.nmembers}\n```py\n'{data.name} - {tag} joined the clan.'```")
-                    else:
-                        continue                   
+                  
 
     async def oclan_data(self):
         """The old clan data code goes here"""
