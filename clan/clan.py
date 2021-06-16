@@ -33,3 +33,8 @@ class ClashRoyaleCog(commands.Cog):
     async def dev_z(self, ctx):
         await ctx.send("trying to start loop")
         await self.myLoop.start(ctx)
+
+    @commands.command()
+    async def stopclanlog(self, ctx):
+        await ctx.send("Clan Log stopped successfully")
+        await self.myLoop.stop()
