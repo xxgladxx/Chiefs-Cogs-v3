@@ -19,7 +19,7 @@ class ClashRoyaleCog(commands.Cog):
             raise ValueError("The Clash Royale API key has not been set. Use [p]set api crapi api_key,YOURAPIKEY")
         self.clash = clashroyale.OfficialAPI(apikey, is_async=True)
         
-    @tasks.loop(seconds = 20)
+    @tasks.loop(seconds = 10)
     async def checker(self, ctx):
         await self.nclan_data()
         time = datetime.datetime.utcnow().strftime('%B %d %Y - %H:%M:%S')
