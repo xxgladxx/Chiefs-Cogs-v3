@@ -1,41 +1,12 @@
 import discord
-from redbot.core import commands, Config, checks
-from redbot.core.utils.embed import randomize_colour
-from redbot.core.utils.menus import menu, DEFAULT_CONTROLS
-from random import choice
-import clashroyale
-from redbot.core.utils.chat_formatting import pagify
-import datetime
-import datetime as dt
-import io
-import json
-import logging
-import os
-import random
-import re
-import string
-from concurrent.futures import ThreadPoolExecutor
-from typing import Dict, List, Optional
-
-import aiohttp
-import discord
-import yaml
-from PIL import Image, ImageDraw, ImageFont
 from redbot.core import Config, checks, commands
-from redbot.core.data_manager import bundled_data_path, cog_data_path
 from redbot.core.utils.chat_formatting import pagify
-from redbot.core.utils.menus import DEFAULT_CONTROLS, menu
-from redbot.core.utils.predicates import MessagePredicate
-PAGINATION_TIMEOUT = 120
+import clashroyale
+
 class ClashRoyaleCog(commands.Cog):
     
     def __init__(self, bot):
         self.bot = bot
-        self.config = Config.get_conf(self, identifier=2512325)
-        default_user = {"tag" : None, "nick" : None}
-        self.config.register_user(**default_user)
-        default_guild = {"clans" : {}}
-        self.config.register_guild(**default_guild)
         self.constants = self.bot.get_cog('ClashRoyaleTools').constants
         
     async def initialize(self):
@@ -52,5 +23,5 @@ class ClashRoyaleCog(commands.Cog):
       
 
 
-      await ctx.send_interactive(str(clan))
+      await ctx.send(pagify(clan))
 
