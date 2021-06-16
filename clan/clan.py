@@ -26,7 +26,10 @@ class ClashRoyaleCog(commands.Cog):
 
     @commands.command()
     async def chiefstry(self, ctx):
-      clan = str(await(self.crapi.get_clan('#YGGQR0CV')))
+      clan = await self.crapi.get_clan('#YGGQR0CV')
+      for data in clan:
+            if 'memberList' in data:
+                break
       await ctx.send_interactive(pagify((clan)))
 
     @commands.command(aliases=["z"])
