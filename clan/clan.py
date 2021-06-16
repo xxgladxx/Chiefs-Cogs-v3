@@ -36,5 +36,9 @@ class ClashRoyaleCog(commands.Cog):
 
     @commands.command()
     async def stopclanlog(self, ctx):
-        await ctx.send("Clan Log stopped successfully")
-        await self.myLoop.stop()
+
+        var = self.myLoop.stop()
+        if var is None:
+            await ctx.send("Clan Log stopped successfully")
+        else:
+            await ctx.send("There was an issue stopping the clan log.\nPlease contact the bot dev.")
