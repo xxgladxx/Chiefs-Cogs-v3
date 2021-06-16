@@ -32,7 +32,7 @@ class ClashRoyaleCog(commands.Cog):
             if 'memberList' in data:
                 break
             else:
-                stringA = stringA.replace(str(clan))
+                stringA = stringA.replace(stringA, str(clan))
                 
       await ctx.send(stringA)
 
