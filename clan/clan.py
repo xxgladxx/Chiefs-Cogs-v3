@@ -19,7 +19,8 @@ class ClashRoyaleCog(commands.Cog):
         
     @tasks.loop(seconds = 120)
     async def myLoop(self, ctx):
-        await ctx.send("Loop test.")
+        channel = ctx.guild.get_channel(854566618633863198)
+        await channel.send("Loop test.")
 
   
 
@@ -30,4 +31,5 @@ class ClashRoyaleCog(commands.Cog):
 
     @commands.command(aliases=["z"])
     async def dev_z(self, ctx):
-        self.myLoop.start()
+        await ctx.send("trying to start loop")
+        await self.myLoop.start()
