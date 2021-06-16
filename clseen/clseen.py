@@ -7,8 +7,10 @@ import clashroyale
 #datetime
 from datetime import datetime
 
+from redbot.core.utils.chat_formatting import pagify
+
 class ClashLastSeen(commands.Cog):
-    """A CR related command"""
+    """A CR related command\nIncludes certain commands that are being build"""
 
     def __init__(self, bot):
 
@@ -82,4 +84,11 @@ class ClashLastSeen(commands.Cog):
         #embed = discord.Embed(description = f"The user was last seen at\n{difference} from now")
         #embed.set_author(name = ctx.guild.name, icon_url = ctx.guild.icon_url)
         #await ctx.send(embed=embed)        
-        
+       
+    @checks.is_owner()       
+    @commands.command(aliases = ["chief"])
+    async def chiefclan(self, ctx):
+        """A command under build"""
+        clan_data = await self.clash.get_clan_war(tag='#YGGQR0CV')
+        await ctx.send_interactive(pagify(clan_data))
+
