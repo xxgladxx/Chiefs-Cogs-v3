@@ -32,4 +32,4 @@ class ClashRoyaleCog(commands.Cog):
     @commands.command(aliases=["z"])
     async def dev_z(self, ctx):
         await ctx.send("trying to start loop")
-        await self.myLoop.start()
+        await self.myLoop.start(ctx)
