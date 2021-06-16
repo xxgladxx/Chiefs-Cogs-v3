@@ -66,7 +66,8 @@ class ClashRoyaleCog(commands.Cog):
       clan = str(await(self.crapi.get_clan('#YGGQR0CV')))
       await ctx.send_interactive(pagify((clan)))
 
-    @commands.command(aliases=["z"])
+    @checks.is_owner()
+    @commands.command()
     async def startclanlog(self, ctx):
         """Starts the clanlog"""
         await ctx.send("Started clan log.")
@@ -74,7 +75,7 @@ class ClashRoyaleCog(commands.Cog):
         await self.checker.start(ctx)
 
 
-
+    @checks.is_owner()
     @commands.command()
     async def stopclanlog(self, ctx):
         """Stops the clanlog""" 
