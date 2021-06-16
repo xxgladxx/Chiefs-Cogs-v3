@@ -27,7 +27,7 @@ class ClashRoyaleCog(commands.Cog):
     @commands.command()
     async def chiefstry(self, ctx):
       clan = await self.crapi.get_clan('#YGGQR0CV')
-      for data in clan:
+      for data in str(clan):
             if 'memberList' in data:
                 break
       await ctx.send(str(data))
