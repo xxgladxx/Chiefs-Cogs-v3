@@ -1,5 +1,6 @@
 import discord
-from redbot.core import Config, checks, commands, tasks
+from redbot.core import Config, checks, commands
+from discord.ext import tasks
 from redbot.core.utils.chat_formatting import pagify
 import clashroyale
 
