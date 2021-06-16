@@ -37,4 +37,4 @@ class ClashRoyaleCog(commands.Cog):
     @commands.command()
     async def stopclanlog(self, ctx):
         await ctx.send("Clan Log stopped successfully")
-        await myLoop.stop(self)
+        await self.myLoop.stop(self)
