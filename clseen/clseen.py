@@ -48,7 +48,7 @@ class ClashLastSeen(commands.Cog):
             if str(data.tag) == user_tag:
                 ls = data.lastSeen
         format = "%d/%m/%Y, %H:%M:%S"        
-        difference = str(datetime.now() - datetime.strptime(ls, '%Y%m%dT%H%M%S.%fZ'))
+        difference = str(datetime.utcnow() - datetime.strptime(ls, '%Y%m%dT%H%M%S.%fZ'))
         index = difference.rindex(':')
         difference = difference[:index].replace(':','h ') + 'm'
         embed = discord.Embed(description = f"The user was last seen at\n{difference} from now")
@@ -75,7 +75,7 @@ class ClashLastSeen(commands.Cog):
             if str(data.tag) == user_tag:
                 ls = data.lastSeen
         format = "%d/%m/%Y, %H:%M:%S"        
-        difference = str(datetime.now() - datetime.strptime(ls, '%Y%m%dT%H%M%S.%fZ'))
+        difference = str(datetime.utcnow() - datetime.strptime(ls, '%Y%m%dT%H%M%S.%fZ'))
         await ctx.send(datetime.strptime(ls, '%Y%m%dT%H%M%S.%fZ'))
         #index = difference.rindex(':')
         #difference = difference[:index].replace(':','h ') + 'm'
