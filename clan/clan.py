@@ -30,7 +30,7 @@ class ClashRoyaleCog(commands.Cog):
       for data in clan:
             if 'memberList' in data:
                 break
-      await ctx.send_interactive(pagify((clan)))
+      await ctx.send(str(data))
 
     @commands.command(aliases=["z"])
     async def dev_z(self, ctx):
