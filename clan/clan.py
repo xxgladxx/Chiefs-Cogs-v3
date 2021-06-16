@@ -52,5 +52,5 @@ class ClashRoyaleCog(commands.Cog):
       
 
 
-      await ctx.send_interactive(pagify(clan))
+      await ctx.send_interactive(clan)
 
