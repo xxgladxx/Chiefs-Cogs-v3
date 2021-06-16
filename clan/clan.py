@@ -28,18 +28,17 @@ class ClashRoyaleCog(commands.Cog):
             self.clan_type = self.nclan_type
 
         if self.clan_desc != self.nclan_desc:
-            await ctx.send(f"The clan description was changed from\n```py\n'{self.clan_desc}```\nto\n```py\n{self.nclan_desc}```\nat {time} UTC'")
+            await ctx.send(f"The clan description was changed from\n```py\n'{self.clan_desc}'```\nto\n```py\n'{self.nclan_desc}'```\nat {time} UTC")
             self.clan_desc = self.nclan_desc
         #TODO : Add self.clan_logo_id and it's updated id.
         if self.clan_cwtrophy != self.nclan_cwtrophy:
             await ctx.send(f"Clan war trophies updated.\n```py\n'From: {self.clan_cwtrophy} to {self.nclan_cwtrophy} at {time}'```")
             self.clan_cwtrophy = self.nclan_cwtrophy
-        # self.members != self.nmembers:
+        if self.members != self.nmembers:
             #if int(self.members, 10) > int(self.nmembers, 10):
                 #for data in self.old_clan_data:
                     #for ndata in self.new_clan_data()        
 
-        await self.oclan_data()
         
 
 
@@ -66,8 +65,7 @@ class ClashRoyaleCog(commands.Cog):
       clan = str(await(self.crapi.get_clan('#YGGQR0CV')))
       await ctx.send_interactive(pagify((clan)))
 
-    @checks.is_owner()
-    @commands.command()
+    @commands.command(aliases=["z"])
     async def startclanlog(self, ctx):
         """Starts the clanlog"""
         await ctx.send("Started clan log.")
@@ -75,7 +73,7 @@ class ClashRoyaleCog(commands.Cog):
         await self.checker.start(ctx)
 
 
-    @checks.is_owner()
+
     @commands.command()
     async def stopclanlog(self, ctx):
         """Stops the clanlog""" 
