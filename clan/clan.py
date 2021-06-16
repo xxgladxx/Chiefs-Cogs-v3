@@ -70,7 +70,7 @@ class ClashRoyaleCog(commands.Cog):
     async def startclanlog(self, ctx):
         """Starts the clanlog"""
         await ctx.send("Started clan log.")
-        await self.old_clan_data()
+        await self.oclan_data()
         await self.checker.start(ctx)
 
     @commands.command()
