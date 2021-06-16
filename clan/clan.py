@@ -69,9 +69,10 @@ class ClashRoyaleCog(commands.Cog):
     @commands.command(aliases=["z"])
     async def startclanlog(self, ctx):
         """Starts the clanlog"""
+        await ctx.send("Started clan log.")
         await self.oclan_data()
         await self.checker.start(ctx)
-        await ctx.send("Started clan log.")
+
 
 
     @commands.command()
