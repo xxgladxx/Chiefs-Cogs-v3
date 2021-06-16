@@ -35,16 +35,26 @@ class ClashRoyaleCog(commands.Cog):
             await ctx.send(f"Clan war trophies updated.\n```py\n'From: {self.clan_cwtrophy} to {self.nclan_cwtrophy} at {time}'```")
             self.clan_cwtrophy = self.nclan_cwtrophy
         if self.members != self.nmembers:
-            #if int(self.members, 10) > int(self.nmembers, 10):
-                #for data in self.old_clan_data:
-                    #for ndata in self.new_clan_data()        
+            if int(self.members, 10) > int(self.nmembers, 10): #means if someone left the clan
+                for data in self.old_clan_members:
+                    tag = data.tag
+                    if tag not in self.new_clan_members:
+                        await ctx.send(f"Clan member list updated\n{self.members} -> {self.nmembers}\n```py\n'{data.name} - {tag} left the clan.'```")
+                    else:
+                        continue
 
-        
-
+            elif int(self.members, 10) < int(self.nmembers, 10): #means if someone joined the clan
+                for data in self.new_clan_members:
+                    tag = data.tag
+                    if tag not in self.old_clan_members:
+                        await ctx.send(f"Clan member list updated\n{self.members} -> {self.nmembers}\n```py\n'{data.name} - {tag} joined the clan.'```")
+                    else:
+                        continue                   
 
     async def oclan_data(self):
         """The old clan data code goes here"""
         self.old_clan_data = await self.clash.get_clan('#YGGQR0CV')
+        self.old_clan_members = await self.clash.get_clan_members('#YGGQR0CV')
         self.clan_type = str(self.old_clan_data.type)
         self.clan_desc = str(self.old_clan_data.description)
         self.clan_logo_id = str(self.old_clan_data.badgeId)
@@ -54,6 +64,7 @@ class ClashRoyaleCog(commands.Cog):
     async def nclan_data(self):
         """fetches refreshed clanlog"""
         self.new_clan_data = await self.clash.get_clan('#YGGQR0CV')
+        self.new_clan_members = await self.clash.get_clan_members('#YGGQR0CV')
         self.nclan_type = str(self.new_clan_data.type)
         self.nclan_desc = str(self.new_clan_data.description)
         self.nclan_logo_id = str(self.new_clan_data.badgeId)
