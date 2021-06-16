@@ -17,7 +17,7 @@ class ClashRoyaleCog(commands.Cog):
             raise ValueError("The Clash Royale API key has not been set. Use [p]set api crapi api_key,YOURAPIKEY")
         self.crapi = clashroyale.OfficialAPI(apikey, is_async=True)
         
-    @tasks.loop(seconds = 120)
+    @tasks.loop(seconds = 10)
     async def myLoop(self, ctx):
         channel = ctx.guild.get_channel(854566618633863198)
         await channel.send("Loop test.")
@@ -37,7 +37,7 @@ class ClashRoyaleCog(commands.Cog):
     @commands.command()
     async def stopclanlog(self, ctx):
 
-        var = self.myLoop.stop()
+        var = self.myLoop.cancel()
         if var is None:
             await ctx.send("Clan Log stopped successfully")
         else:
