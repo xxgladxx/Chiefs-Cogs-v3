@@ -29,7 +29,8 @@ class ClashRoyaleCog(commands.Cog):
             await ctx.send(f"```py\n'The clan type was changed from {self.clan_type} to {self.nclan_type} at {time} UTC'```")
             self.clan_type = self.nclan_type
         if self.old_req != self.new_req:
-            await ctx.send(f"```py\n'The required trophies were changed from {self.old_req} to {self.new_req} at {time} UTC'```"
+            await ctx.send(f"```py\n'The required trophies were changed from {self.old_req} to {self.new_req} at {time} UTC'```")
+            self.old_req = self.new_req
         if self.clan_desc != self.nclan_desc:
             await ctx.send(f"The clan description was changed from\n```py\n'{self.clan_desc}'```\nto\n```py\n'{self.nclan_desc}'```\nat {time} UTC")
             self.clan_desc = self.nclan_desc
