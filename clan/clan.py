@@ -110,7 +110,6 @@ class ClashRoyaleCog(commands.Cog):
           self.checker.cancel()
         except Exception as e:
           return await ctx.send(f"```py\n{e}```")
-        await asyncio.sleep(5)
         await ctx.send("Refreshing clan log")
         await asyncio.sleep(10)
         try:
