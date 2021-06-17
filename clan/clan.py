@@ -99,6 +99,7 @@ class ClashRoyaleCog(commands.Cog):
 
     @commands.command()
     async def testing(self, ctx):
+        await self.nclan_data()
         async for data in self.new_clan_members:
             tag = str(data.tag)
             await ctx.send(tag)
