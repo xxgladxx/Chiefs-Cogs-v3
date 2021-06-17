@@ -1,4 +1,3 @@
-from aiohttp.client_reqrep import ConnectionKey
 import discord
 from redbot.core import Config, checks, commands
 from discord.ext import tasks
