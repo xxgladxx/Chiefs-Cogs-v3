@@ -1,3 +1,4 @@
+from aiohttp.client_reqrep import ConnectionKey
 import discord
 from redbot.core import Config, checks, commands
 from discord.ext import tasks
@@ -23,6 +24,7 @@ class ClashRoyaleCog(commands.Cog):
     async def checker(self, ctx):
         await self.nclan_data()
         time = datetime.datetime.utcnow().strftime('%B %d %Y - %H:%M:%S')
+        x = 0
         if self.clan_type != self.nclan_type:
             await ctx.send(f"```py\n'The clan type was changed from {self.clan_type} to {self.nclan_type} at {time} UTC'```")
             self.clan_type = self.nclan_type
@@ -38,15 +40,19 @@ class ClashRoyaleCog(commands.Cog):
             if int(self.members, 10) > int(self.nmembers, 10): #means if someone left the clan
                 async for data in self.old_clan_members:
                     tag = data.tag
-                    async if tag not in str(self.new_clan_members):
+                    if tag not in str(self.new_clan_members):
                         await ctx.send(f"Clan member list updated\n{self.members} -> {self.nmembers}\n```py\n'{data.name} - {tag} left the clan.'```")
 
             elif int(self.members, 10) < int(self.nmembers, 10): #means if someone joined the clan
-                async for data in str(self.new_clan_members):
+                async for data in self.new_clan_members:
                     tag = str(data.tag)
-                    async if tag not in self.old_clan_members:
-                        await ctx.send(f"Clan member list updated\n{self.members} -> {self.nmembers}\n```py\n'{data.name} - {tag} joined the clan.'```")
+                    await ctx.send(tag)
 
+                        
+
+                        
+
+    
     async def oclan_data(self):
         """The old clan data code goes here"""
         self.old_clan_data = await self.clash.get_clan('#YGGQR0CV')
@@ -90,3 +96,9 @@ class ClashRoyaleCog(commands.Cog):
             await ctx.send("Clan log stopped successfully")
         else:
             await ctx.send("There was an issue stopping the clan log.\nPlease contact the bot dev.")
+
+    @commands.command()
+    async def testing(self, ctx):
+        async for data in self.new_clan_members:
+            tag = str(data.tag)
+            await ctx.send(tag)
