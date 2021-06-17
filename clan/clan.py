@@ -102,5 +102,5 @@ class ClashRoyaleCog(commands.Cog):
         await self.nclan_data()
         async for data in self.new_clan_members:
             tag = str(data.tag)
-            if tag == '#2CG2RLUV':
+            if tag == '#PPGL8Y09P':
                 return await ctx.send("```py\n'WORKS'```")
