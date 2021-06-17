@@ -98,3 +98,22 @@ class ClashRoyaleCog(commands.Cog):
             await ctx.send("Clan log stopped successfully")
         else:
             await ctx.send("There was an issue stopping the clan log.\nPlease contact the bot dev.")
+            
+
+    @commands.command()
+    async def refreshclanlog(self, ctx):
+        """used to restart the clan log\nincase of maintenance break or some other cr api issues"""
+        await ctx.send("Stopping clan log")
+        await asyncio.sleep(10) 
+        try:
+          await self.checker.cancel()
+        except Exception as e:
+          return await ctx.send(f"```py\n{e}```")
+        await asyncio.sleep(5)
+        await ctx.send("Restarting clan log")
+        await asyncio.sleep(10)
+        try:
+          await self.oclan_data()
+          await self.checker.start(ctx)
+        except Exception as e:
+          return await ctx.send(f"```py\n{e}```")
