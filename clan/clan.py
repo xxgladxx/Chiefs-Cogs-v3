@@ -39,20 +39,16 @@ class ClashRoyaleCog(commands.Cog):
         if self.members != self.nmembers:
             if int(self.members, 10) > int(self.nmembers, 10): #means if someone left the clan
                 async for data in self.old_clan_members:
-                    tag = data.tag
+                    tag = str(data.tag)
                     if tag not in str(self.new_clan_members):
                         await ctx.send(f"Clan member list updated\n{self.members} -> {self.nmembers}\n```py\n'{data.name} - {tag} left the clan.'```")
 
             elif int(self.members, 10) < int(self.nmembers, 10): #means if someone joined the clan
                 async for data in self.new_clan_members:
                     tag = str(data.tag)
-                    await ctx.send(tag)
+                    if tag not in str(self.old_clan_members):
+                        await ctx.send(f"Clan member list updated\n{self.members} -> {self.nmembers}\n```py\n'{data.name} - {tag} joined the clan.'```")
 
-                        
-
-                        
-
-    
     async def oclan_data(self):
         """The old clan data code goes here"""
         self.old_clan_data = await self.clash.get_clan('#YGGQR0CV')
@@ -96,11 +92,3 @@ class ClashRoyaleCog(commands.Cog):
             await ctx.send("Clan log stopped successfully")
         else:
             await ctx.send("There was an issue stopping the clan log.\nPlease contact the bot dev.")
-
-    @commands.command()
-    async def testing(self, ctx):
-        await self.nclan_data()
-        async for data in self.new_clan_members:
-            tag = str(data.tag)
-            if tag == '#PPGL8Y09P':
-                return await ctx.send("```py\n'WORKS'```")
