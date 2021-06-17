@@ -32,9 +32,9 @@ class Emojis(commands.Cog):
     embed = discord.Embed()
     out=[]
     for guild in self.bot.guilds:
-              for card in sorted(guild.emojis, key=lambda x: x["name"].lower()):
-                name = card["name"]
-                out.append(f"{name}")
+              for emoji in guild.emojis:
+                name = emoji.name
+                out.append(f":{name}:")
     pages = []
     for page in pagify("\n".join(out), shorten_by=24):
             embed = discord.Embed(description=page, timestamp=datetime.utcnow(),)
