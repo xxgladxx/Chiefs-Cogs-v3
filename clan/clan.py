@@ -28,7 +28,8 @@ class ClashRoyaleCog(commands.Cog):
         if self.clan_type != self.nclan_type:
             await ctx.send(f"```py\n'The clan type was changed from {self.clan_type} to {self.nclan_type} at {time} UTC'```")
             self.clan_type = self.nclan_type
-
+        if self.old_req != self.new_req:
+            await ctx.send(f"```py\n'The required trophies were changed from {self.old_req} to {self.new_req} at {time} UTC'```"
         if self.clan_desc != self.nclan_desc:
             await ctx.send(f"The clan description was changed from\n```py\n'{self.clan_desc}'```\nto\n```py\n'{self.nclan_desc}'```\nat {time} UTC")
             self.clan_desc = self.nclan_desc
@@ -41,14 +42,14 @@ class ClashRoyaleCog(commands.Cog):
                 async for data in self.old_clan_members:
                     tag = str(data.tag)
                     if tag not in str(self.new_clan_members):   
-                        await ctx.send(f"Clan member list updated\n{self.members} -> {self.nmembers}\n```py\n'{data.name} - {tag} left the clan.'```")
+                        await ctx.send(f"Clan member list updated\n{self.members} -> {self.nmembers}\n```py\n'{data.name} - {tag} left the clan.\nat {time}'```")
                         return await self.oclan_data()
 
             elif int(self.members, 10) < int(self.nmembers, 10): #means if someone joined the clan
                 async for data in self.new_clan_members:
                     tag = str(data.tag)
                     if tag not in str(self.old_clan_members):
-                        await ctx.send(f"Clan member list updated\n{self.members} -> {self.nmembers}\n```py\n'{data.name} - {tag} joined the clan.'```")
+                        await ctx.send(f"Clan member list updated\n{self.members} -> {self.nmembers}\n```py\n'{data.name} - {tag} joined the clan.\nat {time}'```")
                         return await self.oclan_data
 
     async def oclan_data(self):
@@ -60,6 +61,7 @@ class ClashRoyaleCog(commands.Cog):
         self.clan_logo_id = str(self.old_clan_data.badgeId)
         self.clan_cwtrophy = str(self.old_clan_data.clanWarTrophies)
         self.members = str(self.old_clan_data.members)
+        self.old_req = str(self.old_clan_data.requiredTrophies)
     
     async def nclan_data(self):
         """fetches refreshed clanlog"""
@@ -70,6 +72,7 @@ class ClashRoyaleCog(commands.Cog):
         self.nclan_logo_id = str(self.new_clan_data.badgeId)
         self.nclan_cwtrophy = str(self.new_clan_data.clanWarTrophies)
         self.nmembers = str(self.new_clan_data.members)
+        self.new_req = str(self.new_clan_data.requiredTrophies)
 
 
     async def chiefstry(self, ctx):
