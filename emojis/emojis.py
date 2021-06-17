@@ -34,9 +34,9 @@ class Emojis(commands.Cog):
     for guild in self.bot.guilds:
               for emoji in guild.emojis:
                 name = emoji.name
-                out.append(f":{name}:")
+                out.append(f"`:{name}:`")
     pages = []
-    for page in pagify("\n".join(out), shorten_by=24):
+    for page in pagify("\n\n".join(out), shorten_by=10):
             embed = discord.Embed(description=page, timestamp=datetime.utcnow(),)
             embed.set_footer(text="By Nubiator6969", icon_url=ctx.author.avatar_url)
             pages.append(embed)
