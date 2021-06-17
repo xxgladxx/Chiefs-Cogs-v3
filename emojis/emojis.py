@@ -15,7 +15,7 @@ class Emojis(commands.Cog):
         """Returns all the inbuild bot emojis that contain the word given by the user."""
         if emoji_name is None:
              return await ctx.send("No emoji name given")                 
-        for guild in bot.guilds:
+        for guild in self.bot.guilds:
             for emoji in guild.emojis:
                 if emoji_name in emoji.name.lower():
                     name = emoji.name + (".gif" if emoji.animated else ".png")
