@@ -5,6 +5,7 @@ from discord.ext import tasks
 from redbot.core.utils.chat_formatting import pagify
 import clashroyale
 import datetime
+import asyncio
 
 class ClashRoyaleCog(commands.Cog):
     """Checks clan log by using old collected data vs the refreshed data from crapi"""
