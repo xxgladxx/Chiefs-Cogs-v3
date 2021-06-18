@@ -45,14 +45,14 @@ class ClashRoyaleCog(commands.Cog):
                     tag = str(data.tag)
                     if tag not in str(self.new_clan_members):   
                         await ctx.send(f"Clan member list updated\n{self.members} -> {self.nmembers}\n```py\n'{data.name} - {tag} left the clan.\nat {time}'```")
-                        return await self.oclan_data()
+                        return self.oclan_data()
 
             elif int(self.members, 10) < int(self.nmembers, 10): #means if someone joined the clan
                 async for data in self.new_clan_members:
                     tag = str(data.tag)
                     if tag not in str(self.old_clan_members):
                         await ctx.send(f"Clan member list updated\n{self.members} -> {self.nmembers}\n```py\n'{data.name} - {tag} joined the clan.\nat {time}'```")
-                        return await self.oclan_data
+                        return self.oclan_data
 
     async def oclan_data(self):
         """The old clan data code goes here"""
