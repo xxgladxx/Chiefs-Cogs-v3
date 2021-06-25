@@ -127,7 +127,7 @@ class ClashRoyaleCog(commands.Cog):
     @checks.is_owner()
     @commands.command()
     async def crapidata(self, ctx):
-        data = str(await self.clash())
-        await ctx.send_interactive(pagify(data))
+        data = str(clashroyale)
+        await ctx.send(dir(clashroyale))
 
 
