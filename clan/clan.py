@@ -127,6 +127,6 @@ class ClashRoyaleCog(commands.Cog):
     @checks.is_owner()
     @commands.command()
     async def crapidata(self, ctx):
-        await ctx.send_interactive(str(pagify(self.clash)))
+        await ctx.send_interactive(pagify(str(self.clash)))
 
 
