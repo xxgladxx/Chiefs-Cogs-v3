@@ -128,6 +128,6 @@ class ClashRoyaleCog(commands.Cog):
     @commands.command()
     async def crapidata(self, ctx):
         data = str(clashroyale)
-        await ctx.send(dir(clashroyale))
+        await ctx.send(dir(self.clash))
 
 
