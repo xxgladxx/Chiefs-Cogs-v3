@@ -27,7 +27,7 @@ class ClanWarCog(commands.Cog):
         for member in participants:
             await self.checkmember(member["tag"])
             if self.con =='Yes':
-                print(f"{member['name']} - {member['tag']} - {member['decksUsedToday']}")
+                await ctx.send(f"{member['name']} - {member['tag']} - {member['decksUsedToday']}")
 
 
             
