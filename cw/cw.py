@@ -10,7 +10,6 @@ class ClanWarCog(commands.Cog):
 
     @commands.command()
     async def cwcheck(self, ctx):
-        self.con = "No"
         token = await self.bot.get_shared_api_tokens("crapi")
         self.token = token["api_key"]
         complete_url = "https://api.clashroyale.com/v1/clans/%23YGGQR0CV/currentriverrace"
@@ -25,7 +24,7 @@ class ClanWarCog(commands.Cog):
         participants = clan_data['participants']
 
         for member in participants:
-            if self.checkmember(str(member["tag"]).strip('#')) == True:
+            if self.checkmember(member["tag"]) == True:
                 await ctx.send(f"{member['name']} - {member['tag']} - {member['decksUsedToday']}")
 
 
@@ -41,6 +40,7 @@ class ClanWarCog(commands.Cog):
                                     }
                                     )
         response = str(urllib.request.urlopen(req).read().decode("utf-8"))
-        if tag in response.strip('#'):
+        await ctx.send("working on it")
+        if tag in response:
             return True
             
