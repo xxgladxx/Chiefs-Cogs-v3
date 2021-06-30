@@ -1,4 +1,4 @@
-from .clan import ClanWarCog
+from .cw import ClanWarCog
 
 async def setup(bot):
   cog = ClanWarCog(bot)
