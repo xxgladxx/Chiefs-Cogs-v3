@@ -25,8 +25,7 @@ class ClanWarCog(commands.Cog):
         participants = clan_data['participants']
 
         for member in participants:
-            await self.checkmember(member["tag"])
-            if self.con =='Yes':
+            if self.checkmember(str(member["tag"]).strip('#')) == True:
                 await ctx.send(f"{member['name']} - {member['tag']} - {member['decksUsedToday']}")
 
 
@@ -42,6 +41,6 @@ class ClanWarCog(commands.Cog):
                                     }
                                     )
         response = str(urllib.request.urlopen(req).read().decode("utf-8"))
-        if tag in response:
-            self.con == 'Yes'
+        if tag in response.strip('#'):
+            return True
             
