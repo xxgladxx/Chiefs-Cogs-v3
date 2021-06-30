@@ -23,10 +23,13 @@ class ClanWarCog(commands.Cog):
         response = json.loads(urllib.request.urlopen(req).read().decode("utf-8"))
         clan_data = response['clan']
         participants = clan_data['participants']
+        embed = discord.Embed(description = "Current race stats:")
+        embed.set_author(name = "Chiefs United - #YGGQR0CV", icon_url=ctx.guild.icon_url)
 
         for member in participants:
             if self.checkmember(tag = member["tag"]):
-                await ctx.send(f"{member['name']} - {member['tag']} - {member['decksUsedToday']}")
+                embed.add_field(name="\u200b", value = f"```{member['name']} - {member['tag']} - {member['decksUsedToday']}```")
+        await ctx.send(embed = embed)
 
     def checkmember(self, tag):
         tag = str(tag)
