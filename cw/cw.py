@@ -25,11 +25,20 @@ class ClanWarCog(commands.Cog):
         participants = clan_data['participants']
         embed = discord.Embed(description = "Current race stats:")
         embed.set_author(name = "Chiefs United - #YGGQR0CV", icon_url=ctx.guild.icon_url)
-
+        embed1 = discord.Embed()
+        numberoffields = 0
+        await ctx.send("```py\n'Please wait upto 2-4 minutes..'")
         for member in participants:
             if self.checkmember(tag = member["tag"]) == True:
-                embed.add_field(name="\u200b", value = f"```{member['name']} - {member['tag']} - {member['decksUsedToday']}```")
+                if numberoffields <= 25:
+                    embed.add_field(name="\u200b", value = f"```{member['name']} - {member['tag']} - {member['decksUsedToday']}```")
+                    numberoffields = numberoffields + 1
+                else:
+                    embed1.add_field(name="\u200b", value = f"```{member['name']} - {member['tag']} - {member['decksUsedToday']}```")
+                    
+
         await ctx.send(embed = embed)
+        await ctx.send(embed = embed1)
 
     def checkmember(self, tag):
         tag = str(tag)
