@@ -29,7 +29,6 @@ class ClanWarCog(commands.Cog):
         for member in participants:
             if self.checkmember(tag = member["tag"]) == True:
                 embed.add_field(name="\u200b", value = f"```{member['name']} - {member['tag']} - {member['decksUsedToday']}```")
-                break
         await ctx.send(embed = embed)
 
     def checkmember(self, tag):
