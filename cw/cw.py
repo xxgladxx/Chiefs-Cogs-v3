@@ -27,8 +27,9 @@ class ClanWarCog(commands.Cog):
         embed.set_author(name = "Chiefs United - #YGGQR0CV", icon_url=ctx.guild.icon_url)
 
         for member in participants:
-            if self.checkmember(tag = member["tag"]):
+            if self.checkmember(tag = member["tag"]) == True:
                 embed.add_field(name="\u200b", value = f"```{member['name']} - {member['tag']} - {member['decksUsedToday']}```")
+                break
         await ctx.send(embed = embed)
 
     def checkmember(self, tag):
