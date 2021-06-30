@@ -31,10 +31,10 @@ class ClanWarCog(commands.Cog):
         for member in participants:
             if self.checkmember(tag = member["tag"]) == True:
                 if numberoffields <= 25:
-                    embed.add_field(name=f"```{member['name'] - {member['tag']}```", value = f"```{member['decksUsedToday']}```")
+                    embed.add_field(name=f"```{member['name']} - {member['tag']}```", value = f"```{member['decksUsedToday']}```")
                     numberoffields = numberoffields + 1
                 else:
-                    embed1.add_field(name=f"```{member['name'] - {member['tag']}```", value = f"```{member['decksUsedToday']}```")
+                    embed1.add_field(name=f"```{member['name']} - {member['tag']}```", value = f"```{member['decksUsedToday']}```")
                     
 
         await ctx.send(embed = embed)
