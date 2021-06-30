@@ -27,7 +27,8 @@ class ClanWarCog(commands.Cog):
         for member in participants:
             await self.checkmember(member["tag"])
             if self.con =='Yes':
-                await ctx.send(f"{member['name']} - {member['tag']} - {member['decksUsedToday']}")
+                print(f"{member['name']} - {member['tag']} - {member['decksUsedToday']}")
+
 
             
             
@@ -40,9 +41,7 @@ class ClanWarCog(commands.Cog):
                                         "Authorization": "Bearer %s" % self.token
                                     }
                                     )
-        response = json.loads(urllib.request.urlopen(req).read().decode("utf-8"))
-        for member in response['items']:
-            member_tag = member['tag']
-            if member_tag == tag:
-                self.con = "Yes"
+        response = str(urllib.request.urlopen(req).read().decode("utf-8"))
+        if tag in response:
+            self.con == 'Yes'
             
