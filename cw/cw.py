@@ -4,7 +4,7 @@ import clashroyale
 import json
 import urllib.request
 
-class ClanWarCog:
+class ClanWarCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
