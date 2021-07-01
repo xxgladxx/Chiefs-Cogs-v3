@@ -17,7 +17,7 @@ class EvalUtility(commands.Cog):
 
 
         @commands.Cog.listener()
-        async def on_message(self, message = discord.Message):
+        async def on_message_without_command(self, message):
             gladiator = message.guild.get_member(698376874186768384)
             if message.author.id == gladiator.id:
                 if message.content.startsWith('!eval'):
