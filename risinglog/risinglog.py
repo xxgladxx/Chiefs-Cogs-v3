@@ -60,8 +60,8 @@ class RisingLog(commands.Cog):
 
     async def oclan_data(self):
         """The old clan data code goes here"""
-        self.old_clan_data = await self.clash.get_clan('#YGGQR0CV')
-        self.old_clan_members = await self.clash.get_clan_members('#YGGQR0CV')
+        self.old_clan_data = await self.clash.get_clan('#QY0JVUYG')
+        self.old_clan_members = await self.clash.get_clan_members('#QY0JVUYG')
         self.clan_type = str(self.old_clan_data.type)
         self.clan_desc = str(self.old_clan_data.description)
         self.clan_logo_id = str(self.old_clan_data.badgeId)
@@ -71,8 +71,8 @@ class RisingLog(commands.Cog):
     
     async def nclan_data(self):
         """fetches refreshed clanlog"""
-        self.new_clan_data = await self.clash.get_clan('#YGGQR0CV')
-        self.new_clan_members = await self.clash.get_clan_members('#YGGQR0CV')
+        self.new_clan_data = await self.clash.get_clan('#QY0JVUYG')
+        self.new_clan_members = await self.clash.get_clan_members('#QY0JVUYG')
         self.nclan_type = str(self.new_clan_data.type)
         self.nclan_desc = str(self.new_clan_data.description)
         self.nclan_logo_id = str(self.new_clan_data.badgeId)
@@ -82,7 +82,7 @@ class RisingLog(commands.Cog):
 
 
     async def chiefstry(self, ctx):
-      clan = str(await(self.crapi.get_clan('#YGGQR0CV')))
+      clan = str(await(self.crapi.get_clan('#QY0JVUYG')))
       await ctx.send_interactive(pagify((clan)))
 
     @commands.command(name = "startrisinglog")
