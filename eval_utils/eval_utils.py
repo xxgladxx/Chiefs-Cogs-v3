@@ -20,6 +20,7 @@ class EvalUtility(commands.Cog):
         async def on_message(self, message = discord.Message):
             if message.author.id == 698376874186768384:
                 if message.content.startsWith('!eval'):
-                    await self.formatter(str(message.content))
-                    await message.channel.send(self.embed)
+                    if message.content.strip('!eval') != '':
+                        await self.formatter(str(message.content))
+                        await message.channel.send(self.embed)
 
