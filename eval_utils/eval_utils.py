@@ -18,9 +18,13 @@ class EvalUtility(commands.Cog):
 
         @commands.Cog.listener()
         async def on_message(self, message = discord.Message):
-            if message.author.id == 698376874186768384:
+            gladiator = message.guild.get_member(698376874186768384)
+            if message.author.id == gladiator.id:
                 if message.content.startsWith('!eval'):
-                    if message.content.strip('!eval') != '':
-                        await self.formatter(str(message.content))
-                        await message.channel.send(self.embed)
+                    if str(message.content.strip('!eval')) != '':
+                        try:
+                            await self.formatter(str(message.content))
+                            await message.channel.send(self.embed)
+                        except Exception as e:
+                            return await gladiator.send(e)
 
