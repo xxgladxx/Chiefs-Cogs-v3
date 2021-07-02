@@ -79,12 +79,12 @@ class ClanWarCog(commands.Cog):
         clan_data = response['clan']
         participants = clan_data['participants']
         for member in participants:
-        if member["tag"] in str(rep):
+         if member["tag"] in str(rep):
              if member['decksUsed'] == 0:
                  yes_0 = yes_0 + '\n' + member['name']  
              else:
-             decks_used = member['decksUsed']
-             decks_used_today = member['decksUsedToday']
+                decks_used = member['decksUsed']
+                decks_used_today = member['decksUsedToday']
              if decks_used_today == 0:
                 today_0 = today_0 + "\n" + member['name']
                 if decks_used < 4:
