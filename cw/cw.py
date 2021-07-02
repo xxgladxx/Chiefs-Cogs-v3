@@ -93,7 +93,7 @@ class ClanWarCog(commands.Cog):
              if decks_used_today < 4 and decks_used_today > 0:
                     today_u4 = today_u4 + "\n" + member['name']
 
-        await ctx.send(f"```py\n@0 battles in both days:\n'{yes_0}'\n```")
-        await ctx.send(f"```py\n@Under 4 battles yesterday:\n'{yes_u4}'\n```")
-        await ctx.send(f"```py\n@0 battles today:\n'{today_0}'\n```")
-        await ctx.send(f"```py\n@Under 4 battles today:\n'{today_u4}'\n```")
+        await ctx.send(f"```py\n@Zero battles in both days:\n'{yes_0}\n'```")
+        await ctx.send(f"```py\n@Under 4 battles yesterday:\n'{yes_u4}\n'```")
+        await ctx.send(f"```py\n@Zero battles today:\n'{today_0}\n'```")
+        await ctx.send(f"```py\n@Under 4 battles today:\n'{today_u4}\n'```")
