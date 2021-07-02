@@ -52,4 +52,49 @@ class ClanWarCog(commands.Cog):
         a_response = urllib.request.urlopen(req).read().decode("utf-8")
         if tag in str(a_response):
             return True
-            
+    
+    @commands.command(name = 'cwchecker')
+    async def _cwchecker(self, ctx):
+        token = await self.bot.get_shared_api_tokens("crapi")
+        token = token["api_key"]
+        complete_url = "https://api.clashroyale.com/v1/clans/%23YGGQR0CV/currentriverrace"
+        url = "https://api.clashroyale.com/v1/clans/%23YGGQR0CV/members"
+        req_1 = urllib.request.Request(url, None, {"Authorization": "Bearer %s" % token})
+        rep = json.loads(urllib.request.urlopen(req_1).read().decode("utf-8"))
+
+        req = urllib.request.Request(complete_url, None, {"Authorization": "Bearer %s" % token})
+        response = json.loads(urllib.request.urlopen(req).read().decode("utf-8"))
+
+        today_0 = ""
+        today_0_1 = ""
+        today_u4 = ""
+        today_u4_1 = ""
+        yes_0 = ""
+        yes_0_1 = ""
+        yes_u4 = ""
+        yes_u4_1 = ""
+        decks_used = 0
+        decks_used_today = 0
+
+        clan_data = response['clan']
+        participants = clan_data['participants']
+        for member in participants:
+        if member["tag"] in str(rep):
+             if member['decksUsed'] == 0:
+                 yes_0 = yes_0 + '\n' + member['name']  
+             else:
+             decks_used = member['decksUsed']
+             decks_used_today = member['decksUsedToday']
+             if decks_used_today == 0:
+                today_0 = today_0 + "\n" + member['name']
+                if decks_used < 4:
+                    yes_u4 = yes_u4 + '\n' + member['name']
+
+             if decks_used_today < 4 and decks_used_today > 0:
+                    today_u4 = today_u4 + "\n" + member['name']
+
+        await ctx.send(f"```py\n'0 battles in both days:'\n{yes_0[:1020]}\n```")
+        #print(f'0 battles in both days:\n{yes_0[1024:]}')  
+        #print(f'Under 4 battles yesterday:\n{yes_u4}')
+        #await ctx.send(f'0 battles today:\n{today_0}')
+        #await ctx.send(f'Under 4 battles today:\n{today_u4}')
