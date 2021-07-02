@@ -54,11 +54,21 @@ class ClanWarCog(commands.Cog):
             return True
     
     @commands.command(name = 'cwchecker')
-    async def _cwchecker(self, ctx):
+    async def _cwchecker(self, ctx, clan: str = None):
+        tag = ''
+        if clan is None:
+            return await ctx.send("```py\n'\nClan name not mentioned.\nUse the command followed by clan name.\n'```")
+        else:
+            if clan.lower() == 'united':
+                tag = 'YGGQR0CV'
+            elif clan.lower() == 'rising':
+                tag = 'QY0JVUYG'
+            else:
+                return await ctx.send("```py\n'\nPlease use the command with either united or rising.\n'```")
         token = await self.bot.get_shared_api_tokens("crapi")
         token = token["api_key"]
-        complete_url = "https://api.clashroyale.com/v1/clans/%23YGGQR0CV/currentriverrace"
-        url = "https://api.clashroyale.com/v1/clans/%23YGGQR0CV/members"
+        complete_url = f"https://api.clashroyale.com/v1/clans/%23{tag}/currentriverrace"
+        url = f"https://api.clashroyale.com/v1/clans/%23{tag}/members"
         req_1 = urllib.request.Request(url, None, {"Authorization": "Bearer %s" % token})
         rep = json.loads(urllib.request.urlopen(req_1).read().decode("utf-8"))
 
