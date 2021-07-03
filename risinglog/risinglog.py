@@ -28,7 +28,8 @@ class RisingLog(commands.Cog):
                     if tag not in str(self.new_clan_members):   
                         await ctx.send(f"Clan member list updated\n{self.members} -> {self.nmembers}\n```py\n'{data.name} - {tag} left the clan.\nat {time}'```")
                         self.old_clan_members = self.new_clan_members
-                        return
+                        self.members = self.nmembers
+                        break
 
             elif int(self.members, 10) < int(self.nmembers, 10): #means if someone joined the clan
                 async for data in self.new_clan_members:
@@ -36,7 +37,8 @@ class RisingLog(commands.Cog):
                     if tag not in str(self.old_clan_members):
                         await ctx.send(f"Clan member list updated\n{self.members} -> {self.nmembers}\n```py\n'{data.name} - {tag} joined the clan.\nat {time}'```")
                         self.old_clan_members = self.new_clan_members
-                        return
+                        self.members = self.nmembers
+                        break
                         
  
 
