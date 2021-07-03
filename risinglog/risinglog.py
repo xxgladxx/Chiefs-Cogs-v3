@@ -57,6 +57,7 @@ class RisingLog(commands.Cog):
     async def _startclanlog(self, ctx):
         """Starts the clanlog"""
         try:
+            await ctx.send("Starting clan log.")
             await self.oclan_data()
             await self.checker.start(ctx)
         except Exception as e:
