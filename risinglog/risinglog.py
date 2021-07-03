@@ -56,11 +56,18 @@ class RisingLog(commands.Cog):
     @commands.command(name = "startrisinglog")
     async def _startclanlog(self, ctx):
         """Starts the clanlog"""
-        await self.oclan_data()
-        await self.checker.start(ctx)
+        try:
+            await self.oclan_data()
+            await self.checker.start(ctx)
+        except Exception as e:
+            return await ctx.send(e)
 
     @checks.admin()
     @commands.command(name = "stoprisinglog")
     async def _stopclanlog(self, ctx):
         """Stops the clanlog""" 
-        var = self.checker.cancel()
+        try:
+            self.checker.cancel()
+            await ctx.send("Successfully stopped clan log.")
+        except Exception as e:
+            return await ctx.send(e)
