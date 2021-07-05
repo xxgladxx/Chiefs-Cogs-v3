@@ -110,6 +110,8 @@ class ClanWarCog(commands.Cog):
 
     @commands.command(name='cwarner')
     async def _cwarner(self, ctx):
+        self.token = await self.bot.get_shared_api_tokens("crapi")
+        self.token = self.token["api_key"]
         complete_url = f"https://api.clashroyale.com/v1/clans/%23YGGQR0CV/currentriverrace"
         url = f"https://api.clashroyale.com/v1/clans/%23YGGQR0CV/members"
         req_1 = urllib.request.Request(url, None, {"Authorization": "Bearer %s" % self.token})
