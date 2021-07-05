@@ -132,4 +132,4 @@ class ClanWarCog(commands.Cog):
                     await person.send(f"Hey {person.mention}, you have {4-int(member['decksUsedToday'])} decks remaining for today. Please complete them ASAP or let a co-leader know if you can't.\nStay safe, chief!")
                     names = names + '\n' + member['name']
         await ctx.tick()
-        await ctx.send("War reminder sent to {}".format(names)
+        await ctx.send("War reminder sent to {}".format(names))
