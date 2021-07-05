@@ -129,7 +129,7 @@ class ClanWarCog(commands.Cog):
              if count >= member['decksUsedToday']:
                 for person in ctx.guild.members:
                   if f'{member["name"]}' in person.nick :
-                    await person.send(f"Hey {person.mention}, you have {4-int(member['decksUsedToday'])} decks remaining for today. Please complete them ASAP or let a co-leader know if you can't.\nStay safe, chief!")
+                    await ctx.send(f"Hey {person.mention}, you have {4-int(member['decksUsedToday'])} decks remaining for today. Please complete them ASAP or let a co-leader know if you can't.\nStay safe, chief!")
                     names = names + '\n' + member['name']
         await ctx.tick()
         await ctx.send("War reminder sent to {}".format(names))
