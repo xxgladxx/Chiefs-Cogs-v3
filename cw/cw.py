@@ -129,3 +129,4 @@ class ClanWarCog(commands.Cog):
                 for person in ctx.guild.members:
                   if person.name == f'{member["name"]} | United':
                     await ctx.send(f"Hey {person.mention}, you have {4-int(member['decksUsedToday'])} decks remaining for today. Please complete them ASAP or let a co-leader know if you can't.\nStay safe, chief!")
+        await ctx.tick()
