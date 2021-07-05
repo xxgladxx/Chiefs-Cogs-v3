@@ -107,3 +107,23 @@ class ClanWarCog(commands.Cog):
         await ctx.send(f"```py\n@Under 4 battles yesterday:\n'{yes_u4}\n'```")
         await ctx.send(f"```py\n@Zero battles today:\n'{today_0}\n'```")
         await ctx.send(f"```py\n@Under 4 battles today:\n'{today_u4}\n'```")
+
+    @commands.command(name='cwarner')
+    async def _cwarner(self, ctx):
+        complete_url = f"https://api.clashroyale.com/v1/clans/%23YGGQR0CV/currentriverrace"
+        url = f"https://api.clashroyale.com/v1/clans/%23YGGQR0CV/members"
+        req_1 = urllib.request.Request(url, None, {"Authorization": "Bearer %s" % self.token})
+        rep = json.loads(urllib.request.urlopen(req_1).read().decode("utf-8"))
+
+        req = urllib.request.Request(complete_url, None, {"Authorization": "Bearer %s" % self.token})
+        response = json.loads(urllib.request.urlopen(req).read().decode("utf-8"))
+        clan_data = response['clan']
+        participants = clan_data['participants']
+        count = 3
+       
+        for member in participants:
+         if member["tag"] in str(rep):
+             if count <= member['decksUsedToday']:
+                for person in ctx.guild.members:
+                  if person.name == f'{member["name"]} | United':
+                    await ctx.send(f"Hey {person.mention}, you have {4-int(member['decksUsedToday'])} decks remaining for today. Please complete them ASAP or let a co-leader know if you can't.\nStay safe, chief!")
