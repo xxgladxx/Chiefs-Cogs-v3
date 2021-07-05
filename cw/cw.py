@@ -122,11 +122,14 @@ class ClanWarCog(commands.Cog):
         clan_data = response['clan']
         participants = clan_data['participants']
         count = 3
+        names = ""
        
         for member in participants:
          if member["tag"] in str(rep):
              if count >= member['decksUsedToday']:
                 for person in ctx.guild.members:
-                  if f'{member["name"]}' in person.name :
-                    await ctx.send(f"Hey {person.mention}, you have {4-int(member['decksUsedToday'])} decks remaining for today. Please complete them ASAP or let a co-leader know if you can't.\nStay safe, chief!")
+                  if f'{member["name"]}' in person.nick :
+                    await person.send(f"Hey {person.mention}, you have {4-int(member['decksUsedToday'])} decks remaining for today. Please complete them ASAP or let a co-leader know if you can't.\nStay safe, chief!")
+                    names = names + '\n' + member['name']
         await ctx.tick()
+        await ctx.send("War reminder sent to {}".format(names)
