@@ -132,6 +132,6 @@ class ClanWarCog(commands.Cog):
                     if role.name == 'United':
                      if f'{member["name"]} | United' in person.nick:
                         await ctx.send(f"Hey {person.mention}, you have {4-int(member['decksUsedToday'])} decks remaining for today. Please complete them ASAP or let a co-leader know if you can't.\nStay safe, chief!")
-                    names = names + '\n' + member['name']
+                        names = names + '\n' + member['name']
         await ctx.tick()
         await ctx.send("War reminder sent to {}".format(names))
