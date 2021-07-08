@@ -31,9 +31,9 @@ class FL(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message_without_command(self, message):
- 
+      profiletag = "" 
       if self.CRregex.search(message.content) is not None:
-        profiletag = ""
+
         ftag = message.content.index('=') +1
         fand = message.content.index('&') 
         profiletag = '#' + message.content[ftag:fand] 
