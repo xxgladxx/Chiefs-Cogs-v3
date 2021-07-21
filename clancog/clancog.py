@@ -34,5 +34,10 @@ class ClanCog(commands.Cog):
         war_req = urllib.request.Request(war_url, None, {"Authorization": "Bearer %s" % self.token})
         war_data = json.loads((urllib.request.urlopen(war_req)).read().decode('utf-8'))
         #await ctx.send_interactive(pagify(war_data))
-        for item in war_data.keys():
-            await ctx.send(item)
+        #for item in war_data.keys():
+        #    await ctx.send(item)
+        for key in war_data.items():
+            for clans in key['clans']:
+                for clan in clans:
+                    await ctx.send(clan['name'], clan['tag'])
+                
