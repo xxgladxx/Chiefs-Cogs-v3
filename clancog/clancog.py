@@ -36,7 +36,6 @@ class ClanCog(commands.Cog):
         #await ctx.send_interactive(pagify(war_data))
         #for item in war_data.keys():
         #    await ctx.send(item)
-        for item in war_data.items():
-            if item[0] == 'clans':
-                for clan in item:
-                    await ctx.send(clan[0])
+        for data in war_data['clans']:
+            for clan in data[0]:
+                await ctx.send(clan['name'])
