@@ -32,7 +32,7 @@ class ClanCog(commands.Cog):
         
         war_url = f"https://api.clashroyale.com/v1/clans/%23{tag.strip('#')}/currentriverrace"
         war_req = urllib.request.Request(war_url, None, {"Authorization": "Bearer %s" % self.token})
-        war_data = json.loads(urllib.request.urlopen(war_req)).read().decode('utf-8')
+        war_data = json.loads((urllib.request.urlopen(war_req)).read().decode('utf-8'))
         #await ctx.send_interactive(pagify(war_data))
         for item in war_data.items():
             await ctx.send(item)
