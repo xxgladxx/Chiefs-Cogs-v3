@@ -38,6 +38,4 @@ class ClanCog(commands.Cog):
         #    await ctx.send(item)
         for key in war_data.items():
             for clans in key['clans']:
-                for clan in dict(clans):
-                    await ctx.send(clan['name'], clan['tag'])
-                
+                await ctx.send('true')
