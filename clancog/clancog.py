@@ -10,7 +10,7 @@ class ClanCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.config = Config.get_conf(self, identifier=82998018)
-        member = {"tag" : None, "name" : None, "donations" : None, "cwfame" : None}
+        member = {"tag" : None, "name" : None}
         self.config.register_user(**member)
     
     async def token_init(self):
@@ -40,3 +40,12 @@ class ClanCog(commands.Cog):
            await ctx.send(f"{data['name']}, {data['tag']}")
 
         await ctx.send(war_data['periodType'])
+    
+    @checks.is_owner()
+    @commands.command()
+    async def s(self, ctx, tag: str):
+        if tag is None:
+            return await ctx.send("?")
+        else:
+            await self.config.user(ctx.author).tag.set(tag)
+            await self.config.user(ctx.author).name.set(ctx.author.name)
