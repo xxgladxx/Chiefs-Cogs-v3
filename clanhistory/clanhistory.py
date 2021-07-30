@@ -36,6 +36,7 @@ class ClashRoyaleHistory(commands.Cog):
     @checks.admin()
     @commands.command(aliases = ['ch'])
     async def clanhistory(self, ctx, member: discord.Member = None, account: int = 1):
+     
         if member is None:
             member = ctx.author
         try:
@@ -46,6 +47,7 @@ class ClashRoyaleHistory(commands.Cog):
                                       " use !accounts to see the accounts you have saved")
         except Exception as e:
             return await ctx.send(e) 
+        await ctx.send("Please wait...")
         profiletag = profiletag.strip('#')    
         url = f'https://clashratings.com/cr/player/{profiletag}'
         result = requests.get(url)
