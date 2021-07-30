@@ -59,4 +59,4 @@ class ClashRoyaleHistory(commands.Cog):
             await self.formatter(div.text)
             output = f'{number}. {output}\n'
             number = number + 1
-        await ctx.send('```\n{output}\n```')
+        await ctx.send(f'```\n{output}\n```')
