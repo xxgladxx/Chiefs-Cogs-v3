@@ -30,7 +30,7 @@ class ClashRoyaleHistory(commands.Cog):
             pos = me
         date = text[:-10]
         text = text.replace(date, "")
-        self.new_data = f'{date}\n• {text}\n• {pos}'
+        self.new_data = f'{date}\n\t•{text}\n\t•{pos}'
 
         
     @checks.admin()
