@@ -57,8 +57,11 @@ class ClashRoyaleHistory(commands.Cog):
         divs = soup.find_all("div", {"class": "playerClanHistoryResults"})
         output = ""
         number = 1
-        for div in divs:
-            await self.formatter(div.text)
-            output = f'{number}. {output}\n'
-            number = number + 1
-        await ctx.send(f'```\n{output}\n```')
+        if divs is not None:
+            for div in divs:
+                await self.formatter(div.text)
+                output = f'{number}. {output}\n'
+                number = number + 1
+                await ctx.send(f'```\n{output}\n```')
+        else:
+            await ctx.send("Could not fetch the clan history of this user.")
