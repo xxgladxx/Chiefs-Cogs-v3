@@ -30,7 +30,7 @@ class ClashRoyaleHistory(commands.Cog):
             pos = me
         date = text[:-10]
         text = text.replace(date, "")
-        self.new_data = f'{text}\n{date}\n{pos}'
+        self.new_data = f'{date}\n• {text}\n• {pos}'
 
         
     @checks.admin()
@@ -46,7 +46,8 @@ class ClashRoyaleHistory(commands.Cog):
                                       " use !accounts to see the accounts you have saved")
         except Exception as e:
             return await ctx.send(e) 
-        profiletag = profiletag.strip('#')    
+        profiletag = profiletag.strip('#')
+        await ctx.send("Please wait...")    
         url = f'https://clashratings.com/cr/player/{profiletag}'
         result = requests.get(url)
         data = result.content.decode('utf-8')
