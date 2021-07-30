@@ -57,10 +57,9 @@ class ClashRoyaleHistory(commands.Cog):
         number = 1
         if divs is not None:
             for div in divs:
-                await ctx.send(div.text)
-                # await self.formatter(div.text)
-                # output = f'{number}. {output}\n'
-                # number = number + 1
-                # await ctx.send(f'```\n{output}\n```')
+                await self.formatter(str(div.text))
+                output = f'{output}\n{number}. {self.new_data}'
+                number = number + 1
+            await ctx.send(f'```\n{output}\n```')
         else:
             await ctx.send("Could not fetch the clan history of this user.")
