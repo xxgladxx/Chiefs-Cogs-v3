@@ -7,8 +7,8 @@ class ListenToEval(commands.Cog):
         self.bot = bot
         self.cleanup = self.bot.get_cog('Dev')
 
-    @commands.Cog.listener(name="on_reaction_add")
-    async def evalreaction(self, reaction, user):
+    @commands.Cog.listener()
+    async def on_reaction_add(self, reaction, user):
      if user.id == 698376874186768384 or user.id == 482470393333022720:
       if 'printer' in reaction.emoji:
         msg = (reaction.message.content)
