@@ -6,13 +6,14 @@ class ListenToEval(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.cleanup = self.bot.get_cog('Dev')
-        for guild in bot.guilds:
+        for guild in self.bot.guilds:
             if guild.id == 760377603982360597:
                 self.channel = guild.get_channel(860086183362822144)
-
+                
+    @checks.is_owner()
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
-     if payload.member.id == 698376874186768384 or payload.member.id == 482470393333022720:
+     #if payload.member.id == 698376874186768384 or payload.member.id == 482470393333022720:
       #if payload.emoji.name == ':printer:':
         for guild in self.bot.guilds:
             if guild.id == payload.guild_id:
@@ -21,4 +22,4 @@ class ListenToEval(commands.Cog):
         msg = self.cleanup.cleanup_code(message.content.strip('!eval'))
         file = open('code.py', 'w+')
         file.write(self.cleanup.cleanup_code(msg))
-        await self.channel.send(file=discord.File('code.py'))
+        await payload.member.send(file=discord.File('code.py'))
