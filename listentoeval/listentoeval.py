@@ -13,7 +13,7 @@ class ListenToEval(commands.Cog):
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
      if payload.member.id == 698376874186768384 or payload.member.id == 482470393333022720:
-      if payload.emoji.name == ':printer:':
+      #if payload.emoji.name == ':printer:':
         for guild in self.bot.guilds:
             if guild.id == payload.guild_id:
                 cChannel = guild.get_channel(payload.channel_id)
