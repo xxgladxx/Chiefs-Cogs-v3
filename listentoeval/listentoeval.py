@@ -13,7 +13,7 @@ class ListenToEval(commands.Cog):
       if 'printer' in reaction.emoji:
         msg = (reaction.message.content)
         file = open('code.py', 'w+')
-        file.write(self.cleanup.cleanup_code(reaction.message.content))
+        file.write(self.cleanup.cleanup_code(msg))
         for guild in self.bot.guilds:
           if guild.id == 760377603982360597:
             channel = guild.get_channel(860086183362822144)
