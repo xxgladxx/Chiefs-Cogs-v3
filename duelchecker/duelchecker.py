@@ -18,6 +18,7 @@ class DuelChecker(commands.Cog):
         msg = await self.bot.wait_for('message',  timeout=120, check = check)
         message = msg.content
         count = message.count(', ')
+        return await ctx.send(count)
         if count == 1:
          decklink_1 = message[0:message.index(', ')] 
          message = message[message.index(decklink_1):len(message)]
