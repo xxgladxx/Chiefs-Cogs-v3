@@ -42,11 +42,11 @@ class DuelChecker(commands.Cog):
             if card in str(keys_2):# or card in str(keys_3):
                 x1 = x1 + card
                 await ctx.send(f":warning:**{card}** has been repeated!")
-        for iter in range(0, len(keys_2)):
-            card = keys_2[iter]
-            if card in str(keys_3):
-                x2 = x2 + card
-                await ctx.send(f":warning:**{card}** has been repeated!")        
+        # for iter in range(0, len(keys_2)):
+        #     card = keys_2[iter]
+        #     if card in str(keys_3):
+        #         x2 = x2 + card
+        #         await ctx.send(f":warning:**{card}** has been repeated!")        
         
         if len(x1) and len(x2) == 0:
             return await ctx.send("**No card** has been repeated!:partying_face:")
