@@ -1,5 +1,4 @@
 import discord
-from discord.enums import RelationshipType
 from discord.ext.commands.core import check
 from redbot.core import commands
 
@@ -40,7 +39,7 @@ class DuelChecker(commands.Cog):
              output = ""
              for i in range(0, len(repeated)):
                  output = f"{output}\n{repeated[i]}"
-             await ctx.send(f"Cards repeated include:\n{output}")  
+             await ctx.send(f"Cards repeated include:\n```{output}```")  
         
         #To check repetition for 3 decks
         elif count == 2:
@@ -69,7 +68,7 @@ class DuelChecker(commands.Cog):
              output = ""
              for i in range(0, len(repeated)):
                  output = f"{output}\n{repeated[i]}"
-             await ctx.send(f"Cards repeated include:\n{output}")       
+             await ctx.send(f"Cards repeated include:\n```{output}```")       
 
 
 
