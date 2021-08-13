@@ -36,7 +36,7 @@ class DuelChecker(commands.Cog):
             return await ctx.send("Try again with 2 or 3 deck links.")
             
 
-        x1, x2 = "", ""
+        x1, x2 = "0", "0"
         for iter in range(0, len(keys_1)):
             card = keys_1[iter]
             if card in str(keys_2):# or card in str(keys_3):
@@ -48,6 +48,6 @@ class DuelChecker(commands.Cog):
         #         x2 = x2 + card
         #         await ctx.send(f":warning:**{card}** has been repeated!")        
         
-        if len(x1) and len(x2) == 0:
+        if len(x1) == 1 and len(x2) == 1:
             return await ctx.send("**No card** has been repeated!:partying_face:")
 
