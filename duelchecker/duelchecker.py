@@ -38,8 +38,8 @@ class DuelChecker(commands.Cog):
         #To check repetition for 3 decks
         elif count == 2:
          decklink_1 = message[0:message.index(', ')] 
-         message = message.replace(decklink_1, '')
-         decklink_2 = message[0:message.index(', ')]
+         message = message[message.index(decklink_1)]
+         decklink_2 = message[:message.index(', ')]
          decklink_3 = message.replace(decklink_2, '')  
          keys_1 = await self.deck.decklink_to_cards(decklink_1)
          keys_2 = await self.deck.decklink_to_cards(decklink_2)
