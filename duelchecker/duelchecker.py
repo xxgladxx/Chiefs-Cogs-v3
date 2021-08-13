@@ -28,11 +28,11 @@ class DuelChecker(commands.Cog):
         for iter in range(0, len(keys_1)):
             card = keys_1[iter]
             if card in str(keys_2) or card in str(keys_3):
-                msgX1 = await ctx.send(":warning:**{card} has been repeated!**:warning:")
+                msgX1 = await ctx.send(f":warning:**{card}** has been repeated!:warning:")
         for iter in range(0, len(keys_2)):
             card = keys_2[iter]
             if card in str(keys_3):
-                msgX2 =await ctx.send(":warning:**{card} has been repeated!**:warning:")        
+                msgX2 =await ctx.send(f":warning:**{card}** has been repeated!:warning:")        
         
         if msgX1 is not None and msgX2 is not None:
-            return await ctx.send("No card has been repeated!:partying_face:")
+            return await ctx.send("**No card** has been repeated!:partying_face:")
