@@ -25,7 +25,7 @@ class DuelChecker(commands.Cog):
         keys_1 = await self.deck.decklink_to_cards(decklink_1)
         keys_2 = await self.deck.decklink_to_cards(decklink_2)
         keys_3 = await self.deck.decklink_to_cards(decklink_3)
-        x1, x2 = ""
+        x1, x2 = "", ""
 
         for iter in range(0, len(keys_1)):
             card = keys_1[iter]
