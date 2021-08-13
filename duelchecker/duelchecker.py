@@ -17,7 +17,8 @@ class DuelChecker(commands.Cog):
             
         msg = await self.bot.wait_for('message',  timeout=120, check = check)
         message = msg.content
-        count = int(message.count(', '))
+        count = (message.count(', '))
+        return await ctx.send(type(count))
         if count == 1:
          decklink_1 = message[0:message.index(', ')] 
          message = message[message.index(decklink_1):len(message)]
@@ -50,3 +51,4 @@ class DuelChecker(commands.Cog):
         
         if len(x1) and len(x2) == 0:
             return await ctx.send("**No card** has been repeated!:partying_face:")
+
