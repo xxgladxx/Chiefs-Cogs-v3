@@ -17,10 +17,10 @@ class DuelChecker(commands.Cog):
             
         msg = await self.bot.wait_for('message',  timeout=120, check = check)
         message = msg.content
-        decklink_1 = message[0, message.index(', ')] 
-        message = message[message.index(decklink_1), len(message)]
+        decklink_1 = message[0:message.index(', ')] 
+        message = message[message.index(decklink_1):len(message)]
         decklink_2 = message[0, message.index(', ')]
-        message = message[message.index(decklink_2), len(message)]
+        message = message[message.index(decklink_2):len(message)]
         decklink_3 = message
         keys_1 = self.deck.decklink_to_cards(decklink_1)
         keys_2 = self.deck.decklink_to_cards(decklink_2)
