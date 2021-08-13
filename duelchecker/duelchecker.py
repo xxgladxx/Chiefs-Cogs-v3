@@ -18,12 +18,24 @@ class DuelChecker(commands.Cog):
         msg = await self.bot.wait_for('message',  timeout=120, check = check)
         message = msg.content
         count = (message.count(', '))
+
+        #To check repetition for 2 decks
         if count == 1:
          decklink_1 = message[0:message.index(', ')] 
          message = message.replace(decklink_1, '')
          decklink_2 = message
          keys_1 = await self.deck.decklink_to_cards(decklink_1)
          keys_2 = await self.deck.decklink_to_cards(decklink_2)
+         x1, x2 = "0", "0"
+         for iter in range(0, len(keys_1)):
+            card = keys_1[iter]
+            if card in str(keys_2):
+                x1 = x1 + card
+                await ctx.send(f":warning:**{card}** has been repeated!") 
+        if len(x1) == 1 and len(x2) == 1:
+            return await ctx.send("**No card** has been repeated!:partying_face:") 
+        
+        #To check repetition for 3 decks
         elif count == 2:
          decklink_1 = message[0:message.index(', ')] 
          message = message.replace(decklink_1, '')
@@ -31,23 +43,12 @@ class DuelChecker(commands.Cog):
          decklink_3 = message.replace(decklink_2, '')  
          keys_1 = await self.deck.decklink_to_cards(decklink_1)
          keys_2 = await self.deck.decklink_to_cards(decklink_2)
-         keys_3 = await self.deck.decklink_to_cards(decklink_3)         
+         keys_3 = await self.deck.decklink_to_cards(decklink_3)  
+         await ctx.send(keys_1)
+         await ctx.send(keys_2)
+         await ctx.send(keys_3)
+
+
         else: 
             return await ctx.send("Try again with 2 or 3 deck links.")
             
-
-        x1, x2 = "0", "0"
-        for iter in range(0, len(keys_1)):
-            card = keys_1[iter]
-            if card in str(keys_2):# or card in str(keys_3):
-                x1 = x1 + card
-                await ctx.send(f":warning:**{card}** has been repeated!")
-        # for iter in range(0, len(keys_2)):
-        #     card = keys_2[iter]
-        #     if card in str(keys_3):
-        #         x2 = x2 + card
-        #         await ctx.send(f":warning:**{card}** has been repeated!")        
-        
-        if len(x1) == 1 and len(x2) == 1:
-            return await ctx.send("**No card** has been repeated!:partying_face:")
-
