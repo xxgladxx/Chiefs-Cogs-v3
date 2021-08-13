@@ -25,16 +25,18 @@ class DuelChecker(commands.Cog):
         keys_1 = await self.deck.decklink_to_cards(decklink_1)
         keys_2 = await self.deck.decklink_to_cards(decklink_2)
         keys_3 = await self.deck.decklink_to_cards(decklink_3)
-        msgX1, msgX2 = None
+        x1, x2 = ""
 
         for iter in range(0, len(keys_1)):
             card = keys_1[iter]
             if card in str(keys_2) or card in str(keys_3):
+                x1 = x1 + card
                 msgX1 = await ctx.send(f":warning:**{card}** has been repeated!")
         for iter in range(0, len(keys_2)):
             card = keys_2[iter]
             if card in str(keys_3):
+                x2 = x2 + card
                 msgX2 =await ctx.send(f":warning:**{card}** has been repeated!")        
         
-        if msgX1 is None and msgX2 is None:
+        if len(x1) and len(x2) == 0:
             return await ctx.send("**No card** has been repeated!:partying_face:")
