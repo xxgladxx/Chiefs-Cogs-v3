@@ -20,8 +20,8 @@ class DuelChecker(commands.Cog):
         count = (message.count(', '))
         if count == 1:
          decklink_1 = message[0:message.index(', ')] 
-         message = message[message.index(decklink_1):len(message)]
-         decklink_2 = message[0:len(message)]
+         message = message.replace(decklink_1, '')
+         decklink_2 = message
          keys_1 = await self.deck.decklink_to_cards(decklink_1)
          keys_2 = await self.deck.decklink_to_cards(decklink_2)
          await ctx.send(keys_1)
