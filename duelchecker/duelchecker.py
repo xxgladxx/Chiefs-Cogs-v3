@@ -32,7 +32,7 @@ class DuelChecker(commands.Cog):
             if card in str(keys_2):
                 x1 = x1 + card
                 await ctx.send(f":warning:**{card}** has been repeated!") 
-        if len(x1) == 1 and len(x2) == 1:
+         if len(x1) == 1 and len(x2) == 1:
             return await ctx.send("**No card** has been repeated!:partying_face:") 
         
         #To check repetition for 3 decks
