@@ -34,5 +34,5 @@ class DuelChecker(commands.Cog):
             if card in str(keys_3):
                 msgX2 =await ctx.send(f":warning:**{card}** has been repeated!:warning:")        
         
-        if msgX1 is not None and msgX2 is not None:
+        if msgX1 is None and msgX2 is None:
             return await ctx.send("**No card** has been repeated!:partying_face:")
