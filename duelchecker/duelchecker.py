@@ -24,14 +24,11 @@ class DuelChecker(commands.Cog):
          decklink_2 = message
          keys_1 = await self.deck.decklink_to_cards(decklink_1)
          keys_2 = await self.deck.decklink_to_cards(decklink_2)
-         await ctx.send(keys_1)
-         await ctx.send(keys_2)
-         return
         elif count == 2:
          decklink_1 = message[0:message.index(', ')] 
-         message = message[message.index(decklink_1):len(message)]
-         decklink_2 = message[0:message.index(', ')]
-         decklink_3 = message[message.index(decklink_2):len(message)]   
+         message = message.replace(decklink_1, '')
+         decklink_2 = message[0, ', ']
+         decklink_3 = message.replace(decklink_2, '')  
          keys_1 = await self.deck.decklink_to_cards(decklink_1)
          keys_2 = await self.deck.decklink_to_cards(decklink_2)
          keys_3 = await self.deck.decklink_to_cards(decklink_3)         
@@ -42,7 +39,7 @@ class DuelChecker(commands.Cog):
         x1, x2 = "", ""
         for iter in range(0, len(keys_1)):
             card = keys_1[iter]
-            if card in str(keys_2) or card in str(keys_3):
+            if card in str(keys_2):# or card in str(keys_3):
                 x1 = x1 + card
                 await ctx.send(f":warning:**{card}** has been repeated!")
         for iter in range(0, len(keys_2)):
