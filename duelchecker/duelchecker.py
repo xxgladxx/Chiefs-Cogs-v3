@@ -19,7 +19,7 @@ class DuelChecker(commands.Cog):
         message = msg.content
         decklink_1 = message[0:message.index(', ')] 
         message = message[message.index(decklink_1):len(message)]
-        decklink_2 = message[0, message.index(', ')]
+        decklink_2 = message[0:message.index(', ')]
         message = message[message.index(decklink_2):len(message)]
         decklink_3 = message
         keys_1 = self.deck.decklink_to_cards(decklink_1)
