@@ -24,6 +24,9 @@ class DuelChecker(commands.Cog):
          decklink_2 = message[0:len(message)]
          keys_1 = await self.deck.decklink_to_cards(decklink_1)
          keys_2 = await self.deck.decklink_to_cards(decklink_2)
+         await ctx.send(keys_1)
+         await ctx.send(keys_2)
+         return
         elif count == 2:
          decklink_1 = message[0:message.index(', ')] 
          message = message[message.index(decklink_1):len(message)]
