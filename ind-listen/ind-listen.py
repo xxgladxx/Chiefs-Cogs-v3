@@ -2,6 +2,9 @@ from redbot.core import commands
 
 class IndListen(commands.Cog):
   
+  def __init__(self,bot):
+    self.bot = bot
+    
   @commands.Cog.listener()
   async def on_member_join(ctx, member):
    channel = ctx.guild.get_channel(876900213938356247)
