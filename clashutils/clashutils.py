@@ -87,8 +87,10 @@ class ClashUtils(commands.Cog):
                 spaces = ""
             header = f"Sno.  | Card Name | \t|U%|\t|W%|"
             await ctx.send(f"```{header}\n{result}```")
-            await ctx.send(f"```{result1}```")
-            await ctx.send(f"```{result2}```")
+            if len(result1) is not 0:
+             await ctx.send(f"```{result1}```")
+            if len(result2) is not 0:
+             await ctx.send(f"```{result2}```")
             #await ctx.invoke(self.bot.get_command('margin'))
             await ctx.tick()
 
