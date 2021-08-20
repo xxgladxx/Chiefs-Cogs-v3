@@ -32,11 +32,13 @@ class ClashUtils(commands.Cog):
 
     @commands.command(name = 'analytics', aliases = ['analyze','track'])
     async def _analytics(self, ctx, tag: str, time: str):
-        """Get all Card Usage% and Win% of any player"""
+        """Get all Card Usage% and Win% of any player
+        tag = clash royale player tag
+        time = time interval to track data. Available options: 1, 3, 7, 14"""
         if len(time) == 0:
             return await ctx.send("```Please also tell the time interval for analytics while using the command.\nAvailable options: 1, 3, 7, 14.```")
         elif time != '1' or '3' or '7' or '14':
-            return await ctx.send("```Invalid value for time interval.\nAvailable options: 1, 3, 7, 14.```")
+            return await ctx.send("```Invalid value for time interval.\n.```")
 
         tag = self.strip(tag)
         url = f"{self.rplayer_url}{tag}/analytics?time={time}d"
