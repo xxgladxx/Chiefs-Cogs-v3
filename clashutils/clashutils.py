@@ -13,11 +13,8 @@ credits = 'Gladiator#2979'
 class ClashUtils(commands.Cog):
     """Set of some helpful clash royale utilities."""
 
-    async def __init__(self, bot):
+    def __init__(self, bot):
         self.bot = bot
-        token = await self.bot.get_shared_api_tokens("clashroyale")
-        token = token["api_key"]
-        self.clash =  clashroyale.official_api.Client(token=token['token'], is_async=True, url="https://proxy.royaleapi.dev/v1")
         self.headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
         self.rplayer_url ='https://royaleapi.com/player/'
         self.deck = bot.get_cog("Deck")
@@ -27,6 +24,11 @@ class ClashUtils(commands.Cog):
         tag = tag.replace('O', 0)
         tag = tag.upper()
         return tag
+    
+    async def initialize(self):
+        token = await self.bot.get_shared_api_tokens("clashroyale")
+        token = token["api_key"]
+        self.clash =  clashroyale.official_api.Client(token=token['token'], is_async=True, url="https://proxy.royaleapi.dev/v1")
 
     @commands.command(name = 'analytics', aliases = ['analyze','track'])
     async def _analytics(self, ctx, tag: str, time: str):
