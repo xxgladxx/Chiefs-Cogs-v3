@@ -37,8 +37,8 @@ class ClashUtils(commands.Cog):
         time = time interval to track data. Available options: 1, 3, 7, 14"""
         if len(time) == 0:
             return await ctx.send("```Please also tell the time interval for analytics while using the command.\nAvailable options: 1, 3, 7, 14.```")
-        elif time != '1' or '3' or '7' or '14':
-            return await ctx.send("```Invalid value for time interval.\n.```")
+        elif time != '1' or time!='3' or time!='7' or time!='14':
+            return await ctx.send("```Invalid value for time interval.\nAvailable options: 1, 3, 7, 14```")
 
         tag = self.strip(tag)
         url = f"{self.rplayer_url}{tag}/analytics?time={time}d"
