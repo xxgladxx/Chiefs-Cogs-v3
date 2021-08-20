@@ -33,7 +33,7 @@ class ClashUtils(commands.Cog):
     @commands.command(name = 'analytics', aliases = ['analyze','track'])
     async def _analytics(self, ctx, tag: str, time: str):
         """Get all Card Usage% and Win% of any player"""
-        if time is "":
+        if time is None:
             return await ctx.send("```Please also tell the time interval for analytics while using the command.\nAvailable options: 1, 3, 7, 14.```")
         elif time != '1' or '3' or '7' or '14':
             return await ctx.send("```Invalid value for time interval.\nAvailable options: 1, 3, 7, 14.```")
@@ -88,9 +88,10 @@ class ClashUtils(commands.Cog):
         await ctx.send(f"```{result1}```")
         await ctx.send(f"```{result2}```")
         await ctx.invoke(self.bot.get_command('margin'))
+        await ctx.tick()
 
     @commands.command(name='recentdecks', aliases=['rd'])
-    async def _recentdecks(self, ctx, tag:str = ""):
+    async def _recentdecks(self, ctx, tag:str):
         """Shows the recent decks used for a player"""
         tag = self.strip(tag)
         url = f"{self.rplayer_url}/{tag}/decks"
