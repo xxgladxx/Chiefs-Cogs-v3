@@ -90,7 +90,7 @@ class ClashUtils(commands.Cog):
         await ctx.invoke(self.bot.get_command('margin'))
 
     @commands.command(name='recentdecks', aliases=['rd'])
-    async def _recentdecks(self, ctx, tag:str):
+    async def _recentdecks(self, ctx, tag:str = ""):
         """Shows the recent decks used for a player"""
         tag = self.strip(tag)
         url = f"{self.rplayer_url}/{tag}/decks"
