@@ -21,7 +21,7 @@ class ClashUtils(commands.Cog):
 
     def strip(self, tag: str):
         tag = tag.strip('#')
-        tag = tag.replace('O', 0)
+        tag = tag.replace('O', '0')
         tag = tag.upper()
         return tag
     
