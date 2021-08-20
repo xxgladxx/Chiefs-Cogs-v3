@@ -1,16 +1,16 @@
-    #importing modules
-    import discord
-    import clashroyale
-    from redbot.core import checks, commands
-    import urllib.request
-    import requests
-    from bs4 import BeautifulSoup
-    import asyncio
+#importing modules
+import discord
+import clashroyale
+from redbot.core import checks, commands
+import urllib.request
+import requests
+from bs4 import BeautifulSoup
+import asyncio
 
-    credits = 'Gladiator#2979'
+credits = 'Gladiator#2979'
 
     #main class
-    class ClashUtils(commands.Cog):
+class ClashUtils(commands.Cog):
         """Set of some helpful clash royale utilities."""
 
         def __init__(self, bot):
