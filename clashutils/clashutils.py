@@ -103,6 +103,7 @@ class ClashUtils(commands.Cog):
             url = deck['href']
             await ctx.send(url)
             await asyncio.sleep(2.5)  
+        await ctx.tick()
 
     @commands.command(name='deckimage', aliases=['img'])
     async def _deckimage(self, ctx, url:str):
