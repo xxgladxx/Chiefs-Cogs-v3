@@ -56,16 +56,16 @@ class ClashUtils(commands.Cog):
         for us in useP:
             if '%' in us.text:
                 ut = us.text.replace('\n', '')
-            if len(ut) == 2:
-                ut=f"0{ut}"
-            if counter1 %2 == 0:
-                output = f"{ut}"
-                counter1 = counter1+1
-            elif counter1 % 2 != 0:
-                output = f"{output}\t{ut}"
-                all_rates.append(output)
-                output = ""
-                counter1 = counter1+1
+                if len(ut) == 2:
+                    ut=f"0{ut}"
+                if counter1 %2 == 0:
+                    output = f"{ut}"
+                    counter1 = counter1+1
+                elif counter1 % 2 != 0:
+                    output = f"{output}\t{ut}"
+                    all_rates.append(output)
+                    output = ""
+                    counter1 = counter1+1
         result = ""
         result1= ""
         result2 = ""
@@ -89,7 +89,7 @@ class ClashUtils(commands.Cog):
         await ctx.send(f"```{header}\n{result}```")
         await ctx.send(f"```{result1}```")
         await ctx.send(f"```{result2}```")
-        await ctx.invoke(self.bot.get_command('margin'))
+        #await ctx.invoke(self.bot.get_command('margin'))
         await ctx.tick()
 
     @commands.command(name='recentdecks', aliases=['rd'])
