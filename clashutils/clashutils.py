@@ -16,7 +16,7 @@ class ClashUtils(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
-        self.rplayer_url ='https://royaleapi.com/player/'
+        self.rplayer_url ='https://royaleapi.com/player'
         self.deck = bot.get_cog("Deck")
 
     def strip(self, tag: str):
