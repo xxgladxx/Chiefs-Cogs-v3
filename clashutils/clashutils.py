@@ -35,10 +35,9 @@ class ClashUtils(commands.Cog):
         """Get all Card Usage% and Win% of any player
         tag = clash royale player tag
         time = time interval to track data. Available options: 1, 3, 7, 14"""
-        return await ctx.send(type(time))
         if len(time) == 0:
             return await ctx.send("```Please also tell the time interval for analytics while using the command.\nAvailable options: 1, 3, 7, 14.```")
-        elif time != '1' or time!='3' or time!='7' or time!='14':
+        elif time not in ['1', '3', '7', '14']:
             return await ctx.send("```Invalid value for time interval.\nAvailable options: 1, 3, 7, 14```")
 
         tag = self.strip(tag)
