@@ -41,7 +41,7 @@
                 return await ctx.send("```Invalid value for time interval.\nAvailable options: 1, 3, 7, 14```")
 
             tag = self.strip(tag)
-            url = f"{self.rplayer_url}{tag}/analytics?time={time}d"
+            url = f"{self.rplayer_url}/{tag}/analytics?time={time}d"
             result = requests.get(url, headers=self.headers)
             data = result.content.decode('utf-8')
             soup = BeautifulSoup(data)
