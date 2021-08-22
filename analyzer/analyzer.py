@@ -137,6 +137,7 @@ class Analyzer(commands.Cog):
                     count = self.all_decks.count(str(i))
                     await self.image(ctx, i, count)
                     await asyncio.sleep(1)
+        pageNumber = pageNumber+1
 
 
             
