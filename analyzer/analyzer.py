@@ -105,19 +105,29 @@ class Analyzer(commands.Cog):
         counter = 2
         s = bs(html)
         listX = s.find_all('a', class_='button_popup item', href = True)
+        if len[listX] == 0:
+            return await ctx.send("No data was found")
+        all_decks = []
         for deck in listX:
             if counter%2==0:
              counter = counter+1
              url = deck['href']
-             await self.image(ctx, url)
-             await asyncio.sleep(1)
+             all_decks.append(url)
             else:
              counter = counter+1
              continue
+        all_decks_without_repetition = set(all_decks)
+        for deck in all_decks_without_repetition:
+            count = all_decks.count(str(deck))
+            await self.image(ctx, url, count)
+            await asyncio.sleep(1)
+            
 
-    async def image(self, ctx, url:str):
+        
+
+    async def image(self, ctx, url:str, count: int):
         deck = self.bot.get_cog("Deck")
-        await deck.only_deck_image(ctx, url)
+        await deck.only_deck_image(ctx, url, count)
 
     @commands.command()
     async def analyze(self, ctx, tag: str, battletype: str):
@@ -130,8 +140,16 @@ class Analyzer(commands.Cog):
         if len(bID) == 0:
             return await ctx.send(f'{ctx.author.mention} That is an invalid option.\nAvailable options: gc, cc, ladder, clan1v1, 2v2, friendly, gt')
         else:
-            self.driver.get(url=f'https://royaleapi.com/player/{tag}/battles/history?battle_type={bID}')
-            await self.txt(ctx, self.driver.page_source)
+            try:
+             self.driver.get(url=f'https://royaleapi.com/player/{tag}/battles/history?battle_type={bID}')
+             await self.txt(ctx, self.driver.page_source)
+            except AttributeError:
+                if self.channel is None:
+                 self.__init__(self.bot)
+                await ctx.send("Restarting analyzer..")
+                await self.startdriver(ctx)
+                await self.analyze(ctx, tag, battletype)
+
 
     @commands.command()
     async def startdriver(self, ctx):
@@ -141,3 +159,4 @@ class Analyzer(commands.Cog):
             await self.login()
             await self.authorize()
             await ctx.tick()
+    
