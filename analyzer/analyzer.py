@@ -21,6 +21,7 @@ class Analyzer(commands.Cog):
                 self.channel = guild.get_channel(878968502365618186)
         self.cmd = self.bot.get_command('image')
         self.all_decks = []
+        self.counter = 0
     
     def browser(self):
         chrome_options = Options()
@@ -118,9 +119,8 @@ class Analyzer(commands.Cog):
         if len(self.all_decks) == 0:
             return await ctx.send("No data was found")
 
-        for pageNumber in range(0, 10):
-         try:
-             await ctx.send(f"Analyzer's current progress: {str((pageNumber+1*10))}")
+        try:
+             await ctx.send(f"Analyzer's current progress: {str((self.counter*10))}")
              nextButton = self.driver.find_element_by_xpath('//*[@id="page_content"]/div[7]/div/a[3]')
              nextButton.send_keys(Keys.ENTER)
              time.sleep(1)
@@ -128,16 +128,14 @@ class Analyzer(commands.Cog):
                 await self.txt(ctx, self.driver.page_source)
              except Exception as e:
                 await self.channel.send(e)
-         except Exception as ex:
+        except Exception as ex:
              await self.channel.send(ex)
-             continue
-         if pageNumber == 10:
-                all_decks_without_repetition = set(self.all_decks)
-                for i in all_decks_without_repetition:
+             all_decks_without_repetition = set(self.all_decks)
+             for i in all_decks_without_repetition:
                     count = self.all_decks.count(str(i))
                     await self.image(ctx, i, count)
                     await asyncio.sleep(1)
-        pageNumber = pageNumber+1
+        self.counter = self.counter + 1
 
 
             
@@ -182,3 +180,4 @@ class Analyzer(commands.Cog):
     
     def clear_old_cache(self):
         self.all_decks.clear()
+        self.counter = 0
