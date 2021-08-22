@@ -120,12 +120,12 @@ class Analyzer(commands.Cog):
             return await ctx.send("No data was found")
 
         self.counter = self.counter + 1
-        if self.counter == 11:
+        if self.counter == 10:
              all_decks_without_repetition = set(self.all_decks)
              for i in all_decks_without_repetition:
                     count = self.all_decks.count(str(i))
                     await self.image(ctx, i, count)
-                    await asyncio.sleep(1)
+
                     
         if self.counter == 1:
             self.message = await ctx.send(f"Analyzer's current progress: {str((self.counter*10))}")
