@@ -134,9 +134,9 @@ class Analyzer(commands.Cog):
 
     @commands.command()
     async def startdriver(self, ctx):
-            await ctx.tick()
+
             self.browser()
             await self.credentials()
             await self.login()
             await self.authorize()
-            await ctx.send("Started")
+            await ctx.tick()
