@@ -70,7 +70,7 @@ class Analyzer(commands.Cog):
         await self.channel.send(file=discord.File('step3.png'))
         return
 
-    async def getBattleID(self, ctx, name: str):
+    def getBattleID(self, ctx, name: str):
         if name.lower() == 'gc':
             return 'challenge-grand'
         elif name.lower() == 'cc':
@@ -134,9 +134,9 @@ class Analyzer(commands.Cog):
 
     @commands.command()
     async def startdriver(self, ctx):
-            await ctx.tick()
+
             self.browser()
             await self.credentials()
             await self.login()
             await self.authorize()
-            await ctx.send("Started")
+            await ctx.tick()
