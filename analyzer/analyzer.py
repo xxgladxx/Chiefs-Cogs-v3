@@ -133,15 +133,16 @@ class Analyzer(commands.Cog):
 
         def check(m):
             return m.channel == ctx.channel and m.author == ctx.author
-
+        await ctx.send("Show further results?")
         msg = await self.bot.wait_for('message', timeout=60, check = check)
         if msg.content.lower() == 'yes':
             nextButton = self.driver.find_element_by_xpath('//*[@id="page_content"]/div[7]/div/a[3]')
             nextButton.click()
+            time.sleep(2)
             try:
                 await self.txt(ctx, self.driver.page_source)
             except Exception as e:
-                return self.channel.send(e)
+                return await self.channel.send(e)
 
 
             
