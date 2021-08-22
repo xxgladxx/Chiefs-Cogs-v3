@@ -121,7 +121,8 @@ class Analyzer(commands.Cog):
 
     @commands.command()
     async def analyze(self, ctx, tag: str, battletype: str):
-        """Analyzer OP"""
+        """tag - Clash Royale Player Tag
+        battletype(options) - gc, cc, ladder, clan1v1, 2v2, friendly, gt"""
         tag = self.formatTag(tag=tag)
         if self.verifyTag(tag=tag) is False:
             return await ctx.send("Invalid tag")
