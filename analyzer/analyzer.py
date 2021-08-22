@@ -169,8 +169,7 @@ class Analyzer(commands.Cog):
              self.driver.get(url=f'https://royaleapi.com/player/{tag}/battles/history?battle_type={bID}')
              await self.txt(ctx, self.driver.page_source)
             except AttributeError:
-                if self.channel is None:
-                 self.__init__(self.bot)
+                self.__init__(self.bot)
                 await ctx.send("Restarting analyzer..")
                 await self.startdriver(ctx)
                 await self.analyze(ctx, tag, battletype)
