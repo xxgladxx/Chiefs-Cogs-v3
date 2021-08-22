@@ -86,7 +86,7 @@ class Analyzer(commands.Cog):
         elif name.lower() == 'gt':
             return 'global-tournament'       
         else:
-            return await ctx.send(f'{ctx.author.mention} That is an invalid option.\nAvailable options: gc, cc, ladder, clan1v1, 2v2, friendly, gt')   
+            return 'None'   
 
     def verifyTag(self, tag):
         """Check if a player's tag is valid"""
@@ -126,8 +126,11 @@ class Analyzer(commands.Cog):
         if self.verifyTag(tag=tag) is False:
             return await ctx.send("Invalid tag")
         battletype = self.getBattleID(ctx, battletype)
-        self.driver.get(url=f'https://royaleapi.com/player/{tag}/battles/history?battle_type={battletype}')
-        await self.txt(ctx, self.driver.page_source)
+        if battletype == 'None':
+            return await ctx.send(f'{ctx.author.mention} That is an invalid option.\nAvailable options: gc, cc, ladder, clan1v1, 2v2, friendly, gt')
+        else:
+            self.driver.get(url=f'https://royaleapi.com/player/{tag}/battles/history?battle_type={battletype}')
+            await self.txt(ctx, self.driver.page_source)
 
     @commands.command()
     async def startdriver(self, ctx):
