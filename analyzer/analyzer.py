@@ -29,11 +29,13 @@ class Analyzer(commands.Cog):
         chrome_options.add_argument(f"user-agent={user}")
         chrome_options.add_argument('window-size=1200x600')
         self.driver = Chrome(ChromeDriverManager().install(), options=chrome_options)
+        return
 
     async def credentials(self):
         creds = await self.bot.get_shared_api_tokens('tw_credentials')
         self.user = creds['un']
         self.password = creds['pw']
+        return
     
     async def login(self):
         self.driver.get(url='https://royaleapi.com/login/twitter?r=/player/2CG2RLUV/battles/history?battle_type=clanMate')
@@ -54,6 +56,7 @@ class Analyzer(commands.Cog):
         self.driver.get_screenshot_as_file('step2.png')
         await self.channel.send(file=discord.File('step2.png'))
         time.sleep(2)
+        return
     
     async def authorize(self):
         try:
@@ -65,6 +68,7 @@ class Analyzer(commands.Cog):
             await self.channel.send(e)
         self.driver.get_screenshot_as_file('step3.png')
         await self.channel.send(file=discord.File('step3.png'))
+        return
 
     async def getBattleID(self, ctx, name: str):
         if name.lower() == 'gc':
@@ -127,8 +131,9 @@ class Analyzer(commands.Cog):
 
     @commands.command()
     async def startdriver(self, ctx):
+            await ctx.tick()
             self.browser()
-            self.credentials()
-            self.login()
-            self.authorize()
+            await self.credentials()
+            await self.login()
+            await self.authorize()
             await ctx.send("Started")
