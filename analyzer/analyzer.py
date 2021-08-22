@@ -1,4 +1,5 @@
 from discord import message
+from discord.ext.commands.core import check
 import selenium
 from seleniumrequests import Chrome
 from selenium.webdriver.chrome.options import Options
@@ -129,6 +130,20 @@ class Analyzer(commands.Cog):
             count = all_decks.count(str(i))
             await self.image(ctx, i, count)
             await asyncio.sleep(1)
+
+        def check(m):
+            return m.channel == ctx.channel and m.author == ctx.author
+
+        msg = await self.bot.wait_for('message', timeout=60, check = check)
+        if msg.content.lower() == 'yes':
+            nextButton = self.driver.find_element_by_xpath('//*[@id="page_content"]/div[7]/div/a[3]')
+            nextButton.click()
+            try:
+                await self.txt(ctx, self.driver.page_source)
+            except Exception as e:
+                return self.channel.send(e)
+
+
             
 
         
