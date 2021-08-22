@@ -1,340 +1,185 @@
-from redbot.core import commands, bank, Config, checks
-from redbot.core.utils import predicates
-import discord
+from discord import message
+from discord.ext.commands.core import check
+import selenium
+from seleniumrequests import Chrome
+from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
+from bs4 import BeautifulSoup as bs
+import time
 import asyncio
 
-credit = "Bot by Glad"
+import discord
+from redbot.core import commands
 
-class UserEnd(Exception):
-    pass
-
-
-class CommandInUse(Exception):
-    pass
-
-
-class Shop(commands.Cog):
+class Analyzer(commands.Cog):
+    """Bunch of cool utilites"""
 
     def __init__(self, bot):
-        self.config = Config.get_conf(self, identifier=32539819	)
-
-        default_guild = {
-            'emoji_cost': 50000,
-            'cc_cost': 50000,
-            'rarecost': 60000,
-            'epiccost': 75000,
-            'legendarycost': 1000000,
-            'passroyale_cost': 10000000,
-            'nitroclassic_cost': 100000000,
-            'rareid': 822747159030923264,
-            'epicid': 823489853459005470,
-            'legendaryid': 823490684638986252,
-            'level100id': 618205748022738950,
-            'logchannel': 823491836365504513,
-
-        }
-
-        self.config.register_guild(**default_guild)
         self.bot = bot
-        self.cc_main = self.bot.get_cog('CustomCommands')
-        self.cc = self.bot.get_cog('CustomCommands').cc_create
-        self.prepare_args = self.bot.get_cog('CustomCommands').prepare_args
+        for guild in self.bot.guilds:
+            if guild.id == 875615868166475776:
+                self.channel = guild.get_channel(878968502365618186)
+        self.cmd = self.bot.get_command('image')
+    
+    def browser(self):
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.add_argument("--enable-javascript")
+        user = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
+        chrome_options.add_argument(f"user-agent={user}")
+        chrome_options.add_argument('window-size=1200x600')
+        self.driver = Chrome(ChromeDriverManager().install(), options=chrome_options)
+        return
 
-    async def buycc(self, ctx):
-        bot = self.bot
-
-        async def action_confirm(what, value):
-            await user.send('Do you confirm "!{}" as your {}?'.format(value, what))
-            # await user.send("Reply with YES for a confirmation. Anything else for NO")
-            pred = predicates.MessagePredicate.yes_or_no(ctx, dm_channel, user)
-            await bot.wait_for("message", check=pred)
-            return pred.result
-
-        await ctx.send("Please check your DM's...")
-        user = ctx.author
-        dm_channel = user.dm_channel
-        if dm_channel is None:
-            dm_channel = await user.create_dm()
-
-        # checks to see if the response is truly from the User DM's
-        def check(m):
-            return m.channel == dm_channel and m.author == user
-
+    async def credentials(self):
+        creds = await self.bot.get_shared_api_tokens('tw_credentials')
+        self.user = creds['un']
+        self.password = creds['pw']
+        return
+    
+    async def login(self):
+        self.driver.get(url='https://royaleapi.com/login/twitter?r=/player/2CG2RLUV/battles/history?battle_type=clanMate')
+        time.sleep(5)
+        self.driver.get_screenshot_as_file('step1.png')
+        await self.channel.send(file=discord.File('step1.png'))
+        email = self.driver.find_element_by_id('username_or_email')
+        password = self.driver.find_element_by_id('password')
+        login_button = self.driver.find_element_by_id('allow')
         try:
-            await user.send("We got a few questions on the custom command... "
-                            "\nType STOP to stop this and refund credits")
-            # Choosing the command name
-            confirmed = False
-            while not confirmed:
-                await user.send("What do you want the command to be (spaces will be automatically replaced with `_`)?")
-                cmd = await self.bot.wait_for('message', timeout=60, check=check)
-                final_command = cmd.content.replace(
-                    ' ', '_')  # Auto replace spaces
-                # Remove the prefix if they added one
-                final_command = final_command.strip('!/.')
-                if cmd.content.lower() == "stop":
-                    raise UserEnd
-                # Check if existing command exists
-                checker = await self.cc_main.config.guild(ctx.guild).commands.get_raw(final_command, default=None)
-                if final_command in (
-                        *self.bot.all_commands, *commands.RESERVED_COMMAND_NAMES, commands) or checker is not None:
-                    await user.send("There already exists a command with the same name.")
-                    continue
-                confirmed = await action_confirm("command", '!' + final_command)
-                user.send(confirmed)
-
-            # Choosing the command response
-            confirmed = False
-            while not confirmed:
-                await user.send("What do you want the command to say?")
-                rsp = await self.bot.wait_for('message', timeout=60, check=check)
-                if rsp.content.lower() == 'stop':
-                    raise UserEnd
-                final_response = rsp.content
-                confirmed = await action_confirm("commmand's response", rsp.content)
-
-
-        except asyncio.exceptions.TimeoutError:
-            await user.send("Timeout... your credits have been refunded")
-            return
-        except UserEnd:
-            await user.send("Stopped!")
-            return
-
-        # Creating the command
-        try:
-            await self.cc(ctx=ctx, command=final_command, text=final_response)
-            await user.send("Great! Command has been created!")
+         email.send_keys('CRIndiaBot')
+         password.send_keys('Gladiatorisgod')
+         login_button.click()
+        except selenium.common.exceptions.NoSuchElementException as e:
+            await self.channel.send(e)
         except Exception as e:
-            await user.send("Error. Please DM ModMail with ```{}```".format(e))
+            await self.channel.send(e)
+        self.driver.get_screenshot_as_file('step2.png')
+        await self.channel.send(file=discord.File('step2.png'))
+        time.sleep(2)
+        return
+    
+    async def authorize(self):
+        try:
+          auth_button = self.driver.find_element_by_xpath('//*[@id="qc-cmp2-ui"]/div[2]/div/button[2]')
+          auth_button.click()
+        except selenium.common.exceptions.NoSuchElementException as e:
+            await self.channel.send(e)
+        except Exception as e:
+            await self.channel.send(e)
+        self.driver.get_screenshot_as_file('step3.png')
+        await self.channel.send(file=discord.File('step3.png'))
+        return
 
-    async def action_confirm(self, ctx):
+    def getBattleID(self, ctx, name: str):
+        if name.lower() == 'gc':
+            return 'challenge-grand'
+        elif name.lower() == 'cc':
+            return 'challenge-classic'
+        elif name.lower() == 'ladder':
+            return 'PvP'
+        elif name.lower() == 'clan1v1':
+            return 'clanMate'
+        elif name.lower() == '2v2':
+            return 'clanMate2v2'
+        elif name.lower() == 'friendly':
+            return 'friendly'
+        elif name.lower() == 'gt':
+            return 'global-tournament'       
+        else:
+            return ''   
+
+    def verifyTag(self, tag):
+        """Check if a player's tag is valid"""
+        check = ["P", "Y", "L", "Q", "G", "R", "J", "C", "U", "V", "0", "2", "8", "9"]
+        if len(tag) > 15:
+            return False
+        if any(i not in check for i in tag):
+            return False
+        return True
+
+    def formatTag(self, tag):
+        """Sanitize and format CR Tag"""
+        return tag.strip("#").upper().replace("O", "0")    
+    
+    async def txt(self, ctx, html:str):
+        counter = 2
+        s = bs(html)
+        listX = s.find_all('a', class_='button_popup item', href = True)
+        all_decks = []
+        for deck in listX:
+            if counter%2==0:
+             counter = counter+1
+             url = deck['href']
+             all_decks.append(url)
+            else:
+             counter = counter+1
+             continue
+        if len(all_decks) == 0:
+            return await ctx.send("No data was found")
+        all_decks_without_repetition = set(all_decks)
+        # file = open("X.py", 'w+')
+        # file.write(f'Repeated:\n{all_decks}')
+        # file.close()
+        # await ctx.send(file=discord.File('X.py'))
+        # file = open("X.py", 'w+')
+        # file.write(f'Non Repeated:\n{all_decks_without_repetition}')
+        # file.close()
+        # return await ctx.send(file=discord.File('X.py'))
+        for i in all_decks_without_repetition:
+            count = all_decks.count(str(i))
+            await self.image(ctx, i, count)
+            await asyncio.sleep(1)
+
         def check(m):
-            return m.author == ctx.author and m.channel == ctx.channel
+            return m.channel == ctx.channel and m.author == ctx.author
 
-        res = await self.bot.wait_for('message', timeout=60, check=check)
-        return res.content.lower() == 'yes'
-
-    # todo make a seperate command called "shop" - don't put them together that's just lazy
-  
-
-    @commands.command()
-    async def buy(self, ctx, choice_no: int = 0):
-        
-        # Shows options if they don't have an option
-        if choice_no == 0 or choice_no > 7:
-            await ctx.send("{0.mention}, please type `!!shop` for getting the list of items available.".format(ctx.author))
-            return
-
-        guild_data = self.config.guild(ctx.guild)
-
-        emoji_cost = await guild_data.emoji_cost()
-        cc_cost = await guild_data.cc_cost()
-
-        level100id = await guild_data.level100id()
-        level100 = ctx.guild.get_role(level100id)
-
-        legendaryid = await guild_data.legendaryid()
-        legendary = ctx.guild.get_role(legendaryid)
-        legendarycost = await guild_data.legendarycost()
-
-        epicid = await guild_data.epicid()
-        epic = ctx.guild.get_role(epicid)
-        epiccost = await guild_data.epiccost()
-
-        rareid = await guild_data.rareid()
-        rare = ctx.guild.get_role(rareid)
-        rarecost = await guild_data.rarecost()
-
-        passroyale_cost = await guild_data.passroyale_cost()
-        nitroclassic_cost = await guild_data.nitroclassic_cost()
-
-        author = ctx.author
-        current_roles = author.roles
-
-        user_bal = await bank.get_balance(author)
-
-        # Buying Custom Command -- DONE
-        if choice_no == 2 and user_bal >= cc_cost:
-            await self.buycc(ctx)
-            # await ctx.send("Custom Command was sucessfully created! You have been charged {}".format(cc_cost))
-            return  # useless code
-
-        # Getting Rare
-        elif choice_no == 3 and user_bal >= rarecost:  # if user wants a rare role
-            if rare in current_roles or epic in current_roles or legendary in current_roles:  # user has any of rare/epic/legendary	
-                await ctx.send("BRUH IF U WASTE MY TIME I MIGHT BS YOU")
-            else:
-                await author.add_roles(rare)
-                await bank.withdraw_credits(author, rarecost)
-                await ctx.send("Done. You have been given the rare role {} \n {} credits have been removed".format(
-                    author.mention, rarecost))
-
-        # Getting epic
-        elif choice_no == 4 and user_bal >= epiccost:  # if user wants an epic role
-            if epic in current_roles or legendary in current_roles:  # checks if the user already has the role or higher
-                await ctx.send("BRUH IF U WASTE MY TIME I MIGHT BS YOU")
-                return
-            elif rare in current_roles:
-                await author.remove_roles(rare, reason="User is getting epic role. Discard stupid orange.")
-                await author.add_roles(epic)
-                await bank.withdraw_credits(author, epiccost)
-                await ctx.send("Done. You have been given the epic role {} \n {} credits have been removed".format(
-                    author.mention, epiccost))
-                return
-            else:  # user has no rare/epic/legendary
-                await ctx.send("Get the rare role first.{}".format(author.mention))
-                return
-
-        # Getting legendary
-        elif choice_no == 5 and user_bal >= legendarycost:  # if user wants a legendary role
-            if legendary in current_roles:  # checks if the user already has the role required
-                await ctx.send("DON'T WASTE YOUR TIME HERE GO ABUSE GENS WALLET. ")
-                return
-            elif epic not in current_roles:  # If user has no or just rare role but not epic
-                await ctx.send("Get the epic role first.{}".format(author.mention))
-                return
-            else:
-                await author.remove_roles(epic, reason="Getting legendery role. Discard stupid purple")
-                await author.add_roles(legendary)
-                await bank.withdraw_credits(author, legendarycost)
-                await ctx.send(
-                    "Done. You have been given the Legendary role {} \n {} credits have been removed".format(
-                        author.mention, legendarycost))
-                return
-
-        # Custom Emote -- DONE
-        elif choice_no == 1 and user_bal >= int(emoji_cost):
-            def check(m):
-                return m.author == ctx.author and m.channel == ctx.channel
-
+        msg = await self.bot.wait_for('message', timeout=60, check = check)
+        if msg.content.lower() == 'yes':
+            nextButton = self.driver.find_element_by_xpath('//*[@id="page_content"]/div[7]/div/a[3]')
+            nextButton.click()
             try:
-                await ctx.send("`Enter your emote` \n **It shouldn't be an animated one due to discord limitations.**")
-                resp = await self.bot.wait_for('message', timeout=60, check=check)
-                emoji = resp.content
-                if emoji.lower() == 'stop':
-                    await ctx.send("Process stopped by user")
-                    return 
-
-                # if len(emoji) != 1:
-                #     await ctx.send("That wasn't an emote")
-                #     return
-
-                # todo len check
-                user_nick = ctx.author.display_name
-                if user_nick.find('|') == 0:
-                    await ctx.send("Unknown username format")
-                    return
-
-                pos = user_nick.find('|') - 1
-
-                user_nick = user_nick + emoji
-
-                await ctx.send(
-                    "`{}` will be your new nickname. Type 'Yes' to confirm, anything else to deny".format(user_nick))
-                res = await self.bot.wait_for('message', timeout=60, check=check)
-                if res.content.lower() == 'yes':
-                    try:
-                        await ctx.author.edit(nick=user_nick)
-                        await bank.withdraw_credits(ctx.author, emoji_cost)
-                        await ctx.send("Done!")
-                    except discord.Forbidden:
-                        await ctx.send("I don't have the permission to do that. Please DM ModMail!")
-                    except discord.HTTPException:
-                        await ctx.send("Name too long. Please DM ModMail")
-
-                else:
-                    await ctx.send("Alright! We kept your current nickname!")
-            except asyncio.exceptions.TimeoutError:
-                await author.send("Timeout... your credits have been refunded")
-
-        # Nitro classic / pass royale -- COMPLETE
-        elif choice_no == 6 and user_bal >= passroyale_cost:
-            if legendary in current_roles or level100 in current_roles:
-                await ctx.send("Are you sure you would like to buy pass royale?(Answer in yes or no.)")
-                try:
-                    if await self.action_confirm(ctx):
-                        await bank.withdraw_credits(author, passroyale_cost)
-                        channel_id = await guild_data.logchannel()
-
-                        channel = ctx.guild.get_channel(int(channel_id))
-
-                        if channel is None:
-                            await ctx.send("Log channel not set")
-                            return
-
-                        await channel.send('**Pass Royale Purchase by** : {}'.format(author.mention)+"\n <@&760377941807988736> <@&760377944043814942>")
-
-                        await ctx.send("Request sent. Please check DM's in 24 hours")
-                    else:
-                        await ctx.send("Request Ignored")
-                        return
-                except asyncio.exceptions.TimeoutError:
-                    await author.send("Timeout... your credits have been refunded")
-
-            else:
-                await ctx.send("You need the legendary role before buying this.")
-
-                return
-
-        elif choice_no == 7 and user_bal >= nitroclassic_cost:
-            if legendary in current_roles or level100 in current_roles:
-                await ctx.send("Are you sure you would like to buy Nitro Classic?(Answer in yes or no.)")
-                try:
-                    if await self.action_confirm(ctx):
-                        await bank.withdraw_credits(author, nitroclassic_cost)
-                        channel_id = await guild_data.logchannel()
-                        channel = ctx.guild.get_channel(int(channel_id))
-
-                        if channel is None:
-                            await ctx.send("Log channel not set")
-                            return
-
-                        await channel.send('**Discord Nitro Purchase by ** : {}'.format(author.mention) + "\n <@&760377941807988736> <@&760377944043814942>")
-
-                        await ctx.send("Request sent. Please check DM's in 24 hours")
-                    else:
-                        await ctx.send("Request Ignored")
-                        return
-                except asyncio.exceptions.TimeoutError:
-                    await author.send("Timeout... your credits have been refunded")
-                    return
-
-            else:
-                await ctx.send("You need the legendary role before buying this.")
+                await self.txt(ctx, self.driver.page_source)
+            except Exception as e:
+                return self.channel.send(e)
 
 
-        # Useless code. See above why
-        # if choice_no >= 5:
-        #     await ctx.send("Huh, I don't seem to have the item you want.")
-        #     return
+            
 
-        else:  # if user can't buy anything
-            await ctx.send("Hehe, you need to earn more money {}".format(author.mention))
-            return
+        
 
-    # todo probably remove this or make it better (very weak rn)
-    @checks.mod_or_permissions()
-    @commands.command()
-    async def setshop(self, ctx, attr, val):
-        """Advanced settings configuration"""
-        await self.config.guild(ctx.guild).get_attr(attr).set(int(val))
-        a = self.config.guild(ctx.guild).get_attr(attr)
-        await ctx.send("Set {} to {}".format(attr, await a()))
-
-    @checks.mod_or_permissions()
-    @commands.command()
-    async def setrole(self, ctx, attr, role: discord.Role):
-        """Set Role ID"""
-        id = role.id
-        await self.config.guild(ctx.guild).get_attr(attr).set(int(id))
-        a = self.config.guild(ctx.guild).get_attr(attr)
-        await ctx.send("Set {} to {}".format(attr, await a()))
+    async def image(self, ctx, url:str, count: int):
+        deck = self.bot.get_cog("Deck")
+        await deck.only_deck_image(ctx, url, count)
 
     @commands.command()
-    async def getval(self, ctx, attr: str):
-        # await ctx.send(await self.config.guild(ctx.guild).get_attr(attr))
-        a = self.config.guild(ctx.guild).get_attr(attr)
-        await ctx.send(await a())
-        await ctx.send(await a())
+    async def analyze(self, ctx, tag: str, battletype: str):
+        """tag - Clash Royale Player Tag
+        battletype(options) - gc, cc, ladder, clan1v1, 2v2, friendly, gt"""
+        tag = self.formatTag(tag=tag)
+        if self.verifyTag(tag=tag) is False:
+            return await ctx.send("Invalid tag")
+        bID = self.getBattleID(ctx, battletype)
+        if len(bID) == 0:
+            return await ctx.send(f'{ctx.author.mention} That is an invalid option.\nAvailable options: gc, cc, ladder, clan1v1, 2v2, friendly, gt')
+        else:
+            try:
+             self.driver.get(url=f'https://royaleapi.com/player/{tag}/battles/history?battle_type={bID}')
+             await self.txt(ctx, self.driver.page_source)
+            except AttributeError:
+                if self.channel is None:
+                 self.__init__(self.bot)
+                await ctx.send("Restarting analyzer..")
+                await self.startdriver(ctx)
+                await self.analyze(ctx, tag, battletype)
 
+
+    @commands.command()
+    async def startdriver(self, ctx):
+
+            self.browser()
+            await self.credentials()
+            await self.login()
+            await self.authorize()
+            await ctx.tick()
+    
