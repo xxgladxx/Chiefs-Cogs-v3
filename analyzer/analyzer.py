@@ -119,7 +119,7 @@ class Analyzer(commands.Cog):
         if len(self.all_decks) == 0:
             return await ctx.send("No data was found")
 
-        self.counter = self.counter + 1
+
         if self.counter == 10:
              all_decks_without_repetition = set(self.all_decks)
              for i in all_decks_without_repetition:
@@ -127,7 +127,7 @@ class Analyzer(commands.Cog):
                     await self.image(ctx, i, count)
              await self.driver.quit()
 
-                    
+        self.counter = self.counter + 1                    
         if self.counter == 1:
             self.message = await ctx.send(content = f"Analyzer's current progress: {str((self.counter*10))}")
         try:
