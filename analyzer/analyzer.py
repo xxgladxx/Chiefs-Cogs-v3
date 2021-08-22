@@ -1,5 +1,5 @@
-from discord import message
-from discord.ext.commands.core import check
+
+from selenium.webdriver.common.keys import Keys
 import selenium
 from seleniumrequests import Chrome
 from selenium.webdriver.chrome.options import Options
@@ -137,7 +137,7 @@ class Analyzer(commands.Cog):
         msg = await self.bot.wait_for('message', timeout=60, check = check)
         if msg.content.lower() == 'yes':
             nextButton = self.driver.find_element_by_xpath('//*[@id="page_content"]/div[7]/div/a[3]')
-            nextButton.click()
+            nextButton.send_keys(Keys.RETURN)
             time.sleep(2)
             try:
                 await self.txt(ctx, self.driver.page_source)
