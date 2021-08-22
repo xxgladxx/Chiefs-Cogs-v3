@@ -138,7 +138,7 @@ class Analyzer(commands.Cog):
              try:
                 await self.txt(ctx, self.driver.page_source)
              except Exception as e:
-                await self.channel.send(e)
+                await self.channel.send(e.with_traceback)
         except Exception as ex:
              await self.channel.send(ex.with_traceback)
              self.driver.quit()
