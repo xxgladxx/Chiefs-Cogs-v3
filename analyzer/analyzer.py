@@ -88,7 +88,7 @@ class Analyzer(commands.Cog):
         else:
             return await ctx.send(f'{ctx.author.mention} That is an invalid option.\nAvailable options: gc, cc, ladder, clan1v1, 2v2, friendly, gt')   
 
-    def verifyTag(tag):
+    def verifyTag(self, tag):
         """Check if a player's tag is valid"""
         check = ["P", "Y", "L", "Q", "G", "R", "J", "C", "U", "V", "0", "2", "8", "9"]
         if len(tag) > 15:
@@ -97,7 +97,7 @@ class Analyzer(commands.Cog):
             return False
         return True
 
-    def formatTag(tag):
+    def formatTag(self, tag):
         """Sanitize and format CR Tag"""
         return tag.strip("#").upper().replace("O", "0")    
     
@@ -122,8 +122,8 @@ class Analyzer(commands.Cog):
     @commands.command()
     async def analyze(self, ctx, tag: str, battletype: str):
         """Analyzer OP"""
-        tag = self.formatTag(tag)
-        if self.verifyTag(tag) is False:
+        tag = self.formatTag(tag=tag)
+        if self.verifyTag(tag=tag) is False:
             return await ctx.send("Invalid tag")
         battletype = self.getBattleID(ctx, battletype)
         self.driver.get(url=f'https://royaleapi.com/player/{tag}/battles/history?battle_type={battletype}')
