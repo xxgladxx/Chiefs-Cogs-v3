@@ -120,21 +120,23 @@ class Analyzer(commands.Cog):
 
         for pageNumber in range(0, 10):
          try:
+             await ctx.send(f"Analyzer's current progress: {str((pageNumber+1*10))}")
              nextButton = self.driver.find_element_by_xpath('//*[@id="page_content"]/div[7]/div/a[3]')
              nextButton.send_keys(Keys.ENTER)
              time.sleep(1)
              try:
                 await self.txt(ctx, self.driver.page_source)
              except Exception as e:
-                return await self.channel.send(e)
+                await self.channel.send(e)
          except Exception as ex:
+             await self.channel.send(ex)
+             continue
+         if pageNumber == 10:
                 all_decks_without_repetition = set(self.all_decks)
                 for i in all_decks_without_repetition:
                     count = self.all_decks.count(str(i))
                     await self.image(ctx, i, count)
                     await asyncio.sleep(1)
-
-                return await self.channel.send(ex)
 
 
             
