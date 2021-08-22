@@ -136,6 +136,8 @@ class Analyzer(commands.Cog):
                     await self.image(ctx, i, count)
                     await asyncio.sleep(1)
         self.counter = self.counter + 1
+        if self.counter == 10:
+            return
 
 
             
