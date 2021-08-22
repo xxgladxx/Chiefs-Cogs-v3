@@ -117,6 +117,14 @@ class Analyzer(commands.Cog):
         if len(all_decks) == 0:
             return await ctx.send("No data was found")
         all_decks_without_repetition = set(all_decks)
+        file = open("X.py", 'w+')
+        file.write(f'Repeated:\n{all_decks}')
+        file.close()
+        await ctx.send(file=discord.File('X.py'))
+        file = open("X.py", 'w+')
+        file.write(f'Non Repeated:\n{all_decks_without_repetition}')
+        file.close()
+        return await ctx.send(file=discord.File('X.py'))
         for deck in all_decks_without_repetition:
             count = all_decks.count(str(deck))
             await self.image(ctx, url, count)
