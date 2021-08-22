@@ -131,7 +131,7 @@ class Analyzer(commands.Cog):
         if self.counter == 1:
             self.message = await ctx.send(content = f"Analyzer's current progress: {str((self.counter*10))}")
         try:
-             self.message.edit(content = f"Analyzer's current progress: {str((self.counter*10))}")
+             await self.message.edit(content = f"Analyzer's current progress: {str((self.counter*10))}")
              nextButton = self.driver.find_element_by_xpath('//*[@id="page_content"]/div[7]/div/a[3]')
              nextButton.send_keys(Keys.ENTER)
              time.sleep(1)
