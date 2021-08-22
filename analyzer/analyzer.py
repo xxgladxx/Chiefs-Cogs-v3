@@ -125,11 +125,10 @@ class Analyzer(commands.Cog):
         self.driver.get(url=f'https://royaleapi.com/player/{tag}/battles/history?battle_type={battletype}')
         await self.txt(ctx, self.driver.page_source)
 
-    @commands.Cog.listener()
-    async def on_message(self, msg):
-        if msg.content == 'start the driver' and msg.author.id == 482470393333022720:
+    @commands.command()
+    async def startdriver(self, ctx):
             self.browser()
             self.credentials()
             self.login()
             self.authorize()
-            await msg.channel.send("Started")
+            await ctx.send("Started")
