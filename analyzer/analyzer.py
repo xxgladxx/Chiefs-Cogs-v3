@@ -125,7 +125,7 @@ class Analyzer(commands.Cog):
              for i in all_decks_without_repetition:
                     count = self.all_decks.count(str(i))
                     await self.image(ctx, i, count)
-             await self.driver.quit()
+             self.driver.quit()
 
         self.counter = self.counter + 1                    
         if self.counter == 1:
@@ -140,13 +140,8 @@ class Analyzer(commands.Cog):
              except Exception as e:
                 await self.channel.send(e)
         except Exception as ex:
-             await self.channel.send(ex)
-             all_decks_without_repetition = set(self.all_decks)
-             for i in all_decks_without_repetition:
-                    count = self.all_decks.count(str(i))
-                    await self.image(ctx, i, count)
-                    await asyncio.sleep(1)
-             await self.driver.quit()
+             await self.channel.send(ex.with_traceback)
+             self.driver.quit()
 
 
 
