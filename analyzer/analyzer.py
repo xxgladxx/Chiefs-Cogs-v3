@@ -117,7 +117,7 @@ class Analyzer(commands.Cog):
 
     async def image(self, ctx, url:str):
         deck = self.bot.get_cog("Deck")
-        await deck.only_deck_image_1(ctx, url)
+        await deck.only_deck_image(ctx, url)
 
     @commands.command()
     async def analyze(self, ctx, tag: str, battletype: str):
