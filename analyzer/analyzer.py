@@ -105,8 +105,6 @@ class Analyzer(commands.Cog):
         counter = 2
         s = bs(html)
         listX = s.find_all('a', class_='button_popup item', href = True)
-        if len[listX] == 0:
-            return await ctx.send("No data was found")
         all_decks = []
         for deck in listX:
             if counter%2==0:
@@ -116,6 +114,8 @@ class Analyzer(commands.Cog):
             else:
              counter = counter+1
              continue
+        if len[all_decks] == 0:
+            return await ctx.send("No data was found")
         all_decks_without_repetition = set(all_decks)
         for deck in all_decks_without_repetition:
             count = all_decks.count(str(deck))
