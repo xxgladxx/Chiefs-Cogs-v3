@@ -114,7 +114,7 @@ class Analyzer(commands.Cog):
             else:
              counter = counter+1
              continue
-        if len[all_decks] == 0:
+        if len(all_decks) == 0:
             return await ctx.send("No data was found")
         all_decks_without_repetition = set(all_decks)
         for deck in all_decks_without_repetition:
