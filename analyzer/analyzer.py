@@ -119,6 +119,10 @@ class Analyzer(commands.Cog):
         if len(self.all_decks) == 0:
             return await ctx.send("No data was found")
 
+        self.counter = self.counter + 1
+        if self.counter == 10:
+            return
+
         try:
              await ctx.send(f"Analyzer's current progress: {str((self.counter*10))}")
              nextButton = self.driver.find_element_by_xpath('//*[@id="page_content"]/div[7]/div/a[3]')
@@ -135,9 +139,7 @@ class Analyzer(commands.Cog):
                     count = self.all_decks.count(str(i))
                     await self.image(ctx, i, count)
                     await asyncio.sleep(1)
-        self.counter = self.counter + 1
-        if self.counter == 10:
-            return
+
 
 
             
