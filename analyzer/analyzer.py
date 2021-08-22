@@ -20,6 +20,7 @@ class Analyzer(commands.Cog):
             if guild.id == 875615868166475776:
                 self.channel = guild.get_channel(878968502365618186)
         self.cmd = self.bot.get_command('image')
+        self.all_decks = []
     
     def browser(self):
         chrome_options = Options()
@@ -106,43 +107,34 @@ class Analyzer(commands.Cog):
         counter = 2
         s = bs(html)
         listX = s.find_all('a', class_='button_popup item', href = True)
-        all_decks = []
         for deck in listX:
             if counter%2==0:
              counter = counter+1
              url = deck['href']
-             all_decks.append(url)
+             self.all_decks.append(url)
             else:
              counter = counter+1
              continue
-        if len(all_decks) == 0:
+        if len(self.all_decks) == 0:
             return await ctx.send("No data was found")
-        all_decks_without_repetition = set(all_decks)
-        # file = open("X.py", 'w+')
-        # file.write(f'Repeated:\n{all_decks}')
-        # file.close()
-        # await ctx.send(file=discord.File('X.py'))
-        # file = open("X.py", 'w+')
-        # file.write(f'Non Repeated:\n{all_decks_without_repetition}')
-        # file.close()
-        # return await ctx.send(file=discord.File('X.py'))
-        for i in all_decks_without_repetition:
-            count = all_decks.count(str(i))
-            await self.image(ctx, i, count)
-            await asyncio.sleep(1)
 
-        def check(m):
-            return m.channel == ctx.channel and m.author == ctx.author
-        await ctx.send("Show further results?")
-        msg = await self.bot.wait_for('message', timeout=60, check = check)
-        if msg.content.lower() == 'yes':
-            nextButton = self.driver.find_element_by_xpath('//*[@id="page_content"]/div[7]/div/a[3]')
-            nextButton.send_keys(Keys.RETURN)
-            time.sleep(2)
-            try:
+        for pageNumber in range(0, 10):
+         try:
+             nextButton = self.driver.find_element_by_xpath('//*[@id="page_content"]/div[7]/div/a[3]')
+             nextButton.send_keys(Keys.ENTER)
+             time.sleep(1)
+             try:
                 await self.txt(ctx, self.driver.page_source)
-            except Exception as e:
+             except Exception as e:
                 return await self.channel.send(e)
+         except Exception as ex:
+                all_decks_without_repetition = set(self.all_decks)
+                for i in all_decks_without_repetition:
+                    count = self.all_decks.count(str(i))
+                    await self.image(ctx, i, count)
+                    await asyncio.sleep(1)
+
+                return await self.channel.send(ex)
 
 
             
@@ -157,6 +149,7 @@ class Analyzer(commands.Cog):
     async def analyze(self, ctx, tag: str, battletype: str):
         """tag - Clash Royale Player Tag
         battletype(options) - gc, cc, ladder, clan1v1, 2v2, friendly, gt"""
+        self.clear_old_cache()
         tag = self.formatTag(tag=tag)
         if self.verifyTag(tag=tag) is False:
             return await ctx.send("Invalid tag")
@@ -184,3 +177,5 @@ class Analyzer(commands.Cog):
             await self.authorize()
             await ctx.tick()
     
+    def clear_old_cache(self):
+        self.all_decks.clear()
