@@ -125,10 +125,11 @@ class Analyzer(commands.Cog):
              for i in all_decks_without_repetition:
                     count = self.all_decks.count(str(i))
                     await self.image(ctx, i, count)
+             await self.driver.quit()
 
                     
         if self.counter == 1:
-            self.message = await ctx.send(f"Analyzer's current progress: {str((self.counter*10))}")
+            self.message = await ctx.send(content = f"Analyzer's current progress: {str((self.counter*10))}")
         try:
              self.message.edit(content = f"Analyzer's current progress: {str((self.counter*10))}")
              nextButton = self.driver.find_element_by_xpath('//*[@id="page_content"]/div[7]/div/a[3]')
@@ -145,6 +146,7 @@ class Analyzer(commands.Cog):
                     count = self.all_decks.count(str(i))
                     await self.image(ctx, i, count)
                     await asyncio.sleep(1)
+             await self.driver.quit()
 
 
 
@@ -191,4 +193,3 @@ class Analyzer(commands.Cog):
     def clear_old_cache(self):
         self.all_decks.clear()
         self.counter = 0
-        self.message = None
