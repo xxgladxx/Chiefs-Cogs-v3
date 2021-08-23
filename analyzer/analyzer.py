@@ -122,8 +122,8 @@ class Analyzer(commands.Cog):
         if len(self.all_decks) == 0:
             return await ctx.send("No data was found")
 
-
-        if self.counter == self.pages or len(self.all_decks) == self.decks:
+        if self.counter != 0:
+         if self.counter == self.pages or len(self.all_decks) == self.decks:
              all_decks_without_repetition = set(self.all_decks)
              for i in all_decks_without_repetition:
                     count = self.all_decks.count(str(i))
