@@ -150,7 +150,7 @@ class Analyzer(commands.Cog):
                   for i in range(0, len(list_of_files)):
                       img = Image.open(list_of_files[i])
                       list_of_images.append(img.convert('RGB'))
-                  im = Image.new("RGBA",(img.size),(35,39,42))
+                  im = Image.new("RGB",(img.size),(35,39,42))
                   W, H = im.size
                   msg = self.text
 
@@ -189,7 +189,7 @@ class Analyzer(commands.Cog):
                   for i in range(0, len(list_of_files)):
                       img = Image.open(list_of_files[i])
                       list_of_images.append(img.convert('RGB'))
-                  im = Image.new("RGBA",(img.size),(35,39,42))
+                  im = Image.new("RGB",(img.size),(35,39,42))
                   W, H = im.size
                   msg = self.text
 
