@@ -149,7 +149,7 @@ class Analyzer(commands.Cog):
              return
 
          elif self.counter == self.decks:
-             answer = await self.yesORno
+             answer = await self.yesORno(ctx)
              if not answer:
               decks = []
               for N in range(0, self.decks):
@@ -204,9 +204,9 @@ class Analyzer(commands.Cog):
             time.sleep(1)
             try:
                 await self.txt(ctx, self.driver.page_source)
-            except Exception as e:
+            except AttributeError as e:
                 await ctx.send(e)
-        except Exception as ex:
+        except AttributeError as ex:
              await self.channel.send(ex)
              self.driver.quit()
 
