@@ -8,6 +8,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup as bs
 import time
 import asyncio
+from PIL import Image
 
 import discord
 from redbot.core import commands
@@ -124,20 +125,57 @@ class Analyzer(commands.Cog):
 
         if self.counter != 0:
          if self.counter == self.pages:
-             all_decks_without_repetition = set(self.all_decks)
-             for i in all_decks_without_repetition:
+             if not await self.yesORno(ctx):
+               all_decks_without_repetition = set(self.all_decks)
+               for i in all_decks_without_repetition:
                     count = self.all_decks.count(str(i))
                     await self.image(ctx, i, count)
+             else:
+                  list_of_files = []
+                  list_of_images = []
+                  all_decks_without_repetition = set(self.all_decks)
+                  for i in all_decks_without_repetition:
+                    count = self.all_decks.count(str(i))
+                    fileName = await self.image(ctx, i, count)
+                    list_of_files.append(fileName)
+                  for i in range(0, len(list_of_files)):
+                      img = Image.open(list_of_files[i])
+                      list_of_images.append(img.convert('RGB'))
+                  img.save(r'all_decks_with_pgNO.pdf',save_all=True, append_images=list_of_images)
+                  await ctx.send(file=discord.File('all_decks_with_pgNO.pdf'))
+                  
+             self.driver.quit()
+             return
+
          elif self.counter == self.decks:
-             decks = []
-             for N in range(0, self.decks):
-                 decks.append(self.all_decks[N])
-             all_decks_no_repetition = set(decks)
-             for i in all_decks_no_repetition:
+             if not await self.yesORno:
+              decks = []
+              for N in range(0, self.decks):
+                  decks.append(self.all_decks[N])
+              all_decks_no_repetition = set(decks)
+              for i in all_decks_no_repetition:
                     count = decks.count(str(i))
                     await self.image(ctx, i, count)
+             else:
+                  decks = []
+                  list_of_files = []
+                  list_of_images = []
+                  for N in range(0, self.decks):
+                   decks.append(self.all_decks[N])
+                  all_decks_no_repetition = set(decks)
+                  for i in all_decks_no_repetition:
+                    count = decks.count(str(i))
+                    fileName = await self.image(ctx, i, count)
+                    list_of_files.append(fileName)
+
+                  for i in range(0, len(list_of_files)):
+                      img = Image.open(list_of_files[i])
+                      list_of_images.append(img.convert('RGB'))
+                  img.save(r'all_decks_with_dNO.pdf',save_all=True, append_images=list_of_images)
+                  await ctx.send(file=discord.File('all_decks_with_dNO.pdf'))                 
 
              self.driver.quit()
+             return
 
         self.counter = self.counter + 1                    
         if self.counter == 1:
@@ -171,6 +209,18 @@ class Analyzer(commands.Cog):
              self.driver.quit()
 
 
+    async def yesORno(self, ctx):
+        def check(m):
+            return m.channel == ctx.channel and m.author == ctx.author
+        await ctx.send("Do you want a pdf of the images?")
+        try:
+         msg = await self.bot.wait_for('message', timeout=60, check=check)
+         if msg.content.lower() == 'yes':
+             return True
+         else:
+             return False
+        except TimeoutError:
+            return False
     async def pagesORdecks(self, ctx):
         await ctx.send("```py\nPlease enter the number of pages or total number of recent decks to be tracked.\n`pages 10` for last 10 pages\n`decks 10`for last 10 decks.\nOnly one of them can be used at a time.```")
         def check(m):
@@ -199,17 +249,9 @@ class Analyzer(commands.Cog):
             return await ctx.send("Timeout.\nContinuing with pages 1 by default")
 
 
-
-
-
-                
-
-
-        
-
     async def image(self, ctx, url:str, count: int):
         deck = self.bot.get_cog("Deck")
-        await deck.only_deck_image(ctx, url, count)
+        return await deck.only_deck_pdf(ctx, url, count)
 
     @commands.command()
     async def analyze(self, ctx, tag: str, battletype: str):
@@ -236,7 +278,7 @@ class Analyzer(commands.Cog):
                 await ctx.send("Restarting analyzer..")
                 await self.startdriver(ctx)
                 await self.analyze(ctx, tag, battletype)                
-            except AttributeError:
+            except AttributeError:  
                 self.__init__(self.bot)
                 await ctx.send("Restarting analyzer..")
                 await self.startdriver(ctx)
