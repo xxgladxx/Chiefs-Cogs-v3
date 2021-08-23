@@ -139,13 +139,17 @@ class Analyzer(commands.Cog):
              self.message = await ctx.send(content = f"Analyzer's current progress: {str((len(self.all_decks)/self.decks*100))}%")
 
         try:
-             await self.message.edit(content = f"Analyzer's current progress: {str((self.counter*10))}")
-             nextButton = self.driver.find_element_by_xpath('//*[@id="page_content"]/div[7]/div/a[3]')
-             nextButton.send_keys(Keys.ENTER)
-             time.sleep(1)
-             try:
+            if self.pages != 0:
+             await self.message.edit(content = f"Analyzer's current progress: {str((self.counter/self.pages*100))}%")
+            elif self.decks != 0:
+             await self.message.edit(content = f"Analyzer's current progress: {str((len(self.all_decks)/self.decks*100))}%")
+
+            nextButton = self.driver.find_element_by_xpath('//*[@id="page_content"]/div[7]/div/a[3]')
+            nextButton.send_keys(Keys.ENTER)
+            time.sleep(1)
+            try:
                 await self.txt(ctx, self.driver.page_source)
-             except Exception as e:
+            except Exception as e:
                 await self.channel.send(e)
         except Exception as ex:
              await self.channel.send(ex)
