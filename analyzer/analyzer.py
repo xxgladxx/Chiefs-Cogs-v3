@@ -137,7 +137,7 @@ class Analyzer(commands.Cog):
                   all_decks_without_repetition = set(self.all_decks)
                   for i in all_decks_without_repetition:
                     count = self.all_decks.count(str(i))
-                    fileName = await self.image(ctx, i, count)
+                    fileName = await self.pdf(ctx, i, count)
                     list_of_files.append(fileName)
                   for i in range(0, len(list_of_files)):
                       img = Image.open(list_of_files[i])
@@ -167,7 +167,7 @@ class Analyzer(commands.Cog):
                   all_decks_no_repetition = set(decks)
                   for i in all_decks_no_repetition:
                     count = decks.count(str(i))
-                    fileName = await self.image(ctx, i, count)
+                    fileName = await self.pdf(ctx, i, count)
                     list_of_files.append(fileName)
 
                   for i in range(0, len(list_of_files)):
@@ -204,11 +204,12 @@ class Analyzer(commands.Cog):
             time.sleep(1)
             try:
                 await self.txt(ctx, self.driver.page_source)
-            except AttributeError as e:
-                await ctx.send(e)
-        except AttributeError as ex:
+            except Exception as e:
+                await self.channel.send(e)
+        except Exception as ex:
              await self.channel.send(ex)
-             self.driver.quit()
+             self.restartdriver(ctx)
+             return await ctx.send("please try again")
 
 
     async def yesORno(self, ctx):
@@ -253,6 +254,9 @@ class Analyzer(commands.Cog):
 
 
     async def image(self, ctx, url:str, count: int):
+        deck = self.bot.get_cog("Deck")
+        await deck.only_deck_image(ctx, url, count)
+    async def pdf(self, ctx, url:str, count: int):
         deck = self.bot.get_cog("Deck")
         return await deck.only_deck_pdf(ctx, url, count)
 
