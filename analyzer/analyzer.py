@@ -107,8 +107,7 @@ class Analyzer(commands.Cog):
         """Sanitize and format CR Tag"""
         return tag.strip("#").upper().replace("O", "0")    
     
-    async def txt(self, ctx, html:str):        
-        await self.pagesORdecks(ctx)        
+    async def txt(self, ctx, html:str):               
         counter = 2
         s = bs(html)
         listX = s.find_all('a', class_='button_popup item', href = True)
@@ -133,6 +132,7 @@ class Analyzer(commands.Cog):
 
         self.counter = self.counter + 1                    
         if self.counter == 1:
+            await self.pagesORdecks(ctx) 
             if self.pages != 0:
              self.message = await ctx.send(content = f"Analyzer's current progress: {str((self.counter/self.pages*100))}%")
             else:
