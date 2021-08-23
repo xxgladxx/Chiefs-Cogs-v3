@@ -134,7 +134,7 @@ class Analyzer(commands.Cog):
                  decks.append(self.all_decks[N])
              all_decks_no_repetition = set(decks)
              for i in all_decks_no_repetition:
-                    count = self.decks.count(str(i))
+                    count = decks.count(str(i))
                     await self.image(ctx, i, count)
 
              self.driver.quit()
@@ -225,6 +225,7 @@ class Analyzer(commands.Cog):
         else:
             try:
              try:
+              self.restartdriver(ctx)
               self.driver.get(url=f'https://royaleapi.com/player/{tag}/battles/history?battle_type={bID}')
               await self.txt(ctx, self.driver.page_source)
              except MaxRetryError:
@@ -253,6 +254,14 @@ class Analyzer(commands.Cog):
     @commands.command()
     async def startdriver(self, ctx):
 
+            self.browser()
+            await self.credentials()
+            await self.login()
+            await self.authorize()
+            await ctx.tick()
+    @commands.command()
+    async def restartdriver(self, ctx):
+            self.driver.quit()
             self.browser()
             await self.credentials()
             await self.login()
