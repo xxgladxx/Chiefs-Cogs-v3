@@ -56,10 +56,13 @@ class Analyzer(commands.Cog):
          email.send_keys('CRIndiaBot')
          password.send_keys(self.password)
          login_button.click()
-         re = self.driver.find_element_by_id('challenge_response')
-         re.send_keys(self.user)
-         bt1 = self.driver.find_element_by_id('email_challenge_submit')
-         bt1.click()
+         try:
+          re = self.driver.find_element_by_id('challenge_response')
+          re.send_keys(self.user)
+          bt1 = self.driver.find_element_by_id('email_challenge_submit')
+          bt1.click()
+         except NoSuchElementException:
+             await self.channel.send(e)
         except NoSuchElementException as e:
             await self.channel.send(e)
         except Exception as e:
