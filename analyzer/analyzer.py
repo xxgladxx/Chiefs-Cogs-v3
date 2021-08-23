@@ -53,10 +53,14 @@ class Analyzer(commands.Cog):
         password = self.driver.find_element_by_id('password')
         login_button = self.driver.find_element_by_id('allow')
         try:
-         email.send_keys('CRIndiaBot')
-         password.send_keys('Gladiatorisgod')
+         email.send_keys(self.user)
+         password.send_keys(self.password)
          login_button.click()
-        except selenium.common.exceptions.NoSuchElementException as e:
+         re = self.driver.find_element_by_id('challenge_response')
+         re.send_keys(self.user)
+         bt1 = self.driver.find_element_by_id('email_challenge_submit')
+         bt1.click()
+        except NoSuchElementException as e:
             await self.channel.send(e)
         except Exception as e:
             await self.channel.send(e)
@@ -285,18 +289,17 @@ class Analyzer(commands.Cog):
                 await ctx.invoke(reloader, 'analyzer')
                 self.__init__(self.bot)
                 await ctx.send("Restarting analyzer..")
-                await self.startdriver(ctx)
+                await self.restartdriver(ctx)
                 await self.analyze(ctx, tag, battletype)                
             except AttributeError:  
                 self.__init__(self.bot)
                 await ctx.send("Restarting analyzer..")
-                await self.startdriver(ctx)
+                await self.restartdriver(ctx)
                 await self.analyze(ctx, tag, battletype)
             except Exception as e:
-                self.driver.close()
                 self.__init__(self.bot)
                 await ctx.send("Restarting analyzer..")
-                await self.startdriver(ctx)
+                await self.restartdriver(ctx)
                 await self.analyze(ctx, tag, battletype) 
                 await self.channel.send(e)
 
