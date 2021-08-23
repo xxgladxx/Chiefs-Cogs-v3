@@ -1,4 +1,5 @@
 from selenium.common.exceptions import NoSuchElementException
+from urllib3.exceptions import MaxRetryError
 from selenium.webdriver.common.keys import Keys
 import selenium
 from seleniumrequests import Chrome
@@ -204,14 +205,24 @@ class Analyzer(commands.Cog):
             return await ctx.send(f'{ctx.author.mention} That is an invalid option.\nAvailable options: gc, cc, ladder, clan1v1, 2v2, friendly, gt')
         else:
             try:
-             self.driver.quit()
-             self.driver.get(url=f'https://royaleapi.com/player/{tag}/battles/history?battle_type={bID}')
-             await self.txt(ctx, self.driver.page_source)
+             try:
+              self.driver.get(url=f'https://royaleapi.com/player/{tag}/battles/history?battle_type={bID}')
+              await self.txt(ctx, self.driver.page_source)
+             except MaxRetryError:
+                self.driver.close()
+                reloader = self.bot.get_command('reload')
+                await ctx.invoke(reloader, 'analyzer')
+                self.__init__(self.bot)
+                await ctx.send("Restarting analyzer..")
+                await self.startdriver(ctx)
+                await self.analyze(ctx, tag, battletype)                
             except AttributeError:
                 self.__init__(self.bot)
                 await ctx.send("Restarting analyzer..")
                 await self.startdriver(ctx)
                 await self.analyze(ctx, tag, battletype)
+            except Exception as e:
+                return await self.channel.send(e)
 
 
 
