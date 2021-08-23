@@ -261,12 +261,15 @@ class Analyzer(commands.Cog):
             await ctx.tick()
     @commands.command()
     async def restartdriver(self, ctx):
+         try:
             self.driver.quit()
             self.browser()
             await self.credentials()
             await self.login()
             await self.authorize()
             await ctx.tick()
+         except AttributeError:
+             await self.startdriver(ctx)
     
     def clear_old_cache(self):
         self.all_decks.clear()
