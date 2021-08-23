@@ -53,7 +53,7 @@ class Analyzer(commands.Cog):
         password = self.driver.find_element_by_id('password')
         login_button = self.driver.find_element_by_id('allow')
         try:
-         email.send_keys(self.user)
+         email.send_keys('CRIndiaBot')
          password.send_keys(self.password)
          login_button.click()
          re = self.driver.find_element_by_id('challenge_response')
