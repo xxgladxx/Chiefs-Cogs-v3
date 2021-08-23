@@ -1,4 +1,4 @@
-
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 import selenium
 from seleniumrequests import Chrome
@@ -67,7 +67,7 @@ class Analyzer(commands.Cog):
         try:
           auth_button = self.driver.find_element_by_xpath('//*[@id="qc-cmp2-ui"]/div[2]/div/button[2]')
           auth_button.click()
-        except selenium.common.exceptions.NoSuchElementException as e:
+        except NoSuchElementException as e:
             await self.channel.send(e)
         except Exception as e:
             await self.channel.send(e)
