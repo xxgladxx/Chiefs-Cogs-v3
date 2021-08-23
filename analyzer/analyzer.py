@@ -142,7 +142,8 @@ class Analyzer(commands.Cog):
                   for i in range(0, len(list_of_files)):
                       img = Image.open(list_of_files[i])
                       list_of_images.append(img.convert('RGB'))
-                  img.save(r'all_decks_with_pgNO.pdf',save_all=True, append_images=list_of_images)
+                  rgb = Image.new('RGB', img.size, (255, 255, 255))  # white background
+                  rgb.save(r'all_decks_with_pgNO.pdf',save_all=True, append_images=list_of_images)
                   await ctx.send(file=discord.File('all_decks_with_pgNO.pdf'))
                   
              self.driver.quit()
@@ -173,7 +174,8 @@ class Analyzer(commands.Cog):
                   for i in range(0, len(list_of_files)):
                       img = Image.open(list_of_files[i])
                       list_of_images.append(img.convert('RGB'))
-                  img.save(r'all_decks_with_dNO.pdf',save_all=True, append_images=list_of_images)
+                  rgb = Image.new('RGB', img.size, (255, 255, 255))  # white background
+                  rgb.save(r'all_decks_with_dNO.pdf',save_all=True, append_images=list_of_images)
                   await ctx.send(file=discord.File('all_decks_with_dNO.pdf'))                 
 
              self.driver.quit()
