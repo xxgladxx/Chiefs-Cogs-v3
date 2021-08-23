@@ -140,7 +140,10 @@ class Analyzer(commands.Cog):
 
         try:
             if self.pages != 0:
-             await self.message.edit(content = f"Analyzer's current progress: {str((self.counter/self.pages*100))}%")
+             percent = (self.counter/self.pages*100)
+             if percent > 100.0:
+                 percent = 100.0
+             await self.message.edit(content = f"Analyzer's current progress: {str(percent)}%")
             elif self.decks != 0:
              await self.message.edit(content = f"Analyzer's current progress: {str((len(self.all_decks)/self.decks*100))}%")
 
@@ -227,8 +230,6 @@ class Analyzer(commands.Cog):
                 await self.analyze(ctx, tag, battletype)
             except Exception as e:
                 self.driver.close()
-                reloader = self.bot.get_command('reload')
-                await ctx.invoke(reloader, 'analyzer')
                 self.__init__(self.bot)
                 await ctx.send("Restarting analyzer..")
                 await self.startdriver(ctx)
