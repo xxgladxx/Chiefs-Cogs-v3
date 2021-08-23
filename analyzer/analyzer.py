@@ -8,7 +8,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup as bs
 import time
 import asyncio
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 
 import discord
 from redbot.core import commands
@@ -26,6 +26,7 @@ class Analyzer(commands.Cog):
         self.counter = 0
         self.pages = 0
         self.decks = 0
+        self.text = ''
     
     def browser(self):
         chrome_options = Options()
@@ -149,9 +150,16 @@ class Analyzer(commands.Cog):
                   for i in range(0, len(list_of_files)):
                       img = Image.open(list_of_files[i])
                       list_of_images.append(img.convert('RGB'))
-                  rgb = Image.new('RGB', img.size, (255, 255, 255))  # white background
-                  rgb.save(r'all_decks_with_pgNO.pdf',save_all=True, append_images=list_of_images)
-                  await ctx.send(file=discord.File('all_decks_with_pgNO.pdf'))
+                  im = Image.new("RGBA",(img.size),(35,39,42))
+                  W, H = im.size
+                  msg = self.text
+
+                  draw = ImageDraw.Draw(im)
+                  myFont = ImageFont.truetype("/root/clanbot/cogs/CogManager/cogs/deck/data/fonts/Supercell-magic-webfont.ttf", 50)
+                  w, h = draw.textsize(msg, font=myFont)
+                  draw.text(((W-w)/2,(H-h)/2), msg, fill="black")
+                  img.save(r'all_decks_with_dNO.pdf',save_all=True, append_images=list_of_images)
+                  await ctx.send(file=discord.File('all_decks_with_dNO.pdf'))  
                   
              self.driver.quit()
              return
@@ -181,8 +189,15 @@ class Analyzer(commands.Cog):
                   for i in range(0, len(list_of_files)):
                       img = Image.open(list_of_files[i])
                       list_of_images.append(img.convert('RGB'))
-                  rgb = Image.new('RGB', img.size, (255, 255, 255))  # white background
-                  rgb.save(r'all_decks_with_dNO.pdf',save_all=True, append_images=list_of_images)
+                  im = Image.new("RGBA",(img.size),(35,39,42))
+                  W, H = im.size
+                  msg = self.text
+
+                  draw = ImageDraw.Draw(im)
+                  myFont = ImageFont.truetype("/root/clanbot/cogs/CogManager/cogs/deck/data/fonts/Supercell-magic-webfont.ttf", 50)
+                  w, h = draw.textsize(msg, font=myFont)
+                  draw.text(((W-w)/2,(H-h)/2), msg, fill="black")
+                  img.save(r'all_decks_with_dNO.pdf',save_all=True, append_images=list_of_images)
                   await ctx.send(file=discord.File('all_decks_with_dNO.pdf'))                 
 
              self.driver.quit()
@@ -274,6 +289,7 @@ class Analyzer(commands.Cog):
         """tag - Clash Royale Player Tag
         battletype(options) - gc, cc, ladder, clan1v1, 2v2, friendly, gt"""
         self.clear_old_cache()
+        self.text = f'Analyzer Data for {tag}'
         tag = self.formatTag(tag=tag)
         if self.verifyTag(tag=tag) is False:
             return await ctx.send("Invalid tag")
@@ -285,26 +301,21 @@ class Analyzer(commands.Cog):
              try:
               self.restartdriver(ctx)
               self.driver.get(url=f'https://royaleapi.com/player/{tag}/battles/history?battle_type={bID}')
-              await self.txt(ctx, self.driver.page_source)
-             except MaxRetryError:
-                self.driver.close()
-                reloader = self.bot.get_command('reload')
-                await ctx.invoke(reloader, 'analyzer')
-                self.__init__(self.bot)
-                await ctx.send("Restarting analyzer..")
-                await self.restartdriver(ctx)
-                await self.analyze(ctx, tag, battletype)                
-            except AttributeError:  
+              await self.txt(ctx, self.driver.page_source)               
+             except AttributeError:  
                 self.__init__(self.bot)
                 await ctx.send("Restarting analyzer..")
                 await self.restartdriver(ctx)
                 await self.analyze(ctx, tag, battletype)
-            except Exception as e:
+             except Exception as e:
                 self.__init__(self.bot)
                 await ctx.send("Restarting analyzer..")
                 await self.restartdriver(ctx)
                 await self.analyze(ctx, tag, battletype) 
                 await self.channel.send(e)
+            except Exception as e:
+                await ctx.send("An error occured")
+                return await self.channel.send(e)
 
 
 
@@ -333,3 +344,4 @@ class Analyzer(commands.Cog):
         self.counter = 0
         self.pages = 0
         self.decks = 0
+        self.text = ''
