@@ -61,7 +61,7 @@ class Analyzer(commands.Cog):
           re.send_keys(self.user)
           bt1 = self.driver.find_element_by_id('email_challenge_submit')
           bt1.click()
-         except NoSuchElementException:
+         except NoSuchElementException as e:
              await self.channel.send(e)
         except NoSuchElementException as e:
             await self.channel.send(e)
