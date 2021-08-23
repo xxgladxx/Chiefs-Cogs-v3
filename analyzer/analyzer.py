@@ -205,7 +205,7 @@ class Analyzer(commands.Cog):
             try:
                 await self.txt(ctx, self.driver.page_source)
             except Exception as e:
-                await self.channel.send(e)
+                await ctx.send(e)
         except Exception as ex:
              await self.channel.send(ex)
              self.driver.quit()
@@ -223,7 +223,7 @@ class Analyzer(commands.Cog):
              return False
         except TimeoutError:
             return False
-            
+
     async def pagesORdecks(self, ctx):
         await ctx.send("```py\nPlease enter the number of pages or total number of recent decks to be tracked.\n`pages 10` for last 10 pages\n`decks 10`for last 10 decks.\nOnly one of them can be used at a time.```")
         def check(m):
