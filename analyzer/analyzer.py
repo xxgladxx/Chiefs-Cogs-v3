@@ -158,7 +158,7 @@ class Analyzer(commands.Cog):
                   myFont = ImageFont.truetype("/root/clanbot/cogs/CogManager/cogs/deck/data/fonts/Supercell-magic-webfont.ttf", 50)
                   w, h = draw.textsize(msg, font=myFont)
                   draw.text(((W-w)/2,(H-h)/2), msg, fill="black")
-                  img.save(r'all_decks_with_dNO.pdf',save_all=True, append_images=list_of_images)
+                  im.save(r'all_decks_with_dNO.pdf',save_all=True, append_images=list_of_images)
                   await ctx.send(file=discord.File('all_decks_with_dNO.pdf'))  
                   
              self.driver.quit()
@@ -197,7 +197,7 @@ class Analyzer(commands.Cog):
                   myFont = ImageFont.truetype("/root/clanbot/cogs/CogManager/cogs/deck/data/fonts/Supercell-magic-webfont.ttf", 50)
                   w, h = draw.textsize(msg, font=myFont)
                   draw.text(((W-w)/2,(H-h)/2), msg, fill="black")
-                  img.save(r'all_decks_with_dNO.pdf',save_all=True, append_images=list_of_images)
+                  im.save(r'all_decks_with_dNO.pdf',save_all=True, append_images=list_of_images)
                   await ctx.send(file=discord.File('all_decks_with_dNO.pdf'))                 
 
              self.driver.quit()
