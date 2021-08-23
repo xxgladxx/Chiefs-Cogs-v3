@@ -22,6 +22,8 @@ class Analyzer(commands.Cog):
         self.cmd = self.bot.get_command('image')
         self.all_decks = []
         self.counter = 0
+        self.pages = 0
+        self.decks = 0
     
     def browser(self):
         chrome_options = Options()
@@ -104,7 +106,8 @@ class Analyzer(commands.Cog):
         """Sanitize and format CR Tag"""
         return tag.strip("#").upper().replace("O", "0")    
     
-    async def txt(self, ctx, html:str):
+    async def txt(self, ctx, html:str):        
+        await self.pagesORdecks(ctx)        
         counter = 2
         s = bs(html)
         listX = s.find_all('a', class_='button_popup item', href = True)
@@ -120,7 +123,7 @@ class Analyzer(commands.Cog):
             return await ctx.send("No data was found")
 
 
-        if self.counter == 10:
+        if self.counter == self.pages or len(self.all_decks) == self.decks:
              all_decks_without_repetition = set(self.all_decks)
              for i in all_decks_without_repetition:
                     count = self.all_decks.count(str(i))
@@ -129,7 +132,11 @@ class Analyzer(commands.Cog):
 
         self.counter = self.counter + 1                    
         if self.counter == 1:
-            self.message = await ctx.send(content = f"Analyzer's current progress: {str((self.counter*10))}")
+            if self.pages != 0:
+             self.message = await ctx.send(content = f"Analyzer's current progress: {str((self.counter/self.pages*100))}%")
+            else:
+             self.message = await ctx.send(content = f"Analyzer's current progress: {str((len(self.all_decks)/self.decks*100))}%")
+
         try:
              await self.message.edit(content = f"Analyzer's current progress: {str((self.counter*10))}")
              nextButton = self.driver.find_element_by_xpath('//*[@id="page_content"]/div[7]/div/a[3]')
@@ -138,14 +145,45 @@ class Analyzer(commands.Cog):
              try:
                 await self.txt(ctx, self.driver.page_source)
              except Exception as e:
-                await self.channel.send(e.with_traceback)
+                await self.channel.send(e)
         except Exception as ex:
-             await self.channel.send(ex.with_traceback)
+             await self.channel.send(ex)
              self.driver.quit()
 
 
+    async def pagesORdecks(self, ctx):
+        await ctx.send("```py\nPlease enter the number of pages or total number of recent decks to be tracked.\n`pages 10` for last 10 pages\n`decks 10`for last 10 decks.\nOnly one of them can be used at a time.```")
+        def check(m):
+            return m.channel == ctx.channel and m.author == ctx.author
 
-            
+        msg = await self.bot.wait_for('message', timeout = 60, check=check)
+        input = msg.content
+        try:
+            if 'pages' in input:
+                input = input.replace('pages', '').replace(' ', '')
+                try:
+                 self.pages = int(input)
+                except ValueError:
+                 return await ctx.send('Invalid value. Try again.')
+            elif 'decks' in input:
+                input = input.replace('decks', '').replace(' ', '')
+                try:
+                 self.decks = int(input)
+                except ValueError:
+                 return await ctx.send('Invalid value. Try again.')
+            else:
+                return await ctx.send('Invalid option.')
+
+        except TimeoutError:
+            self.pages = 1
+            return await ctx.send("Timeout.\nContinuing with pages 1 by default")
+
+
+
+
+
+                
+
 
         
 
@@ -166,6 +204,7 @@ class Analyzer(commands.Cog):
             return await ctx.send(f'{ctx.author.mention} That is an invalid option.\nAvailable options: gc, cc, ladder, clan1v1, 2v2, friendly, gt')
         else:
             try:
+             self.driver.quit()
              self.driver.get(url=f'https://royaleapi.com/player/{tag}/battles/history?battle_type={bID}')
              await self.txt(ctx, self.driver.page_source)
             except AttributeError:
@@ -173,6 +212,7 @@ class Analyzer(commands.Cog):
                 await ctx.send("Restarting analyzer..")
                 await self.startdriver(ctx)
                 await self.analyze(ctx, tag, battletype)
+
 
 
     @commands.command()
@@ -187,3 +227,5 @@ class Analyzer(commands.Cog):
     def clear_old_cache(self):
         self.all_decks.clear()
         self.counter = 0
+        self.pages = 0
+        self.decks = 0
