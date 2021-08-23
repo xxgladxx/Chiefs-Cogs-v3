@@ -222,7 +222,14 @@ class Analyzer(commands.Cog):
                 await self.startdriver(ctx)
                 await self.analyze(ctx, tag, battletype)
             except Exception as e:
-                return await self.channel.send(e)
+                self.driver.close()
+                reloader = self.bot.get_command('reload')
+                await ctx.invoke(reloader, 'analyzer')
+                self.__init__(self.bot)
+                await ctx.send("Restarting analyzer..")
+                await self.startdriver(ctx)
+                await self.analyze(ctx, tag, battletype) 
+                await self.channel.send(e)
 
 
 
