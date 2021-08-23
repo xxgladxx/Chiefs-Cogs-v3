@@ -125,7 +125,8 @@ class Analyzer(commands.Cog):
 
         if self.counter != 0:
          if self.counter == self.pages:
-             if not await self.yesORno(ctx):
+             answer = await self.yesORno(ctx)
+             if not answer:
                all_decks_without_repetition = set(self.all_decks)
                for i in all_decks_without_repetition:
                     count = self.all_decks.count(str(i))
@@ -148,7 +149,8 @@ class Analyzer(commands.Cog):
              return
 
          elif self.counter == self.decks:
-             if not await self.yesORno:
+             answer = await self.yesORno
+             if not answer:
               decks = []
               for N in range(0, self.decks):
                   decks.append(self.all_decks[N])
@@ -221,6 +223,7 @@ class Analyzer(commands.Cog):
              return False
         except TimeoutError:
             return False
+            
     async def pagesORdecks(self, ctx):
         await ctx.send("```py\nPlease enter the number of pages or total number of recent decks to be tracked.\n`pages 10` for last 10 pages\n`decks 10`for last 10 decks.\nOnly one of them can be used at a time.```")
         def check(m):
