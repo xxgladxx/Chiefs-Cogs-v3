@@ -123,11 +123,20 @@ class Analyzer(commands.Cog):
             return await ctx.send("No data was found")
 
         if self.counter != 0:
-         if self.counter == self.pages or len(self.all_decks) == self.decks:
+         if self.counter == self.pages:
              all_decks_without_repetition = set(self.all_decks)
              for i in all_decks_without_repetition:
                     count = self.all_decks.count(str(i))
                     await self.image(ctx, i, count)
+         elif self.counter == self.decks:
+             decks = []
+             for N in range(0, self.decks):
+                 decks.append(self.all_decks[N])
+             all_decks_no_repetition = set(decks)
+             for i in all_decks_no_repetition:
+                    count = self.decks.count(str(i))
+                    await self.image(ctx, i, count)
+
              self.driver.quit()
 
         self.counter = self.counter + 1                    
@@ -136,7 +145,7 @@ class Analyzer(commands.Cog):
             if self.pages != 0:
              self.message = await ctx.send(content = f"Analyzer's current progress: {str((self.counter/self.pages*100))}%")
             else:
-             self.message = await ctx.send(content = f"Analyzer's current progress: {str((len(self.all_decks)/self.decks*100))}%")
+             self.message = await ctx.send(content = f"Analyzer's current progress: {str((self.counter/self.decks*100))}%")
 
         try:
             if self.pages != 0:
@@ -145,7 +154,10 @@ class Analyzer(commands.Cog):
                  percent = 100.0
              await self.message.edit(content = f"Analyzer's current progress: {str(percent)}%")
             elif self.decks != 0:
-             await self.message.edit(content = f"Analyzer's current progress: {str((len(self.all_decks)/self.decks*100))}%")
+             percent = (self.counter/self.decks*100)
+             if percent > 100.0:
+                 percent = 100.0
+             await self.message.edit(content = f"Analyzer's current progress: {str(percent)}%")
 
             nextButton = self.driver.find_element_by_xpath('//*[@id="page_content"]/div[7]/div/a[3]')
             nextButton.send_keys(Keys.ENTER)
