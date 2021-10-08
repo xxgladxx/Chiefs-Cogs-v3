@@ -30,7 +30,7 @@ class ClashUtils(commands.Cog):
             token = token["api_key"]
             self.clash =  clashroyale.official_api.Client(token=token['token'], is_async=True, url="https://proxy.royaleapi.dev/v1")
 
-        @commands.command(name = 'analytics', aliases = ['analyze','track'])
+        @commands.command(name = 'analytics', aliases = ['track'])
         async def _analytics(self, ctx, tag: str, time: str):
             """Get all Card Usage% and Win% of any player
             tag = clash royale player tag
