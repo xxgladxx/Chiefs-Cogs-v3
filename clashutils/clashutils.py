@@ -94,7 +94,7 @@ class ClashUtils(commands.Cog):
             #await ctx.invoke(self.bot.get_command('margin'))
             await ctx.tick()
 
-        @commands.command(name='recentdecks', aliases=['rd'])
+        @commands.command(name='rs', aliases=['r1'])
         async def _recentdecks(self, ctx, tag:str):
             """Shows the recent decks used for a player"""
             tag = self.strip(tag)
